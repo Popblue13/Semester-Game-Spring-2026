@@ -1,4 +1,4 @@
-[gd_scene format=3 uid="uid://vsy85ifrshdf"]
+[gd_scene load_steps=5 format=3 uid="uid://vsy85ifrshdf"]
 
 [ext_resource type="Texture2D" uid="uid://rnp51ohx37kk" path="res://Art/icon.svg" id="1_v0iea"]
 [ext_resource type="Script" uid="uid://biijq8uecnvgb" path="res://Scripts/player_body.gd" id="2_cvnsp"]
@@ -7,15 +7,24 @@
 radius = 12.0
 height = 32.0
 
-[node name="Player" type="Node2D" unique_id=1071723042]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_cvnsp"]
+size = Vector2(19, 46)
 
-[node name="PlayerBody" type="CharacterBody2D" parent="." unique_id=699822442]
+[node name="Player" type="Node2D"]
+
+[node name="PlayerBody" type="CharacterBody2D" parent="."]
 motion_mode = 1
 script = ExtResource("2_cvnsp")
 
-[node name="Sprite2D" type="Sprite2D" parent="PlayerBody" unique_id=1064680219]
+[node name="Sprite2D" type="Sprite2D" parent="PlayerBody"]
 scale = Vector2(0.25, 0.25)
 texture = ExtResource("1_v0iea")
 
-[node name="PlayerHitbox" type="CollisionShape2D" parent="PlayerBody" unique_id=257708227]
+[node name="PlayerHurtbox" type="CollisionShape2D" parent="PlayerBody"]
 shape = SubResource("CapsuleShape2D_6t5aa")
+
+[node name="Claws" type="Area2D" parent="PlayerBody"]
+
+[node name="ClawsHitbox" type="CollisionShape2D" parent="PlayerBody/Claws"]
+position = Vector2(23, 0)
+shape = SubResource("RectangleShape2D_cvnsp")
