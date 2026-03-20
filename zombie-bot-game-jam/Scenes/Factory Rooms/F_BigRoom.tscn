@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://du2uj0q2rsygx" path="res://Scripts/Room.gd" id="1_jhlpk"]
 [ext_resource type="Texture2D" uid="uid://dp54g6uigueap" path="res://Art/Tilesets/Misc/PlaceholderTileSet.png" id="1_pgy7g"]
-[ext_resource type="PackedScene" uid="uid://vsy85ifrshdf" path="res://Scenes/Dungeon Objects/player.tscn" id="2_jhlpk"]
+[ext_resource type="PackedScene" uid="uid://vsy85ifrshdf" path="res://Scenes/player.tscn" id="2_jhlpk"]
 [ext_resource type="PackedScene" uid="uid://c1mjli7ob3ifg" path="res://Scenes/Dungeon Objects/Doorway.tscn" id="3_uk2ob"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_17rx2"]
