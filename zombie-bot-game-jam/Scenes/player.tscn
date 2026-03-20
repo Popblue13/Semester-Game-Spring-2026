@@ -1,12 +1,15 @@
 [gd_scene load_steps=5 format=3 uid="uid://vsy85ifrshdf"]
 
-[ext_resource type="Texture2D" uid="uid://rnp51ohx37kk" path="res://Art/icon.svg" id="1_v0iea"]
+[ext_resource type="Texture2D" uid="uid://rnp51ohx37kk" path="res://Art/Sprites/icon.svg" id="1_v0iea"]
 [ext_resource type="Script" uid="uid://biijq8uecnvgb" path="res://Scripts/player_body.gd" id="2_cvnsp"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_6t5aa"]
 radius = 12.0
 height = 32.0
 
+[node name="Player" type="Node2D" unique_id=1071723042 groups=["player"]]
+
+[node name="PlayerBody" type="CharacterBody2D" parent="." unique_id=699822442 groups=["player"]]
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_cvnsp"]
 size = Vector2(19, 46)
 
