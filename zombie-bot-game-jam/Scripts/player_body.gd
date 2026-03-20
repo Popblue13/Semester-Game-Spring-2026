@@ -9,6 +9,8 @@ var override_direction_input : String = ""
 @onready var sprite_2d: Sprite2D = $Sprite2D
 @onready var player_hurtbox: CollisionShape2D = $PlayerHurtbox
 @onready var sprite_position : Vector2 = Vector2(0,0)
+const energy_projectile : PackedScene = preload("res://Scenes/energy_projectile.tscn")
+var last_direction : String = "right"
 
 func _physics_process(delta: float) -> void:
 	if Input.is_action_pressed("right"):
@@ -16,11 +18,13 @@ func _physics_process(delta: float) -> void:
 		x_direction_input = "right"
 		if not y_direction_input:
 			override_direction_input = "right"
+		last_direction = "right"
 	elif Input.is_action_pressed("left"):
 		velocity.x = -SPEED
 		x_direction_input = "left"
 		if not y_direction_input:
 			override_direction_input = "left"
+		last_direction = "left"
 	else: # make go straight to zero if we want it to not slide afterwards
 		if x_direction_input == override_direction_input:
 			x_direction_input = ""
@@ -32,11 +36,13 @@ func _physics_process(delta: float) -> void:
 		y_direction_input = "up"
 		if not x_direction_input:
 			override_direction_input = "up"
+		last_direction = "up"
 	elif Input.is_action_pressed("down"):
 		velocity.y = SPEED
 		y_direction_input = "down"
 		if not x_direction_input:
 			override_direction_input = "down"
+		last_direction = "down"
 	else:
 		if y_direction_input == override_direction_input:
 			y_direction_input = ""
@@ -60,7 +66,7 @@ func _physics_process(delta: float) -> void:
 				
 	else:
 		sprite_position = sprite_position.move_toward(Vector2(0,0), 100 * delta)
-		player_hurtbox.disabled = false
+		set_collision_layer_value(2,true)
 	sprite_2d.position = sprite_position
 	
 	# self clamp because the normal clamp ain't working for me
@@ -89,31 +95,66 @@ func change_sprite_2d_position(delta : float) -> void:
 		sprite_position.x = 0.001
 	
 	if sprite_position.y < -11:
-		player_hurtbox.disabled = true
+		set_collision_layer_value(2,false)
 	else:
-		player_hurtbox.disabled = false
+		set_collision_layer_value(2,true)
 	
 func _input(_event: InputEvent) -> void:
-	claws_hitbox.disabled = true
+	
 	
 	if Input.is_action_pressed("space"):
+		claws_hitbox.disabled = true
 		return #prevents attacking while midair
 	
 	if Input.is_action_just_pressed("right-click"):
-		pass
-	
+		#make projectile
+		var instance = energy_projectile.instantiate()
+		get_parent().add_child(instance)
+		instance.position = position
+		instance.set_collision_layer_value(4, true) #set to hit enemies
+		instance.set_collision_layer_value(8, true) #enable hitting interactables
+		
+		
+		var direction_input : String
+		if override_direction_input:
+			direction_input = override_direction_input
+		else:
+			direction_input = last_direction
+		
+		if direction_input == "right":
+			instance.rotation = 0
+			instance.velocity.x = SPEED*2
+		elif direction_input == "left":
+			instance.rotation = 0
+			instance.velocity.x = -SPEED*2
+		elif direction_input == "up":
+			instance.rotation = PI/2
+			instance.velocity.y = -SPEED*2
+		elif direction_input == "down":
+			instance.rotation = PI/2
+			instance.velocity.y = SPEED*2
+		
+			
+	claws_hitbox.disabled = true
 	if Input.is_action_just_pressed("left-click"):
 		claws_hitbox.disabled = false
-		if override_direction_input == "right":
+		
+		var direction_input : String
+		if override_direction_input:
+			direction_input = override_direction_input
+		else:
+			direction_input = last_direction
+		
+		if direction_input == "right":
 			claws_hitbox.rotation = 0
 			claws_hitbox.position = Vector2(23,0)
-		elif override_direction_input == "left":
+		elif direction_input == "left":
 			claws_hitbox.rotation = 0
 			claws_hitbox.position = Vector2(-23,0)
-		elif override_direction_input == "up":
+		elif direction_input == "up":
 			claws_hitbox.rotation = PI/2
 			claws_hitbox.position = Vector2(0,-23)
-		elif override_direction_input == "down":
+		elif direction_input == "down":
 			claws_hitbox.rotation = PI/2
 			claws_hitbox.position = Vector2(0,23)
 		
