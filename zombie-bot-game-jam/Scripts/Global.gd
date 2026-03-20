@@ -1,6 +1,9 @@
 extends Node
 
-var next_spawn_name: String = ""
+## Name of the door to spawn at in the next room.
+var next_door_name: String = ""
+
+## Small cooldown to prevent instant re-trigger.
 var door_cooldown: float = 0.0
 
 func _process(delta: float) -> void:
