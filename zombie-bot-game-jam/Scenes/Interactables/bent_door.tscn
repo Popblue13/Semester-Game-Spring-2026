@@ -1,0 +1,26 @@
+[gd_scene load_steps=4 format=3 uid="uid://dgeww3sl4i0ab"]
+
+[ext_resource type="Texture2D" uid="uid://rnp51ohx37kk" path="res://Art/icon.svg" id="1_1osth"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_eqmpe"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1osth"]
+
+[node name="BentDoor" type="Area2D"]
+collision_layer = 8
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_eqmpe")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+collision_layer = 9
+collision_mask = 8
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+shape = SubResource("RectangleShape2D_1osth")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+rotation = 1.5707964
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("1_1osth")

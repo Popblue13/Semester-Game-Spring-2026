@@ -13,7 +13,7 @@ size = Vector2(19, 46)
 [node name="Player" type="Node2D"]
 
 [node name="PlayerBody" type="CharacterBody2D" parent="."]
-collision_layer = 3
+collision_layer = 2
 collision_mask = 3
 motion_mode = 1
 script = ExtResource("2_cvnsp")
@@ -26,9 +26,11 @@ texture = ExtResource("1_v0iea")
 shape = SubResource("CapsuleShape2D_6t5aa")
 
 [node name="Claws" type="Area2D" parent="PlayerBody"]
-collision_layer = 12
-collision_mask = 0
+collision_layer = 0
+collision_mask = 12
 
 [node name="ClawsHitbox" type="CollisionShape2D" parent="PlayerBody/Claws"]
 position = Vector2(23, 0)
 shape = SubResource("RectangleShape2D_cvnsp")
+
+[connection signal="area_entered" from="PlayerBody/Claws" to="PlayerBody" method="_on_claws_area_entered"]

@@ -66,7 +66,7 @@ func _physics_process(delta: float) -> void:
 				
 	else:
 		sprite_position = sprite_position.move_toward(Vector2(0,0), 100 * delta)
-		set_collision_layer_value(2,true)
+		set_collision_mask_value(2,true)
 	sprite_2d.position = sprite_position
 	
 	# self clamp because the normal clamp ain't working for me
@@ -95,9 +95,9 @@ func change_sprite_2d_position(delta : float) -> void:
 		sprite_position.x = 0.001
 	
 	if sprite_position.y < -11:
-		set_collision_layer_value(2,false)
+		set_collision_mask_value(2,false)
 	else:
-		set_collision_layer_value(2,true)
+		set_collision_mask_value(2,true)
 	
 func _input(_event: InputEvent) -> void:
 	
@@ -111,8 +111,8 @@ func _input(_event: InputEvent) -> void:
 		var instance = energy_projectile.instantiate()
 		get_parent().add_child(instance)
 		instance.position = position
-		instance.set_collision_layer_value(4, true) #set to hit enemies
-		instance.set_collision_layer_value(8, true) #enable hitting interactables
+		instance.set_collision_mask_value(4, true) #set to hit enemies
+		instance.set_collision_mask_value(8, true) #enable hitting interactables
 		
 		
 		var direction_input : String
@@ -158,3 +158,7 @@ func _input(_event: InputEvent) -> void:
 			claws_hitbox.rotation = PI/2
 			claws_hitbox.position = Vector2(0,23)
 		
+
+
+func _on_claws_area_entered(area: Area2D) -> void:
+	area.queue_free()
