@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=3 uid="uid://bbqj7lg1qiy2"]
+
+[ext_resource type="Texture2D" uid="uid://rnp51ohx37kk" path="res://Art/icon.svg" id="1_s4a5n"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_oyt2m"]
+
+[node name="JumpableWall" type="StaticBody2D"]
+collision_layer = 10
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_oyt2m")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+rotation = 3.1415927
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("1_s4a5n")
