@@ -1,4 +1,4 @@
-[gd_scene load_steps=4 format=3 uid="uid://cbr3kher7x1rp"]
+[gd_scene format=3 uid="uid://cbr3kher7x1rp"]
 
 [ext_resource type="Script" uid="uid://dt5kt6hshj0s2" path="res://Scripts/zappable_panel.gd" id="1_2ocfw"]
 [ext_resource type="Texture2D" uid="uid://rnp51ohx37kk" path="res://Art/icon.svg" id="2_u8xi6"]

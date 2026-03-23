@@ -9,7 +9,7 @@ var override_direction_input : String = ""
 @onready var sprite_2d: Sprite2D = $Sprite2D
 @onready var player_hurtbox: CollisionShape2D = $PlayerHurtbox
 @onready var sprite_position : Vector2 = Vector2(0,0)
-const energy_projectile : PackedScene = preload("res://Scenes/energy_projectile.tscn")
+const energy_projectile : PackedScene = preload("res://Scenes/Dungeon Objects/energy_projectile.tscn")
 var last_direction : String = "right"
 
 func _physics_process(delta: float) -> void:
