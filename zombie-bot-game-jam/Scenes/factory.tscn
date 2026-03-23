@@ -1,9 +1,12 @@
-[gd_scene load_steps=8 format=4 uid="uid://bhomrdeu7fhnr"]
+[gd_scene load_steps=11 format=4 uid="uid://bhomrdeu7fhnr"]
 
 [ext_resource type="Texture2D" uid="uid://dp54g6uigueap" path="res://Art/PlaceholderTileSet.png" id="1_0u02i"]
 [ext_resource type="PackedScene" uid="uid://vsy85ifrshdf" path="res://Scenes/player.tscn" id="1_17rx2"]
 [ext_resource type="PackedScene" uid="uid://c1mjli7ob3ifg" path="res://Scenes/Doorway.tscn" id="3_1ln2w"]
 [ext_resource type="PackedScene" uid="uid://t1h6hl6wkq3f" path="res://Scenes/Interactables/toggable_cover.tscn" id="4_1mebd"]
+[ext_resource type="PackedScene" uid="uid://dgeww3sl4i0ab" path="res://Scenes/Interactables/bent_door.tscn" id="4_2ot76"]
+[ext_resource type="PackedScene" uid="uid://d4mo2ex51mpwv" path="res://Scenes/zombie.tscn" id="4_ts5vx"]
+[ext_resource type="PackedScene" uid="uid://bbqj7lg1qiy2" path="res://Scenes/Interactables/jumpable_wall.tscn" id="6_i6kvj"]
 [ext_resource type="PackedScene" uid="uid://cbr3kher7x1rp" path="res://Scenes/Interactables/zappable_panel.tscn" id="6_ts5vx"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_17rx2"]
@@ -32,6 +35,21 @@ tile_set = SubResource("TileSet_1ln2w")
 
 [node name="Doorway" parent="." instance=ExtResource("3_1ln2w")]
 position = Vector2(556, 202)
+
+[node name="BentDoor" parent="." instance=ExtResource("4_2ot76")]
+position = Vector2(378, 393)
+
+[node name="Zombie" parent="." instance=ExtResource("4_ts5vx")]
+position = Vector2(741, 305)
+
+[node name="Zombie2" parent="." instance=ExtResource("4_ts5vx")]
+position = Vector2(955, 75)
+
+[node name="JumpableWall" parent="." instance=ExtResource("6_i6kvj")]
+position = Vector2(143, 436)
+
+[node name="Zombie3" parent="." instance=ExtResource("4_ts5vx")]
+position = Vector2(1342, 362)
 
 [node name="ZappablePanel" parent="." instance=ExtResource("6_ts5vx")]
 position = Vector2(321, 132)

@@ -111,8 +111,8 @@ func _input(_event: InputEvent) -> void:
 		var instance = energy_projectile.instantiate()
 		get_parent().add_child(instance)
 		instance.position = position
-		instance.set_collision_mask_value(4, true) #set to hit enemies
-		instance.set_collision_mask_value(8, true) #enable hitting interactables
+		instance.set_collision_mask_value(3, true) #set to hit enemies
+		instance.set_collision_mask_value(4, true) #enable hitting interactables
 		
 		
 		var direction_input : String
@@ -147,18 +147,23 @@ func _input(_event: InputEvent) -> void:
 		
 		if direction_input == "right":
 			claws_hitbox.rotation = 0
-			claws_hitbox.position = Vector2(23,0)
+			claws_hitbox.position = Vector2(30.75,0)
 		elif direction_input == "left":
 			claws_hitbox.rotation = 0
-			claws_hitbox.position = Vector2(-23,0)
+			claws_hitbox.position = Vector2(-30.75,0)
 		elif direction_input == "up":
 			claws_hitbox.rotation = PI/2
-			claws_hitbox.position = Vector2(0,-23)
+			claws_hitbox.position = Vector2(0,-30.75)
 		elif direction_input == "down":
 			claws_hitbox.rotation = PI/2
-			claws_hitbox.position = Vector2(0,23)
+			claws_hitbox.position = Vector2(0,30.75)
 		
 
 
 func _on_claws_area_entered(area: Area2D) -> void:
-	area.queue_free()
+	if not area.get_collision_layer_value(1): # is broken door, static body is on layer 1 not area
+		area.queue_free()
+	
+
+func _on_claws_body_entered(body: Node2D) -> void:
+	body.queue_free()

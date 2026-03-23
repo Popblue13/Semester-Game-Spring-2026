@@ -8,7 +8,7 @@ radius = 12.0
 height = 32.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_cvnsp"]
-size = Vector2(19, 46)
+size = Vector2(34.5, 46)
 
 [node name="Player" type="Node2D"]
 
@@ -30,7 +30,8 @@ collision_layer = 0
 collision_mask = 12
 
 [node name="ClawsHitbox" type="CollisionShape2D" parent="PlayerBody/Claws"]
-position = Vector2(23, 0)
+position = Vector2(30.75, 0)
 shape = SubResource("RectangleShape2D_cvnsp")
 
 [connection signal="area_entered" from="PlayerBody/Claws" to="PlayerBody" method="_on_claws_area_entered"]
+[connection signal="body_entered" from="PlayerBody/Claws" to="PlayerBody" method="_on_claws_body_entered"]
