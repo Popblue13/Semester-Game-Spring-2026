@@ -11,9 +11,9 @@ config_version=5
 [application]
 
 config/name="ZombieBot Game Jam"
-run/main_scene="uid://bhomrdeu7fhnr"
+run/main_scene="uid://5eoer813qwnv"
 config/features=PackedStringArray("4.6", "Forward Plus")
-config/icon="res://Art/icon.svg"
+config/icon="res://Art/Sprites/icon.svg"
 
 [autoload]
 
@@ -32,6 +32,10 @@ folder_colors={
 "res://Scenes/Dungeon Objects/": "orange",
 "res://Scripts/": "red"
 }
+
+[global_group]
+
+player="player group"
 
 [input]
 
