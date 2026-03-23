@@ -29,7 +29,7 @@ window/stretch/mode="canvas_items"
 folder_colors={
 "res://Art/": "blue",
 "res://Scenes/": "orange",
-"res://Scenes/Interactables/": "yellow",
+"res://Scenes/Dungeon Objects/": "orange",
 "res://Scripts/": "red"
 }
 
