@@ -2,7 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://dp54g6uigueap" path="res://Art/PlaceholderTileSet.png" id="1_e77lj"]
 [ext_resource type="PackedScene" uid="uid://vsy85ifrshdf" path="res://Scenes/Dungeon Objects/player.tscn" id="2_du6nm"]
-[ext_resource type="PackedScene" uid="uid://c1mjli7ob3ifg" path="res://Scenes/Dungeon Objects/Doorway.tscn" id="3_nclit"]
+[ext_resource type="PackedScene" uid="uid://c1mjli7ob3ifg" path="res://Scenes/Doorway.tscn" id="3_nclit"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_17rx2"]
 texture = ExtResource("1_e77lj")
