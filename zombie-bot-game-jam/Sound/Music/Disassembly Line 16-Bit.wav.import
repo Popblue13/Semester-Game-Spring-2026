@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://bqygckabhwqwb"
+path="res://.godot/imported/Disassembly Line 16-Bit.wav-22baff8000c84fefea1caeba3adf00f6.sample"
+
+[deps]
+
+source_file="res://Sound/Music/Disassembly Line 16-Bit.wav"
+dest_files=["res://.godot/imported/Disassembly Line 16-Bit.wav-22baff8000c84fefea1caeba3adf00f6.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

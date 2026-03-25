@@ -30,7 +30,8 @@ folder_colors={
 "res://Art/": "blue",
 "res://Scenes/": "orange",
 "res://Scenes/Dungeon Objects/": "orange",
-"res://Scripts/": "red"
+"res://Scripts/": "red",
+"res://Sound/": "purple"
 }
 
 [global_group]
