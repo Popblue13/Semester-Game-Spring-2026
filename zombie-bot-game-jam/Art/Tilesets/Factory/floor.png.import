@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bk36do572gqiv"
-path="res://.godot/imported/PlaceholderTileSet.png-11b59991e4e9f44fe1dc3c1c4c5f9a4c.ctex"
+uid="uid://bhr7eneqeuwd4"
+path="res://.godot/imported/floor.png-b3dcc98b70ea74640cf46d827bd15bbc.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Art/Tilesets/PlaceholderTileSet.png"
-dest_files=["res://.godot/imported/PlaceholderTileSet.png-11b59991e4e9f44fe1dc3c1c4c5f9a4c.ctex"]
+source_file="res://Art/Tilesets/Factory/floor.png"
+dest_files=["res://.godot/imported/floor.png-b3dcc98b70ea74640cf46d827bd15bbc.ctex"]
 
 [params]
 
