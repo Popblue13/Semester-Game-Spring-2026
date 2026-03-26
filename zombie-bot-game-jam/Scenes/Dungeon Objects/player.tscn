@@ -1,4 +1,4 @@
-[gd_scene format=3 uid="uid://vsy85ifrshdf"]
+[gd_scene load_steps=5 format=3 uid="uid://vsy85ifrshdf"]
 
 [ext_resource type="Texture2D" uid="uid://rnp51ohx37kk" path="res://Art/Sprites/icon.svg" id="1_v0iea"]
 [ext_resource type="Script" uid="uid://biijq8uecnvgb" path="res://Scripts/player_body.gd" id="2_cvnsp"]
@@ -8,22 +8,28 @@ radius = 12.0
 height = 32.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_cvnsp"]
-size = Vector2(19, 46)
+size = Vector2(33.5, 46)
 
-[node name="Player" type="CharacterBody2D" unique_id=931068253 groups=["player"]]
+[node name="Player" type="CharacterBody2D" groups=["player"]]
 collision_layer = 2
 collision_mask = 3
+motion_mode = 1
 script = ExtResource("2_cvnsp")
 
-[node name="Sprite2D" type="Sprite2D" parent="." unique_id=56385043]
+[node name="Sprite2D" type="Sprite2D" parent="."]
 scale = Vector2(0.25, 0.25)
 texture = ExtResource("1_v0iea")
 
-[node name="PlayerHurtbox" type="CollisionShape2D" parent="." unique_id=1935556075 groups=["player"]]
+[node name="PlayerHurtbox" type="CollisionShape2D" parent="." groups=["player"]]
 shape = SubResource("CapsuleShape2D_6t5aa")
 
-[node name="Claws" type="Area2D" parent="." unique_id=1389416647]
+[node name="Claws" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 12
 
-[node name="ClawsHitbox" type="CollisionShape2D" parent="Claws" unique_id=2123045409]
-position = Vector2(23, 0)
+[node name="ClawsHitbox" type="CollisionShape2D" parent="Claws"]
+position = Vector2(30.25, 0)
 shape = SubResource("RectangleShape2D_cvnsp")
+
+[connection signal="area_entered" from="Claws" to="." method="_on_claws_area_entered"]
+[connection signal="body_entered" from="Claws" to="." method="_on_claws_body_entered"]

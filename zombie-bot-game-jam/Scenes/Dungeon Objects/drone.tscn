@@ -1,0 +1,42 @@
+[gd_scene load_steps=5 format=3 uid="uid://c7ro7ltwn8e2c"]
+
+[ext_resource type="Script" uid="uid://cjvtkdetl4v70" path="res://Scripts/drone.gd" id="1_jd5kt"]
+[ext_resource type="Texture2D" uid="uid://rnp51ohx37kk" path="res://Art/Sprites/icon.svg" id="2_m83ns"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_lt4d5"]
+radius = 9.0
+height = 28.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ampdf"]
+radius = 402.0796
+
+[node name="Drone" type="CharacterBody2D"]
+collision_layer = 4
+collision_mask = 7
+motion_mode = 1
+script = ExtResource("1_jd5kt")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(4.7683716e-07, -0.4999988)
+scale = Vector2(0.15625, 0.21093749)
+texture = ExtResource("2_m83ns")
+
+[node name="Sprite2D2" type="Sprite2D" parent="."]
+position = Vector2(0, -10)
+scale = Vector2(0.25, 0.15625)
+skew = -1.3439038
+texture = ExtResource("2_m83ns")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CapsuleShape2D_lt4d5")
+
+[node name="Range" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 18
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Range"]
+shape = SubResource("CircleShape2D_ampdf")
+debug_color = Color(0.9571249, 0.0283828, 0.52176684, 0.41960785)
+
+[connection signal="body_entered" from="Range" to="." method="_on_range_body_entered"]
+[connection signal="body_exited" from="Range" to="." method="_on_range_body_exited"]
