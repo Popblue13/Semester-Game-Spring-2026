@@ -12,6 +12,7 @@ var override_direction_input : String = ""
 const energy_projectile : PackedScene = preload("res://Scenes/Dungeon Objects/energy_projectile.tscn")
 var last_direction : String = "right"
 
+
 func _physics_process(delta: float) -> void:
 	if Input.is_action_pressed("right"):
 		velocity.x = SPEED
@@ -147,16 +148,16 @@ func _input(_event: InputEvent) -> void:
 		
 		if direction_input == "right":
 			claws_hitbox.rotation = 0
-			claws_hitbox.position = Vector2(30.75,0)
+			claws_hitbox.position = Vector2(30.25,0)
 		elif direction_input == "left":
 			claws_hitbox.rotation = 0
-			claws_hitbox.position = Vector2(-30.75,0)
+			claws_hitbox.position = Vector2(-30.25,0)
 		elif direction_input == "up":
 			claws_hitbox.rotation = PI/2
-			claws_hitbox.position = Vector2(0,-30.75)
+			claws_hitbox.position = Vector2(0,-30.25)
 		elif direction_input == "down":
 			claws_hitbox.rotation = PI/2
-			claws_hitbox.position = Vector2(0,30.75)
+			claws_hitbox.position = Vector2(0,30.25)
 		
 
 
@@ -166,4 +167,5 @@ func _on_claws_area_entered(area: Area2D) -> void:
 	
 
 func _on_claws_body_entered(body: Node2D) -> void:
-	body.queue_free()
+	if not body.get_collision_layer_value(4): #not an interactable
+		body.queue_free()
