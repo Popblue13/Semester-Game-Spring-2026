@@ -11,7 +11,8 @@ var override_direction_input : String = ""
 @onready var sprite_position : Vector2 = Vector2(0,0)
 const energy_projectile : PackedScene = preload("res://Scenes/Dungeon Objects/energy_projectile.tscn")
 var last_direction : String = "right"
-
+var claw_cooldown : float = 0
+var laser_charge_level : float = 0
 
 func _physics_process(delta: float) -> void:
 	if Input.is_action_pressed("right"):
@@ -82,6 +83,52 @@ func _physics_process(delta: float) -> void:
 		velocity.x = -SPEED * 3
 	
 	move_and_slide()
+	
+	# stuff for claws
+	if Input.is_action_pressed("left-click"):
+		if trigger_claw_cooldown(delta): # false if threshold reached
+			claw_cooldown = 0
+		claws_hitbox.disabled = false
+	else:
+		if trigger_claw_cooldown(delta*9):
+			claws_hitbox.disabled = true
+		else:
+			claw_cooldown -= delta * 2
+			
+	# stuff for projectiles
+	if Input.is_action_pressed("right-click"):
+		if charging_projectile(delta):
+			return
+		laser_charge_level = 0
+		#make projectile
+		var instance = energy_projectile.instantiate()
+		get_parent().add_child(instance)
+		instance.position = position
+		instance.set_collision_mask_value(3, true) #set to hit enemies
+		instance.set_collision_mask_value(4, true) #enable hitting interactables
+		
+		
+		var direction_input : String
+		if override_direction_input:
+			direction_input = override_direction_input
+		else:
+			direction_input = last_direction
+		
+		if direction_input == "right":
+			instance.rotation = 0
+			instance.velocity.x = SPEED*2.5
+		elif direction_input == "left":
+			instance.rotation = 0
+			instance.velocity.x = -SPEED*2.5
+		elif direction_input == "up":
+			instance.rotation = PI/2
+			instance.velocity.y = -SPEED*2.5
+		elif direction_input == "down":
+			instance.rotation = PI/2
+			instance.velocity.y = SPEED*2.5
+	else:
+		laser_charge_level = move_toward(laser_charge_level,1.5,delta)
+			
 
 func change_sprite_2d_position(delta : float) -> void:
 	if sprite_position.x == 0:
@@ -106,60 +153,48 @@ func _input(_event: InputEvent) -> void:
 	if Input.is_action_pressed("space"):
 		claws_hitbox.disabled = true
 		return #prevents attacking while midair
-	
-	if Input.is_action_just_pressed("right-click"):
-		#make projectile
-		var instance = energy_projectile.instantiate()
-		get_parent().add_child(instance)
-		instance.position = position
-		instance.set_collision_mask_value(3, true) #set to hit enemies
-		instance.set_collision_mask_value(4, true) #enable hitting interactables
-		
-		
-		var direction_input : String
-		if override_direction_input:
-			direction_input = override_direction_input
-		else:
-			direction_input = last_direction
-		
-		if direction_input == "right":
-			instance.rotation = 0
-			instance.velocity.x = SPEED*2
-		elif direction_input == "left":
-			instance.rotation = 0
-			instance.velocity.x = -SPEED*2
-		elif direction_input == "up":
-			instance.rotation = PI/2
-			instance.velocity.y = -SPEED*2
-		elif direction_input == "down":
-			instance.rotation = PI/2
-			instance.velocity.y = SPEED*2
-		
 			
-	claws_hitbox.disabled = true
-	if Input.is_action_just_pressed("left-click"):
-		claws_hitbox.disabled = false
-		
+	
+	if Input.is_action_pressed("left-click"):
 		var direction_input : String
 		if override_direction_input:
 			direction_input = override_direction_input
 		else:
 			direction_input = last_direction
-		
+			
+		if not claws_hitbox.disabled:
+			if claw_cooldown > 2:
+				claws_hitbox.scale = Vector2(1-2.0/3,1-2.0/3)
+			else:
+				claws_hitbox.scale = Vector2(1-claw_cooldown/3,1-claw_cooldown/3)
+		else:
+			claws_hitbox.scale = Vector2(1,1)
+			
 		if direction_input == "right":
 			claws_hitbox.rotation = 0
-			claws_hitbox.position = Vector2(30.25,0)
+			claws_hitbox.position = Vector2(24 *claws_hitbox.scale.x,0)
 		elif direction_input == "left":
 			claws_hitbox.rotation = 0
-			claws_hitbox.position = Vector2(-30.25,0)
+			claws_hitbox.position = Vector2(-24*claws_hitbox.scale.x,0)
 		elif direction_input == "up":
 			claws_hitbox.rotation = PI/2
-			claws_hitbox.position = Vector2(0,-30.25)
+			claws_hitbox.position = Vector2(0,-24*claws_hitbox.scale.y)
 		elif direction_input == "down":
 			claws_hitbox.rotation = PI/2
-			claws_hitbox.position = Vector2(0,30.25)
+			claws_hitbox.position = Vector2(0,24*claws_hitbox.scale.y)
 		
-
+func trigger_claw_cooldown(delta: float) -> bool:
+	claw_cooldown += delta
+	if claw_cooldown > 5: # ten second threshold
+		return true
+	return false
+	
+func charging_projectile(delta: float) -> bool:
+	laser_charge_level += delta
+	if laser_charge_level > 1: # charging takes 2 seconds
+		laser_charge_level = 10
+		return false
+	return true
 
 func _on_claws_area_entered(area: Area2D) -> void:
 	if not area.get_collision_layer_value(1): # is broken door, static body is on layer 1 not area

@@ -19,6 +19,8 @@ func _physics_process(_delta: float) -> void:
 
 
 func _on_range_body_entered(body: Node2D) -> void:
+	if body is StaticBody2D:
+		return
 	if body.get_collision_layer_value(5): # if on zombie layer
 		return
 	if not player:
