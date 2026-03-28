@@ -14,6 +14,8 @@ var last_direction : String = "right"
 var claw_cooldown : float = 0
 var laser_charge_level : float = 0
 
+var feature_enabled : Array = [true, false] # boots, cannon, big claws
+
 func _physics_process(delta: float) -> void:
 	if Input.is_action_pressed("right"):
 		velocity.x = SPEED
@@ -51,7 +53,8 @@ func _physics_process(delta: float) -> void:
 			override_direction_input = x_direction_input
 		velocity.y = move_toward(velocity.y, 0, 5 * SPEED * delta)
 	
-	if Input.is_action_pressed("space"): # *hidden "tech" for speedrunners included*
+	if Input.is_action_pressed("space") and feature_enabled[0]: 
+		# *hidden "tech" for speedrunners included*
 		if override_direction_input: # chooses the first input hit as the main direction
 				if override_direction_input == "right" or override_direction_input == "left":
 					velocity.x *= abs(sprite_position.y) / 9
@@ -96,7 +99,7 @@ func _physics_process(delta: float) -> void:
 			claw_cooldown -= delta * 2
 			
 	# stuff for projectiles
-	if Input.is_action_pressed("right-click"):
+	if Input.is_action_pressed("right-click") and feature_enabled[1]:
 		if charging_projectile(delta):
 			return
 		laser_charge_level = 0
@@ -150,7 +153,7 @@ func change_sprite_2d_position(delta : float) -> void:
 func _input(_event: InputEvent) -> void:
 	
 	
-	if Input.is_action_pressed("space"):
+	if Input.is_action_pressed("space") and feature_enabled[0]:
 		claws_hitbox.disabled = true
 		return #prevents attacking while midair
 			

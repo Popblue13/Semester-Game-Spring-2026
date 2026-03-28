@@ -5,7 +5,7 @@ var player : CharacterBody2D # aka, first priority target
 var enemy : CharacterBody2D # aka, second priority target
 var SPEED : float = 400.0
 
-func _physics_process(_delta: float) -> void:
+func _physics_process(delta: float) -> void:
 	if player:
 		var direction = position.direction_to(player.position)
 		if position.distance_to(player.position) < 25:
@@ -15,7 +15,10 @@ func _physics_process(_delta: float) -> void:
 		var speed = SPEED * 100/position.distance_to(player.position)
 		velocity = direction * speed
 		move_and_slide()
-		
+	else:
+		velocity = clamp(velocity.move_toward(Vector2(0,0),delta*10),
+							Vector2(-SPEED,-SPEED), Vector2(SPEED,SPEED))
+		move_and_slide()
 
 
 func _on_range_body_entered(body: Node2D) -> void:
