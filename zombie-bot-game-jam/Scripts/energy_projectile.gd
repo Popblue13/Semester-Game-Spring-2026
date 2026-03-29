@@ -10,7 +10,6 @@ func _physics_process(_delta: float) -> void:
 				pass
 			elif collider.get_collider_shape().get_parent() is CharacterBody2D:
 				if collider.get_collider_shape().get_parent().get_collision_layer_value(4):
-					print("Energy particles collided! AH!")
 					return
 				else:
 					if collider.get_collider_shape_index() == 0:

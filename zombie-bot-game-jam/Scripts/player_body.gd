@@ -14,9 +14,12 @@ var last_direction : String = "right"
 var claw_cooldown : float = 0
 var laser_charge_level : float = 0
 
-var feature_enabled : Array = [true, false] # boots, cannon, big claws
+var feature_enabled : Array = [true, true] # boots, cannon, big claws
 
 func _physics_process(delta: float) -> void:
+	if is_queued_for_deletion():
+		return
+	
 	if Input.is_action_pressed("right"):
 		velocity.x = SPEED
 		x_direction_input = "right"
@@ -151,7 +154,8 @@ func change_sprite_2d_position(delta : float) -> void:
 		set_collision_mask_value(2,true)
 	
 func _input(_event: InputEvent) -> void:
-	
+	if is_queued_for_deletion():
+		return
 	
 	if Input.is_action_pressed("space") and feature_enabled[0]:
 		claws_hitbox.disabled = true
