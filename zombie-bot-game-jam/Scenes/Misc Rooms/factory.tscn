@@ -1,9 +1,8 @@
-[gd_scene load_steps=11 format=4 uid="uid://bhomrdeu7fhnr"]
+[gd_scene load_steps=10 format=4 uid="uid://bhomrdeu7fhnr"]
 
-[ext_resource type="Texture2D" uid="uid://dp54g6uigueap" path="res://Art/Tilesets/PlaceholderTileSet.png" id="1_0u02i"]
+[ext_resource type="Texture2D" uid="uid://bk36do572gqiv" path="res://Art/Tilesets/PlaceholderTileSet.png" id="1_0u02i"]
 [ext_resource type="PackedScene" uid="uid://vsy85ifrshdf" path="res://Scenes/Dungeon Objects/player.tscn" id="1_17rx2"]
 [ext_resource type="PackedScene" uid="uid://dgeww3sl4i0ab" path="res://Scenes/Dungeon Objects/bent_door.tscn" id="3_pmpbf"]
-[ext_resource type="PackedScene" uid="uid://d4mo2ex51mpwv" path="res://Scenes/Dungeon Objects/zombie.tscn" id="4_yihdi"]
 [ext_resource type="PackedScene" uid="uid://bbqj7lg1qiy2" path="res://Scenes/Dungeon Objects/jumpable_wall.tscn" id="5_j8q7r"]
 [ext_resource type="PackedScene" uid="uid://cbr3kher7x1rp" path="res://Scenes/Dungeon Objects/zappable_panel.tscn" id="6_7lj3a"]
 [ext_resource type="PackedScene" uid="uid://c7ro7ltwn8e2c" path="res://Scenes/Dungeon Objects/drone.tscn" id="6_yihdi"]
@@ -37,17 +36,20 @@ position = Vector2(322, 269)
 [node name="BentDoor" parent="." instance=ExtResource("3_pmpbf")]
 position = Vector2(245, 93)
 
-[node name="JumpableWall" parent="." instance=ExtResource("5_j8q7r")]
-position = Vector2(135, 174)
+[node name="Drone3" parent="." instance=ExtResource("6_yihdi")]
+position = Vector2(794, 87)
 
-[node name="Zombie" parent="." instance=ExtResource("4_yihdi")]
-position = Vector2(992, 83)
+[node name="Drone2" parent="." instance=ExtResource("6_yihdi")]
+position = Vector2(994, 462)
 
 [node name="Drone" parent="." instance=ExtResource("6_yihdi")]
-position = Vector2(725, 97)
+position = Vector2(1068, 50)
+
+[node name="JumpableWall" parent="." instance=ExtResource("5_j8q7r")]
+position = Vector2(135, 174)
 
 [node name="ZappablePanel" parent="." instance=ExtResource("6_7lj3a")]
 position = Vector2(338, 40)
 
 [node name="ToggableCover" parent="ZappablePanel" instance=ExtResource("7_gks2b")]
-position = Vector2(256, 134)
+position = Vector2(-190, 28)

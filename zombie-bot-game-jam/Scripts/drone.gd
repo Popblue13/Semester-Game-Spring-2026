@@ -47,6 +47,8 @@ func charge_gun(delta: float) -> bool:
 
 
 func _on_range_body_entered(body: Node2D) -> void:
+	if body is StaticBody2D:
+		return
 	if not body.get_collision_layer_value(5): # if not on zombie layer
 		if not body.get_collision_layer_value(2): # player isn't on zombie layer so safeguard
 			return

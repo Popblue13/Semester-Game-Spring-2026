@@ -7,8 +7,8 @@
 radius = 12.0
 height = 32.0
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_cvnsp"]
-size = Vector2(33.5, 46)
+[sub_resource type="CircleShape2D" id="CircleShape2D_iam2d"]
+radius = 36.0
 
 [node name="Player" type="CharacterBody2D" groups=["player"]]
 collision_layer = 2
@@ -28,8 +28,9 @@ collision_layer = 0
 collision_mask = 12
 
 [node name="ClawsHitbox" type="CollisionShape2D" parent="Claws"]
-position = Vector2(30.25, 0)
-shape = SubResource("RectangleShape2D_cvnsp")
+position = Vector2(24, 0)
+shape = SubResource("CircleShape2D_iam2d")
+disabled = true
 
 [connection signal="area_entered" from="Claws" to="." method="_on_claws_area_entered"]
 [connection signal="body_entered" from="Claws" to="." method="_on_claws_body_entered"]
