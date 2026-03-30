@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=4 uid="uid://c1jvpmrwbjdec"]
+[gd_scene load_steps=19 format=4 uid="uid://c1jvpmrwbjdec"]
 
 [ext_resource type="Script" uid="uid://duiblfs6iy3eq" path="res://Scripts/room.gd" id="1_udbj3"]
 [ext_resource type="PackedScene" uid="uid://vsy85ifrshdf" path="res://Scenes/Dungeon Objects/player.tscn" id="2_udbj3"]
@@ -7,6 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://d330xn1e52jni" path="res://Art/Tilesets/Factory/IMG_0435 2.png" id="4_wobdf"]
 [ext_resource type="Script" uid="uid://dfqub56g6o6ue" path="res://Scripts/moving_parts.gd" id="5_umjbf"]
 [ext_resource type="AudioStream" uid="uid://bqygckabhwqwb" path="res://Sound/Music/Disassembly Line 16-Bit.wav" id="6_wobdf"]
+[ext_resource type="Script" uid="uid://c4y65a7t7sb0x" path="res://Scripts/auto_arm.gd" id="8_chv3v"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_qrxxx"]
 texture = ExtResource("3_wobdf")
@@ -220,6 +221,16 @@ size = Vector2(50, 289)
 size = Vector2(288.00003, 21.428604)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_chv3v"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_u1yvb"]
+radius = 223.14345
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1ibio"]
+size = Vector2(112, 20)
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_chv3v"]
+radius = 20.0
+height = 62.0
 
 [node name="FactoryMain" type="Node2D"]
 script = ExtResource("1_udbj3")
@@ -615,3 +626,522 @@ editor_draw_drag_margin = true
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("6_wobdf")
 autoplay = true
+
+[node name="AutomatedArms" type="Node2D" parent="."]
+
+[node name="AutoArm" type="StaticBody2D" parent="AutomatedArms"]
+position = Vector2(337, 429)
+collision_layer = 2
+collision_mask = 3
+script = ExtResource("8_chv3v")
+
+[node name="Range" type="Area2D" parent="AutomatedArms/AutoArm"]
+collision_layer = 0
+collision_mask = 18
+monitorable = false
+metadata/_edit_lock_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AutomatedArms/AutoArm/Range"]
+shape = SubResource("CircleShape2D_u1yvb")
+debug_color = Color(0.68194693, 0.50312716, 0, 0.41960785)
+metadata/_edit_lock_ = true
+
+[node name="Crane" type="StaticBody2D" parent="AutomatedArms/AutoArm"]
+position = Vector2(99, 0)
+collision_layer = 2
+collision_mask = 3
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AutomatedArms/AutoArm/Crane"]
+position = Vector2(46, 0)
+shape = SubResource("RectangleShape2D_1ibio")
+
+[node name="Grabber" type="CharacterBody2D" parent="AutomatedArms/AutoArm/Crane"]
+position = Vector2(85, -1)
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AutomatedArms/AutoArm/Crane/Grabber"]
+position = Vector2(10, 0)
+scale = Vector2(0.5, 1)
+shape = SubResource("CapsuleShape2D_chv3v")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AutomatedArms/AutoArm"]
+position = Vector2(46, 0)
+shape = SubResource("RectangleShape2D_1ibio")
+metadata/_edit_lock_ = true
+
+[node name="AutoArm2" type="StaticBody2D" parent="AutomatedArms"]
+position = Vector2(825, 414)
+collision_layer = 2
+collision_mask = 3
+script = ExtResource("8_chv3v")
+
+[node name="Range" type="Area2D" parent="AutomatedArms/AutoArm2"]
+collision_layer = 0
+collision_mask = 18
+monitorable = false
+metadata/_edit_lock_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AutomatedArms/AutoArm2/Range"]
+shape = SubResource("CircleShape2D_u1yvb")
+debug_color = Color(0.68194693, 0.50312716, 0, 0.41960785)
+metadata/_edit_lock_ = true
+
+[node name="Crane" type="StaticBody2D" parent="AutomatedArms/AutoArm2"]
+position = Vector2(99, 0)
+collision_layer = 2
+collision_mask = 3
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AutomatedArms/AutoArm2/Crane"]
+position = Vector2(46, 0)
+shape = SubResource("RectangleShape2D_1ibio")
+
+[node name="Grabber" type="CharacterBody2D" parent="AutomatedArms/AutoArm2/Crane"]
+position = Vector2(85, -1)
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AutomatedArms/AutoArm2/Crane/Grabber"]
+position = Vector2(10, 0)
+scale = Vector2(0.5, 1)
+shape = SubResource("CapsuleShape2D_chv3v")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AutomatedArms/AutoArm2"]
+position = Vector2(46, 0)
+shape = SubResource("RectangleShape2D_1ibio")
+metadata/_edit_lock_ = true
+
+[node name="AutoArm3" type="StaticBody2D" parent="AutomatedArms"]
+position = Vector2(582, 206)
+collision_layer = 2
+collision_mask = 3
+script = ExtResource("8_chv3v")
+
+[node name="Range" type="Area2D" parent="AutomatedArms/AutoArm3"]
+collision_layer = 0
+collision_mask = 18
+monitorable = false
+metadata/_edit_lock_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AutomatedArms/AutoArm3/Range"]
+shape = SubResource("CircleShape2D_u1yvb")
+debug_color = Color(0.68194693, 0.50312716, 0, 0.41960785)
+metadata/_edit_lock_ = true
+
+[node name="Crane" type="StaticBody2D" parent="AutomatedArms/AutoArm3"]
+position = Vector2(99, 0)
+collision_layer = 2
+collision_mask = 3
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AutomatedArms/AutoArm3/Crane"]
+position = Vector2(46, 0)
+shape = SubResource("RectangleShape2D_1ibio")
+
+[node name="Grabber" type="CharacterBody2D" parent="AutomatedArms/AutoArm3/Crane"]
+position = Vector2(85, -1)
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AutomatedArms/AutoArm3/Crane/Grabber"]
+position = Vector2(10, 0)
+scale = Vector2(0.5, 1)
+shape = SubResource("CapsuleShape2D_chv3v")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AutomatedArms/AutoArm3"]
+position = Vector2(46, 0)
+shape = SubResource("RectangleShape2D_1ibio")
+metadata/_edit_lock_ = true
+
+[node name="AutoArm4" type="StaticBody2D" parent="AutomatedArms"]
+position = Vector2(30, 215)
+collision_layer = 2
+collision_mask = 3
+script = ExtResource("8_chv3v")
+
+[node name="Range" type="Area2D" parent="AutomatedArms/AutoArm4"]
+collision_layer = 0
+collision_mask = 18
+monitorable = false
+metadata/_edit_lock_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AutomatedArms/AutoArm4/Range"]
+shape = SubResource("CircleShape2D_u1yvb")
+debug_color = Color(0.68194693, 0.50312716, 0, 0.41960785)
+metadata/_edit_lock_ = true
+
+[node name="Crane" type="StaticBody2D" parent="AutomatedArms/AutoArm4"]
+position = Vector2(99, 0)
+collision_layer = 2
+collision_mask = 3
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AutomatedArms/AutoArm4/Crane"]
+position = Vector2(46, 0)
+shape = SubResource("RectangleShape2D_1ibio")
+
+[node name="Grabber" type="CharacterBody2D" parent="AutomatedArms/AutoArm4/Crane"]
+position = Vector2(85, -1)
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AutomatedArms/AutoArm4/Crane/Grabber"]
+position = Vector2(10, 0)
+scale = Vector2(0.5, 1)
+shape = SubResource("CapsuleShape2D_chv3v")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AutomatedArms/AutoArm4"]
+position = Vector2(46, 0)
+shape = SubResource("RectangleShape2D_1ibio")
+metadata/_edit_lock_ = true
+
+[node name="AutoArm5" type="StaticBody2D" parent="AutomatedArms"]
+position = Vector2(-374, 196)
+collision_layer = 2
+collision_mask = 3
+script = ExtResource("8_chv3v")
+
+[node name="Range" type="Area2D" parent="AutomatedArms/AutoArm5"]
+collision_layer = 0
+collision_mask = 18
+monitorable = false
+metadata/_edit_lock_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AutomatedArms/AutoArm5/Range"]
+shape = SubResource("CircleShape2D_u1yvb")
+debug_color = Color(0.68194693, 0.50312716, 0, 0.41960785)
+metadata/_edit_lock_ = true
+
+[node name="Crane" type="StaticBody2D" parent="AutomatedArms/AutoArm5"]
+position = Vector2(99, 0)
+collision_layer = 2
+collision_mask = 3
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AutomatedArms/AutoArm5/Crane"]
+position = Vector2(46, 0)
+shape = SubResource("RectangleShape2D_1ibio")
+
+[node name="Grabber" type="CharacterBody2D" parent="AutomatedArms/AutoArm5/Crane"]
+position = Vector2(85, -1)
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AutomatedArms/AutoArm5/Crane/Grabber"]
+position = Vector2(10, 0)
+scale = Vector2(0.5, 1)
+shape = SubResource("CapsuleShape2D_chv3v")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AutomatedArms/AutoArm5"]
+position = Vector2(46, 0)
+shape = SubResource("RectangleShape2D_1ibio")
+metadata/_edit_lock_ = true
+
+[node name="AutoArm6" type="StaticBody2D" parent="AutomatedArms"]
+position = Vector2(-541, 438)
+collision_layer = 2
+collision_mask = 3
+script = ExtResource("8_chv3v")
+
+[node name="Range" type="Area2D" parent="AutomatedArms/AutoArm6"]
+collision_layer = 0
+collision_mask = 18
+monitorable = false
+metadata/_edit_lock_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AutomatedArms/AutoArm6/Range"]
+shape = SubResource("CircleShape2D_u1yvb")
+debug_color = Color(0.68194693, 0.50312716, 0, 0.41960785)
+metadata/_edit_lock_ = true
+
+[node name="Crane" type="StaticBody2D" parent="AutomatedArms/AutoArm6"]
+position = Vector2(99, 0)
+collision_layer = 2
+collision_mask = 3
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AutomatedArms/AutoArm6/Crane"]
+position = Vector2(46, 0)
+shape = SubResource("RectangleShape2D_1ibio")
+
+[node name="Grabber" type="CharacterBody2D" parent="AutomatedArms/AutoArm6/Crane"]
+position = Vector2(85, -1)
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AutomatedArms/AutoArm6/Crane/Grabber"]
+position = Vector2(10, 0)
+scale = Vector2(0.5, 1)
+shape = SubResource("CapsuleShape2D_chv3v")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AutomatedArms/AutoArm6"]
+position = Vector2(46, 0)
+shape = SubResource("RectangleShape2D_1ibio")
+metadata/_edit_lock_ = true
+
+[node name="AutoArm7" type="StaticBody2D" parent="AutomatedArms"]
+position = Vector2(-882, 439)
+collision_layer = 2
+collision_mask = 3
+script = ExtResource("8_chv3v")
+
+[node name="Range" type="Area2D" parent="AutomatedArms/AutoArm7"]
+collision_layer = 0
+collision_mask = 18
+monitorable = false
+metadata/_edit_lock_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AutomatedArms/AutoArm7/Range"]
+shape = SubResource("CircleShape2D_u1yvb")
+debug_color = Color(0.68194693, 0.50312716, 0, 0.41960785)
+metadata/_edit_lock_ = true
+
+[node name="Crane" type="StaticBody2D" parent="AutomatedArms/AutoArm7"]
+position = Vector2(99, 0)
+collision_layer = 2
+collision_mask = 3
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AutomatedArms/AutoArm7/Crane"]
+position = Vector2(46, 0)
+shape = SubResource("RectangleShape2D_1ibio")
+
+[node name="Grabber" type="CharacterBody2D" parent="AutomatedArms/AutoArm7/Crane"]
+position = Vector2(85, -1)
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AutomatedArms/AutoArm7/Crane/Grabber"]
+position = Vector2(10, 0)
+scale = Vector2(0.5, 1)
+shape = SubResource("CapsuleShape2D_chv3v")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AutomatedArms/AutoArm7"]
+position = Vector2(46, 0)
+shape = SubResource("RectangleShape2D_1ibio")
+metadata/_edit_lock_ = true
+
+[node name="AutoArm8" type="StaticBody2D" parent="AutomatedArms"]
+position = Vector2(-374, -189)
+collision_layer = 2
+collision_mask = 3
+script = ExtResource("8_chv3v")
+
+[node name="Range" type="Area2D" parent="AutomatedArms/AutoArm8"]
+collision_layer = 0
+collision_mask = 18
+monitorable = false
+metadata/_edit_lock_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AutomatedArms/AutoArm8/Range"]
+shape = SubResource("CircleShape2D_u1yvb")
+debug_color = Color(0.68194693, 0.50312716, 0, 0.41960785)
+metadata/_edit_lock_ = true
+
+[node name="Crane" type="StaticBody2D" parent="AutomatedArms/AutoArm8"]
+position = Vector2(99, 0)
+collision_layer = 2
+collision_mask = 3
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AutomatedArms/AutoArm8/Crane"]
+position = Vector2(46, 0)
+shape = SubResource("RectangleShape2D_1ibio")
+
+[node name="Grabber" type="CharacterBody2D" parent="AutomatedArms/AutoArm8/Crane"]
+position = Vector2(85, -1)
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AutomatedArms/AutoArm8/Crane/Grabber"]
+position = Vector2(10, 0)
+scale = Vector2(0.5, 1)
+shape = SubResource("CapsuleShape2D_chv3v")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AutomatedArms/AutoArm8"]
+position = Vector2(46, 0)
+shape = SubResource("RectangleShape2D_1ibio")
+metadata/_edit_lock_ = true
+
+[node name="AutoArm9" type="StaticBody2D" parent="AutomatedArms"]
+position = Vector2(24, -180)
+collision_layer = 2
+collision_mask = 3
+script = ExtResource("8_chv3v")
+
+[node name="Range" type="Area2D" parent="AutomatedArms/AutoArm9"]
+collision_layer = 0
+collision_mask = 18
+monitorable = false
+metadata/_edit_lock_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AutomatedArms/AutoArm9/Range"]
+shape = SubResource("CircleShape2D_u1yvb")
+debug_color = Color(0.68194693, 0.50312716, 0, 0.41960785)
+metadata/_edit_lock_ = true
+
+[node name="Crane" type="StaticBody2D" parent="AutomatedArms/AutoArm9"]
+position = Vector2(99, 0)
+collision_layer = 2
+collision_mask = 3
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AutomatedArms/AutoArm9/Crane"]
+position = Vector2(46, 0)
+shape = SubResource("RectangleShape2D_1ibio")
+
+[node name="Grabber" type="CharacterBody2D" parent="AutomatedArms/AutoArm9/Crane"]
+position = Vector2(85, -1)
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AutomatedArms/AutoArm9/Crane/Grabber"]
+position = Vector2(10, 0)
+scale = Vector2(0.5, 1)
+shape = SubResource("CapsuleShape2D_chv3v")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AutomatedArms/AutoArm9"]
+position = Vector2(46, 0)
+shape = SubResource("RectangleShape2D_1ibio")
+metadata/_edit_lock_ = true
+
+[node name="AutoArm10" type="StaticBody2D" parent="AutomatedArms"]
+position = Vector2(315, -385)
+collision_layer = 2
+collision_mask = 3
+script = ExtResource("8_chv3v")
+
+[node name="Range" type="Area2D" parent="AutomatedArms/AutoArm10"]
+collision_layer = 0
+collision_mask = 18
+monitorable = false
+metadata/_edit_lock_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AutomatedArms/AutoArm10/Range"]
+shape = SubResource("CircleShape2D_u1yvb")
+debug_color = Color(0.68194693, 0.50312716, 0, 0.41960785)
+metadata/_edit_lock_ = true
+
+[node name="Crane" type="StaticBody2D" parent="AutomatedArms/AutoArm10"]
+position = Vector2(99, 0)
+collision_layer = 2
+collision_mask = 3
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AutomatedArms/AutoArm10/Crane"]
+position = Vector2(46, 0)
+shape = SubResource("RectangleShape2D_1ibio")
+
+[node name="Grabber" type="CharacterBody2D" parent="AutomatedArms/AutoArm10/Crane"]
+position = Vector2(85, -1)
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AutomatedArms/AutoArm10/Crane/Grabber"]
+position = Vector2(10, 0)
+scale = Vector2(0.5, 1)
+shape = SubResource("CapsuleShape2D_chv3v")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AutomatedArms/AutoArm10"]
+position = Vector2(46, 0)
+shape = SubResource("RectangleShape2D_1ibio")
+metadata/_edit_lock_ = true
+
+[node name="AutoArm11" type="StaticBody2D" parent="AutomatedArms"]
+position = Vector2(589, -195)
+collision_layer = 2
+collision_mask = 3
+script = ExtResource("8_chv3v")
+
+[node name="Range" type="Area2D" parent="AutomatedArms/AutoArm11"]
+collision_layer = 0
+collision_mask = 18
+monitorable = false
+metadata/_edit_lock_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AutomatedArms/AutoArm11/Range"]
+shape = SubResource("CircleShape2D_u1yvb")
+debug_color = Color(0.68194693, 0.50312716, 0, 0.41960785)
+metadata/_edit_lock_ = true
+
+[node name="Crane" type="StaticBody2D" parent="AutomatedArms/AutoArm11"]
+position = Vector2(99, 0)
+collision_layer = 2
+collision_mask = 3
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AutomatedArms/AutoArm11/Crane"]
+position = Vector2(46, 0)
+shape = SubResource("RectangleShape2D_1ibio")
+
+[node name="Grabber" type="CharacterBody2D" parent="AutomatedArms/AutoArm11/Crane"]
+position = Vector2(85, -1)
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AutomatedArms/AutoArm11/Crane/Grabber"]
+position = Vector2(10, 0)
+scale = Vector2(0.5, 1)
+shape = SubResource("CapsuleShape2D_chv3v")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AutomatedArms/AutoArm11"]
+position = Vector2(46, 0)
+shape = SubResource("RectangleShape2D_1ibio")
+metadata/_edit_lock_ = true
+
+[node name="AutoArm12" type="StaticBody2D" parent="AutomatedArms"]
+position = Vector2(831, -396)
+collision_layer = 2
+collision_mask = 3
+script = ExtResource("8_chv3v")
+
+[node name="Range" type="Area2D" parent="AutomatedArms/AutoArm12"]
+collision_layer = 0
+collision_mask = 18
+monitorable = false
+metadata/_edit_lock_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AutomatedArms/AutoArm12/Range"]
+shape = SubResource("CircleShape2D_u1yvb")
+debug_color = Color(0.68194693, 0.50312716, 0, 0.41960785)
+metadata/_edit_lock_ = true
+
+[node name="Crane" type="StaticBody2D" parent="AutomatedArms/AutoArm12"]
+position = Vector2(99, 0)
+collision_layer = 2
+collision_mask = 3
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AutomatedArms/AutoArm12/Crane"]
+position = Vector2(46, 0)
+shape = SubResource("RectangleShape2D_1ibio")
+
+[node name="Grabber" type="CharacterBody2D" parent="AutomatedArms/AutoArm12/Crane"]
+position = Vector2(85, -1)
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AutomatedArms/AutoArm12/Crane/Grabber"]
+position = Vector2(10, 0)
+scale = Vector2(0.5, 1)
+shape = SubResource("CapsuleShape2D_chv3v")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AutomatedArms/AutoArm12"]
+position = Vector2(46, 0)
+shape = SubResource("RectangleShape2D_1ibio")
+metadata/_edit_lock_ = true
+
+[connection signal="body_entered" from="AutomatedArms/AutoArm/Range" to="AutomatedArms/AutoArm" method="_on_range_body_entered"]
+[connection signal="body_exited" from="AutomatedArms/AutoArm/Range" to="AutomatedArms/AutoArm" method="_on_range_body_exited"]
+[connection signal="body_entered" from="AutomatedArms/AutoArm2/Range" to="AutomatedArms/AutoArm2" method="_on_range_body_entered"]
+[connection signal="body_exited" from="AutomatedArms/AutoArm2/Range" to="AutomatedArms/AutoArm2" method="_on_range_body_exited"]
+[connection signal="body_entered" from="AutomatedArms/AutoArm3/Range" to="AutomatedArms/AutoArm3" method="_on_range_body_entered"]
+[connection signal="body_exited" from="AutomatedArms/AutoArm3/Range" to="AutomatedArms/AutoArm3" method="_on_range_body_exited"]
+[connection signal="body_entered" from="AutomatedArms/AutoArm4/Range" to="AutomatedArms/AutoArm4" method="_on_range_body_entered"]
+[connection signal="body_exited" from="AutomatedArms/AutoArm4/Range" to="AutomatedArms/AutoArm4" method="_on_range_body_exited"]
+[connection signal="body_entered" from="AutomatedArms/AutoArm5/Range" to="AutomatedArms/AutoArm5" method="_on_range_body_entered"]
+[connection signal="body_exited" from="AutomatedArms/AutoArm5/Range" to="AutomatedArms/AutoArm5" method="_on_range_body_exited"]
+[connection signal="body_entered" from="AutomatedArms/AutoArm6/Range" to="AutomatedArms/AutoArm6" method="_on_range_body_entered"]
+[connection signal="body_exited" from="AutomatedArms/AutoArm6/Range" to="AutomatedArms/AutoArm6" method="_on_range_body_exited"]
+[connection signal="body_entered" from="AutomatedArms/AutoArm7/Range" to="AutomatedArms/AutoArm7" method="_on_range_body_entered"]
+[connection signal="body_exited" from="AutomatedArms/AutoArm7/Range" to="AutomatedArms/AutoArm7" method="_on_range_body_exited"]
+[connection signal="body_entered" from="AutomatedArms/AutoArm8/Range" to="AutomatedArms/AutoArm8" method="_on_range_body_entered"]
+[connection signal="body_exited" from="AutomatedArms/AutoArm8/Range" to="AutomatedArms/AutoArm8" method="_on_range_body_exited"]
+[connection signal="body_entered" from="AutomatedArms/AutoArm9/Range" to="AutomatedArms/AutoArm9" method="_on_range_body_entered"]
+[connection signal="body_exited" from="AutomatedArms/AutoArm9/Range" to="AutomatedArms/AutoArm9" method="_on_range_body_exited"]
+[connection signal="body_entered" from="AutomatedArms/AutoArm10/Range" to="AutomatedArms/AutoArm10" method="_on_range_body_entered"]
+[connection signal="body_exited" from="AutomatedArms/AutoArm10/Range" to="AutomatedArms/AutoArm10" method="_on_range_body_exited"]
+[connection signal="body_entered" from="AutomatedArms/AutoArm11/Range" to="AutomatedArms/AutoArm11" method="_on_range_body_entered"]
+[connection signal="body_exited" from="AutomatedArms/AutoArm11/Range" to="AutomatedArms/AutoArm11" method="_on_range_body_exited"]
+[connection signal="body_entered" from="AutomatedArms/AutoArm12/Range" to="AutomatedArms/AutoArm12" method="_on_range_body_entered"]
+[connection signal="body_exited" from="AutomatedArms/AutoArm12/Range" to="AutomatedArms/AutoArm12" method="_on_range_body_exited"]
