@@ -59,3 +59,4 @@ func _on_area_2d_body_entered(body: Node2D) -> void:
 	if body.get_collision_mask_value(1) and body.get_collision_mask_value(3):
 		body.queue_free()
 		boss_health -= 1
+		print("owie, I hurted:", boss_health)

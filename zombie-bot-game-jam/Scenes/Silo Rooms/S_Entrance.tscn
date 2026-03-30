@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=4 uid="uid://bt7433q55xk4v"]
+[gd_scene load_steps=17 format=4 uid="uid://bt7433q55xk4v"]
 
 [ext_resource type="Script" uid="uid://duiblfs6iy3eq" path="res://Scripts/room.gd" id="1_peo0y"]
 [ext_resource type="Texture2D" uid="uid://cakkcjsk66cuw" path="res://Art/Tilesets/Silo/IMG_0428.PNG" id="2_vr1rh"]
@@ -215,6 +215,9 @@ sources/0 = SubResource("TileSetAtlasSource_tjgvd")
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_833lp"]
 size = Vector2(704, 415)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8ejws"]
+size = Vector2(86, 143)
+
 [node name="Entrance" type="Node2D"]
 script = ExtResource("1_peo0y")
 
@@ -380,6 +383,15 @@ position = Vector2(62, -359.5)
 shape = SubResource("RectangleShape2D_833lp")
 debug_color = Color(0.9882353, 0, 0.011764706, 0.41960785)
 metadata/_edit_lock_ = true
+
+[node name="NoEscape" type="StaticBody2D" parent="ZOM-BOT"]
+collision_layer = 0
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ZOM-BOT/NoEscape"]
+position = Vector2(1151, 70.5)
+shape = SubResource("RectangleShape2D_8ejws")
+debug_color = Color(0.5985883, 0.4641313, 0.75107855, 0.41960785)
 
 [connection signal="body_entered" from="ZOM-BOT/RightArm/RightArea" to="ZOM-BOT/RightArm" method="_on_right_area_body_entered"]
 [connection signal="body_entered" from="ZOM-BOT/LeftArm/LeftArea" to="ZOM-BOT/LeftArm" method="_on_left_area_body_entered"]

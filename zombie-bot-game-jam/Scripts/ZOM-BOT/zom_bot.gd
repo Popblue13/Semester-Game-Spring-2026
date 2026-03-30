@@ -4,6 +4,7 @@ extends Node2D
 var started : bool = false
 const ZOMBIE : PackedScene = preload("res://Scenes/Dungeon Objects/zombie.tscn")
 const DRONE : PackedScene = preload("res://Scenes/Dungeon Objects/drone.tscn")
+@onready var no_escape: StaticBody2D = $NoEscape
 
 func initiate_battle(player : CharacterBody2D):
 	for part in get_children():
@@ -21,6 +22,7 @@ func _on_yap_box_body_exited(body: Node2D) -> void:
 	elif body.get_collision_layer_value(2):
 		initiate_battle(body)
 		started = true
+		no_escape.set_collision_layer_value(1, true)
 
 
 func _on_timer_timeout() -> void:
