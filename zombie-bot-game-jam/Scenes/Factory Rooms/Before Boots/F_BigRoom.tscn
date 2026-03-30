@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=4 uid="uid://c1jvpmrwbjdec"]
+[gd_scene load_steps=20 format=4 uid="uid://c1jvpmrwbjdec"]
 
 [ext_resource type="Script" uid="uid://duiblfs6iy3eq" path="res://Scripts/room.gd" id="1_udbj3"]
 [ext_resource type="PackedScene" uid="uid://vsy85ifrshdf" path="res://Scenes/Dungeon Objects/player.tscn" id="2_udbj3"]
@@ -9,7 +9,6 @@
 [ext_resource type="AudioStream" uid="uid://bqygckabhwqwb" path="res://Sound/Music/Disassembly Line 16-Bit.wav" id="6_wobdf"]
 [ext_resource type="Script" uid="uid://c4y65a7t7sb0x" path="res://Scripts/auto_arm.gd" id="8_chv3v"]
 [ext_resource type="PackedScene" uid="uid://c7ro7ltwn8e2c" path="res://Scenes/Dungeon Objects/drone.tscn" id="9_1ibio"]
-[ext_resource type="PackedScene" uid="uid://d4mo2ex51mpwv" path="res://Scenes/Dungeon Objects/zombie.tscn" id="10_u1yvb"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_qrxxx"]
 texture = ExtResource("3_wobdf")
@@ -1139,9 +1138,6 @@ position = Vector2(-939, -123)
 
 [node name="Drone5" parent="Mobs" instance=ExtResource("9_1ibio")]
 position = Vector2(-147, -364)
-
-[node name="Zombie" parent="Mobs" instance=ExtResource("10_u1yvb")]
-position = Vector2(610, 424)
 
 [connection signal="body_entered" from="AutomatedArms/AutoArm/Range" to="AutomatedArms/AutoArm" method="_on_range_body_entered"]
 [connection signal="body_exited" from="AutomatedArms/AutoArm/Range" to="AutomatedArms/AutoArm" method="_on_range_body_exited"]
