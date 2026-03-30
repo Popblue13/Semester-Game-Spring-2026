@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=4 uid="uid://c1jvpmrwbjdec"]
+[gd_scene load_steps=21 format=4 uid="uid://c1jvpmrwbjdec"]
 
 [ext_resource type="Script" uid="uid://duiblfs6iy3eq" path="res://Scripts/room.gd" id="1_udbj3"]
 [ext_resource type="PackedScene" uid="uid://vsy85ifrshdf" path="res://Scenes/Dungeon Objects/player.tscn" id="2_udbj3"]
@@ -8,6 +8,8 @@
 [ext_resource type="Script" uid="uid://dfqub56g6o6ue" path="res://Scripts/moving_parts.gd" id="5_umjbf"]
 [ext_resource type="AudioStream" uid="uid://bqygckabhwqwb" path="res://Sound/Music/Disassembly Line 16-Bit.wav" id="6_wobdf"]
 [ext_resource type="Script" uid="uid://c4y65a7t7sb0x" path="res://Scripts/auto_arm.gd" id="8_chv3v"]
+[ext_resource type="PackedScene" uid="uid://c7ro7ltwn8e2c" path="res://Scenes/Dungeon Objects/drone.tscn" id="9_1ibio"]
+[ext_resource type="PackedScene" uid="uid://d4mo2ex51mpwv" path="res://Scenes/Dungeon Objects/zombie.tscn" id="10_u1yvb"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_qrxxx"]
 texture = ExtResource("3_wobdf")
@@ -229,8 +231,8 @@ radius = 223.14345
 size = Vector2(112, 20)
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_chv3v"]
-radius = 20.0
-height = 62.0
+radius = 29.0
+height = 60.0
 
 [node name="FactoryMain" type="Node2D"]
 script = ExtResource("1_udbj3")
@@ -655,7 +657,7 @@ collision_mask = 3
 position = Vector2(46, 0)
 shape = SubResource("RectangleShape2D_1ibio")
 
-[node name="Grabber" type="CharacterBody2D" parent="AutomatedArms/AutoArm/Crane"]
+[node name="Grabber" type="Area2D" parent="AutomatedArms/AutoArm/Crane"]
 position = Vector2(85, -1)
 collision_layer = 0
 collision_mask = 2
@@ -671,7 +673,7 @@ shape = SubResource("RectangleShape2D_1ibio")
 metadata/_edit_lock_ = true
 
 [node name="AutoArm2" type="StaticBody2D" parent="AutomatedArms"]
-position = Vector2(825, 414)
+position = Vector2(865, 428)
 collision_layer = 2
 collision_mask = 3
 script = ExtResource("8_chv3v")
@@ -696,7 +698,7 @@ collision_mask = 3
 position = Vector2(46, 0)
 shape = SubResource("RectangleShape2D_1ibio")
 
-[node name="Grabber" type="CharacterBody2D" parent="AutomatedArms/AutoArm2/Crane"]
+[node name="Grabber" type="Area2D" parent="AutomatedArms/AutoArm2/Crane"]
 position = Vector2(85, -1)
 collision_layer = 0
 collision_mask = 2
@@ -712,7 +714,7 @@ shape = SubResource("RectangleShape2D_1ibio")
 metadata/_edit_lock_ = true
 
 [node name="AutoArm3" type="StaticBody2D" parent="AutomatedArms"]
-position = Vector2(582, 206)
+position = Vector2(577, 163)
 collision_layer = 2
 collision_mask = 3
 script = ExtResource("8_chv3v")
@@ -737,7 +739,7 @@ collision_mask = 3
 position = Vector2(46, 0)
 shape = SubResource("RectangleShape2D_1ibio")
 
-[node name="Grabber" type="CharacterBody2D" parent="AutomatedArms/AutoArm3/Crane"]
+[node name="Grabber" type="Area2D" parent="AutomatedArms/AutoArm3/Crane"]
 position = Vector2(85, -1)
 collision_layer = 0
 collision_mask = 2
@@ -753,7 +755,7 @@ shape = SubResource("RectangleShape2D_1ibio")
 metadata/_edit_lock_ = true
 
 [node name="AutoArm4" type="StaticBody2D" parent="AutomatedArms"]
-position = Vector2(30, 215)
+position = Vector2(56, 167)
 collision_layer = 2
 collision_mask = 3
 script = ExtResource("8_chv3v")
@@ -778,7 +780,7 @@ collision_mask = 3
 position = Vector2(46, 0)
 shape = SubResource("RectangleShape2D_1ibio")
 
-[node name="Grabber" type="CharacterBody2D" parent="AutomatedArms/AutoArm4/Crane"]
+[node name="Grabber" type="Area2D" parent="AutomatedArms/AutoArm4/Crane"]
 position = Vector2(85, -1)
 collision_layer = 0
 collision_mask = 2
@@ -794,7 +796,7 @@ shape = SubResource("RectangleShape2D_1ibio")
 metadata/_edit_lock_ = true
 
 [node name="AutoArm5" type="StaticBody2D" parent="AutomatedArms"]
-position = Vector2(-374, 196)
+position = Vector2(-366, 169)
 collision_layer = 2
 collision_mask = 3
 script = ExtResource("8_chv3v")
@@ -819,7 +821,7 @@ collision_mask = 3
 position = Vector2(46, 0)
 shape = SubResource("RectangleShape2D_1ibio")
 
-[node name="Grabber" type="CharacterBody2D" parent="AutomatedArms/AutoArm5/Crane"]
+[node name="Grabber" type="Area2D" parent="AutomatedArms/AutoArm5/Crane"]
 position = Vector2(85, -1)
 collision_layer = 0
 collision_mask = 2
@@ -835,7 +837,7 @@ shape = SubResource("RectangleShape2D_1ibio")
 metadata/_edit_lock_ = true
 
 [node name="AutoArm6" type="StaticBody2D" parent="AutomatedArms"]
-position = Vector2(-541, 438)
+position = Vector2(-534, 431)
 collision_layer = 2
 collision_mask = 3
 script = ExtResource("8_chv3v")
@@ -860,7 +862,7 @@ collision_mask = 3
 position = Vector2(46, 0)
 shape = SubResource("RectangleShape2D_1ibio")
 
-[node name="Grabber" type="CharacterBody2D" parent="AutomatedArms/AutoArm6/Crane"]
+[node name="Grabber" type="Area2D" parent="AutomatedArms/AutoArm6/Crane"]
 position = Vector2(85, -1)
 collision_layer = 0
 collision_mask = 2
@@ -876,7 +878,7 @@ shape = SubResource("RectangleShape2D_1ibio")
 metadata/_edit_lock_ = true
 
 [node name="AutoArm7" type="StaticBody2D" parent="AutomatedArms"]
-position = Vector2(-882, 439)
+position = Vector2(-894, 422)
 collision_layer = 2
 collision_mask = 3
 script = ExtResource("8_chv3v")
@@ -901,7 +903,7 @@ collision_mask = 3
 position = Vector2(46, 0)
 shape = SubResource("RectangleShape2D_1ibio")
 
-[node name="Grabber" type="CharacterBody2D" parent="AutomatedArms/AutoArm7/Crane"]
+[node name="Grabber" type="Area2D" parent="AutomatedArms/AutoArm7/Crane"]
 position = Vector2(85, -1)
 collision_layer = 0
 collision_mask = 2
@@ -917,7 +919,7 @@ shape = SubResource("RectangleShape2D_1ibio")
 metadata/_edit_lock_ = true
 
 [node name="AutoArm8" type="StaticBody2D" parent="AutomatedArms"]
-position = Vector2(-374, -189)
+position = Vector2(-382, -214)
 collision_layer = 2
 collision_mask = 3
 script = ExtResource("8_chv3v")
@@ -942,7 +944,7 @@ collision_mask = 3
 position = Vector2(46, 0)
 shape = SubResource("RectangleShape2D_1ibio")
 
-[node name="Grabber" type="CharacterBody2D" parent="AutomatedArms/AutoArm8/Crane"]
+[node name="Grabber" type="Area2D" parent="AutomatedArms/AutoArm8/Crane"]
 position = Vector2(85, -1)
 collision_layer = 0
 collision_mask = 2
@@ -958,7 +960,7 @@ shape = SubResource("RectangleShape2D_1ibio")
 metadata/_edit_lock_ = true
 
 [node name="AutoArm9" type="StaticBody2D" parent="AutomatedArms"]
-position = Vector2(24, -180)
+position = Vector2(61, -203)
 collision_layer = 2
 collision_mask = 3
 script = ExtResource("8_chv3v")
@@ -983,7 +985,7 @@ collision_mask = 3
 position = Vector2(46, 0)
 shape = SubResource("RectangleShape2D_1ibio")
 
-[node name="Grabber" type="CharacterBody2D" parent="AutomatedArms/AutoArm9/Crane"]
+[node name="Grabber" type="Area2D" parent="AutomatedArms/AutoArm9/Crane"]
 position = Vector2(85, -1)
 collision_layer = 0
 collision_mask = 2
@@ -999,7 +1001,7 @@ shape = SubResource("RectangleShape2D_1ibio")
 metadata/_edit_lock_ = true
 
 [node name="AutoArm10" type="StaticBody2D" parent="AutomatedArms"]
-position = Vector2(315, -385)
+position = Vector2(380, -440)
 collision_layer = 2
 collision_mask = 3
 script = ExtResource("8_chv3v")
@@ -1024,7 +1026,7 @@ collision_mask = 3
 position = Vector2(46, 0)
 shape = SubResource("RectangleShape2D_1ibio")
 
-[node name="Grabber" type="CharacterBody2D" parent="AutomatedArms/AutoArm10/Crane"]
+[node name="Grabber" type="Area2D" parent="AutomatedArms/AutoArm10/Crane"]
 position = Vector2(85, -1)
 collision_layer = 0
 collision_mask = 2
@@ -1040,7 +1042,7 @@ shape = SubResource("RectangleShape2D_1ibio")
 metadata/_edit_lock_ = true
 
 [node name="AutoArm11" type="StaticBody2D" parent="AutomatedArms"]
-position = Vector2(589, -195)
+position = Vector2(624, -190)
 collision_layer = 2
 collision_mask = 3
 script = ExtResource("8_chv3v")
@@ -1065,7 +1067,7 @@ collision_mask = 3
 position = Vector2(46, 0)
 shape = SubResource("RectangleShape2D_1ibio")
 
-[node name="Grabber" type="CharacterBody2D" parent="AutomatedArms/AutoArm11/Crane"]
+[node name="Grabber" type="Area2D" parent="AutomatedArms/AutoArm11/Crane"]
 position = Vector2(85, -1)
 collision_layer = 0
 collision_mask = 2
@@ -1081,7 +1083,7 @@ shape = SubResource("RectangleShape2D_1ibio")
 metadata/_edit_lock_ = true
 
 [node name="AutoArm12" type="StaticBody2D" parent="AutomatedArms"]
-position = Vector2(831, -396)
+position = Vector2(858, -475)
 collision_layer = 2
 collision_mask = 3
 script = ExtResource("8_chv3v")
@@ -1106,7 +1108,7 @@ collision_mask = 3
 position = Vector2(46, 0)
 shape = SubResource("RectangleShape2D_1ibio")
 
-[node name="Grabber" type="CharacterBody2D" parent="AutomatedArms/AutoArm12/Crane"]
+[node name="Grabber" type="Area2D" parent="AutomatedArms/AutoArm12/Crane"]
 position = Vector2(85, -1)
 collision_layer = 0
 collision_mask = 2
@@ -1121,27 +1123,59 @@ position = Vector2(46, 0)
 shape = SubResource("RectangleShape2D_1ibio")
 metadata/_edit_lock_ = true
 
+[node name="Mobs" type="Node2D" parent="."]
+
+[node name="Drone" parent="Mobs" instance=ExtResource("9_1ibio")]
+position = Vector2(-77, 515)
+
+[node name="Drone2" parent="Mobs" instance=ExtResource("9_1ibio")]
+position = Vector2(-813, -96)
+
+[node name="Drone3" parent="Mobs" instance=ExtResource("9_1ibio")]
+position = Vector2(-735, -190)
+
+[node name="Drone4" parent="Mobs" instance=ExtResource("9_1ibio")]
+position = Vector2(-939, -123)
+
+[node name="Drone5" parent="Mobs" instance=ExtResource("9_1ibio")]
+position = Vector2(-147, -364)
+
+[node name="Zombie" parent="Mobs" instance=ExtResource("10_u1yvb")]
+position = Vector2(610, 424)
+
 [connection signal="body_entered" from="AutomatedArms/AutoArm/Range" to="AutomatedArms/AutoArm" method="_on_range_body_entered"]
 [connection signal="body_exited" from="AutomatedArms/AutoArm/Range" to="AutomatedArms/AutoArm" method="_on_range_body_exited"]
+[connection signal="body_entered" from="AutomatedArms/AutoArm/Crane/Grabber" to="AutomatedArms/AutoArm" method="_on_grabber_body_entered"]
 [connection signal="body_entered" from="AutomatedArms/AutoArm2/Range" to="AutomatedArms/AutoArm2" method="_on_range_body_entered"]
 [connection signal="body_exited" from="AutomatedArms/AutoArm2/Range" to="AutomatedArms/AutoArm2" method="_on_range_body_exited"]
+[connection signal="body_entered" from="AutomatedArms/AutoArm2/Crane/Grabber" to="AutomatedArms/AutoArm2" method="_on_grabber_body_entered"]
 [connection signal="body_entered" from="AutomatedArms/AutoArm3/Range" to="AutomatedArms/AutoArm3" method="_on_range_body_entered"]
 [connection signal="body_exited" from="AutomatedArms/AutoArm3/Range" to="AutomatedArms/AutoArm3" method="_on_range_body_exited"]
+[connection signal="body_entered" from="AutomatedArms/AutoArm3/Crane/Grabber" to="AutomatedArms/AutoArm3" method="_on_grabber_body_entered"]
 [connection signal="body_entered" from="AutomatedArms/AutoArm4/Range" to="AutomatedArms/AutoArm4" method="_on_range_body_entered"]
 [connection signal="body_exited" from="AutomatedArms/AutoArm4/Range" to="AutomatedArms/AutoArm4" method="_on_range_body_exited"]
+[connection signal="body_entered" from="AutomatedArms/AutoArm4/Crane/Grabber" to="AutomatedArms/AutoArm4" method="_on_grabber_body_entered"]
 [connection signal="body_entered" from="AutomatedArms/AutoArm5/Range" to="AutomatedArms/AutoArm5" method="_on_range_body_entered"]
 [connection signal="body_exited" from="AutomatedArms/AutoArm5/Range" to="AutomatedArms/AutoArm5" method="_on_range_body_exited"]
+[connection signal="body_entered" from="AutomatedArms/AutoArm5/Crane/Grabber" to="AutomatedArms/AutoArm5" method="_on_grabber_body_entered"]
 [connection signal="body_entered" from="AutomatedArms/AutoArm6/Range" to="AutomatedArms/AutoArm6" method="_on_range_body_entered"]
 [connection signal="body_exited" from="AutomatedArms/AutoArm6/Range" to="AutomatedArms/AutoArm6" method="_on_range_body_exited"]
+[connection signal="body_entered" from="AutomatedArms/AutoArm6/Crane/Grabber" to="AutomatedArms/AutoArm6" method="_on_grabber_body_entered"]
 [connection signal="body_entered" from="AutomatedArms/AutoArm7/Range" to="AutomatedArms/AutoArm7" method="_on_range_body_entered"]
 [connection signal="body_exited" from="AutomatedArms/AutoArm7/Range" to="AutomatedArms/AutoArm7" method="_on_range_body_exited"]
+[connection signal="body_entered" from="AutomatedArms/AutoArm7/Crane/Grabber" to="AutomatedArms/AutoArm7" method="_on_grabber_body_entered"]
 [connection signal="body_entered" from="AutomatedArms/AutoArm8/Range" to="AutomatedArms/AutoArm8" method="_on_range_body_entered"]
 [connection signal="body_exited" from="AutomatedArms/AutoArm8/Range" to="AutomatedArms/AutoArm8" method="_on_range_body_exited"]
+[connection signal="body_entered" from="AutomatedArms/AutoArm8/Crane/Grabber" to="AutomatedArms/AutoArm8" method="_on_grabber_body_entered"]
 [connection signal="body_entered" from="AutomatedArms/AutoArm9/Range" to="AutomatedArms/AutoArm9" method="_on_range_body_entered"]
 [connection signal="body_exited" from="AutomatedArms/AutoArm9/Range" to="AutomatedArms/AutoArm9" method="_on_range_body_exited"]
+[connection signal="body_entered" from="AutomatedArms/AutoArm9/Crane/Grabber" to="AutomatedArms/AutoArm9" method="_on_grabber_body_entered"]
 [connection signal="body_entered" from="AutomatedArms/AutoArm10/Range" to="AutomatedArms/AutoArm10" method="_on_range_body_entered"]
 [connection signal="body_exited" from="AutomatedArms/AutoArm10/Range" to="AutomatedArms/AutoArm10" method="_on_range_body_exited"]
+[connection signal="body_entered" from="AutomatedArms/AutoArm10/Crane/Grabber" to="AutomatedArms/AutoArm10" method="_on_grabber_body_entered"]
 [connection signal="body_entered" from="AutomatedArms/AutoArm11/Range" to="AutomatedArms/AutoArm11" method="_on_range_body_entered"]
 [connection signal="body_exited" from="AutomatedArms/AutoArm11/Range" to="AutomatedArms/AutoArm11" method="_on_range_body_exited"]
+[connection signal="body_entered" from="AutomatedArms/AutoArm11/Crane/Grabber" to="AutomatedArms/AutoArm11" method="_on_grabber_body_entered"]
 [connection signal="body_entered" from="AutomatedArms/AutoArm12/Range" to="AutomatedArms/AutoArm12" method="_on_range_body_entered"]
 [connection signal="body_exited" from="AutomatedArms/AutoArm12/Range" to="AutomatedArms/AutoArm12" method="_on_range_body_exited"]
+[connection signal="body_entered" from="AutomatedArms/AutoArm12/Crane/Grabber" to="AutomatedArms/AutoArm12" method="_on_grabber_body_entered"]

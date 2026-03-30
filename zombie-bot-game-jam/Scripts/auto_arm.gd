@@ -8,7 +8,7 @@ var enemy : CharacterBody2D
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	if player:
-		rotation = move_toward(rotation, get_angle_to(player.position), 2*delta)
+		rotation = move_toward(rotation, get_angle_to(player.position), delta/2)
 		crane.rotation =  move_toward(crane.rotation, get_angle_to(player.position), delta)
 		clamp(rotation,-PI,PI)
 
@@ -35,3 +35,8 @@ func _on_range_body_exited(body: Node2D) -> void:
 		enemy = null
 	elif body == enemy:
 		enemy = null
+
+
+func _on_grabber_body_entered(body: Node2D) -> void:
+	if body is CharacterBody2D:
+		body.queue_free()
