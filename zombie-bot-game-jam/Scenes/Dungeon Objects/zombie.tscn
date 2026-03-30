@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://d4mo2ex51mpwv"]
+[gd_scene format=3 uid="uid://d4mo2ex51mpwv"]
 
 [ext_resource type="Texture2D" uid="uid://rnp51ohx37kk" path="res://Art/Sprites/icon.svg" id="1_h3kin"]
 [ext_resource type="Script" uid="uid://dugb2hcfheguy" path="res://Scripts/zombie.gd" id="1_n70j1"]
@@ -10,25 +10,26 @@ height = 32.0
 [sub_resource type="CircleShape2D" id="CircleShape2D_iyl7r"]
 radius = 508.17813
 
-[node name="Zombie" type="CharacterBody2D"]
+[node name="Zombie" type="CharacterBody2D" unique_id=1707554325]
 collision_layer = 20
 collision_mask = 7
 motion_mode = 1
 script = ExtResource("1_n70j1")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1288158568]
 shape = SubResource("CapsuleShape2D_n70j1")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=315127145]
 scale = Vector2(0.25, 0.25)
 skew = -0.76096356
 texture = ExtResource("1_h3kin")
 
-[node name="Range" type="Area2D" parent="."]
+[node name="Range" type="Area2D" parent="." unique_id=1861578183]
+visible = false
 collision_layer = 0
 collision_mask = 6
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Range"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Range" unique_id=1380154647]
 shape = SubResource("CircleShape2D_iyl7r")
 debug_color = Color(0.9312627, 0.21228647, 0.40110692, 0.41960785)
 
