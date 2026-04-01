@@ -1,6 +1,6 @@
 extends CharacterBody2D
 
-
+var health : float = 1
 var player : CharacterBody2D # aka, first priority target
 var enemy : CharacterBody2D # aka, second priority target
 var SPEED : float = 400.0
@@ -8,6 +8,10 @@ const energy_projectile : PackedScene = preload("res://Scenes/Dungeon Objects/en
 var charge : float = 0.0
 
 func _physics_process(delta: float) -> void:
+	if health <= 0:
+		queue_free()
+		return
+	
 	if player:
 		var direction : Vector2 = position.direction_to(player.position)
 		var speed : float
@@ -67,3 +71,6 @@ func _on_range_body_exited(body: Node2D) -> void:
 		enemy = null
 	elif body == enemy:
 		enemy = null
+		
+func change_health(health_taken:float) -> void:
+	health -= health_taken

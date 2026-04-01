@@ -39,4 +39,4 @@ func _on_range_body_exited(body: Node2D) -> void:
 
 func _on_grabber_body_entered(body: Node2D) -> void:
 	if body is CharacterBody2D:
-		body.queue_free()
+		body.change_health(2)
