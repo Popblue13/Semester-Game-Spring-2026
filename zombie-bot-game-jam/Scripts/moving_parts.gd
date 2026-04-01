@@ -23,7 +23,9 @@ func _process(delta: float) -> void:
 				shape_cast.add_exception(shape_cast.get_collider(0))
 			else:
 				var mod_p : int = 1 # zombies get thrown at SPEED, player needs a lil extra
-				if shape_cast.get_collider(0).get_collision_layer_value(2): #is player
+				if shape_cast.get_collider(0) == null or shape_cast.get_collider(0).is_queued_for_deletion():
+					continue
+				elif shape_cast.get_collider(0).get_collision_layer_value(2): #is player
 					mod_p = 10
 				
 					

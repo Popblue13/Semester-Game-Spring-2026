@@ -1,4 +1,4 @@
-[gd_scene format=4 uid="uid://cg4b68os1o6qu"]
+[gd_scene load_steps=0 format=4 uid="uid://cg4b68os1o6qu"]
 
 [ext_resource type="Script" uid="uid://duiblfs6iy3eq" path="res://Scripts/room.gd" id="1_mxiks"]
 [ext_resource type="Texture2D" uid="uid://bhr7eneqeuwd4" path="res://Art/Tilesets/Factory/floor.png" id="2_sm0p3"]
