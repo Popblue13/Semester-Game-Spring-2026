@@ -1,8 +1,10 @@
 extends Node2D
+@export var room_theme: String = ""
 
 func _ready() -> void:
 	call_deferred("_place_player_at_door")
-
+	if room_theme != "":
+		MusicManager.play_theme(room_theme)
 func _place_player_at_door() -> void:
 	if Global.next_door_name == "":
 		return

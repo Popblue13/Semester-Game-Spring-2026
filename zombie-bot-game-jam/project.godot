@@ -18,6 +18,7 @@ config/icon="res://Art/Sprites/icon.svg"
 [autoload]
 
 Global="*uid://bbag6om16kx4o"
+MusicManager="*uid://siflocyxsogh"
 
 [display]
 
