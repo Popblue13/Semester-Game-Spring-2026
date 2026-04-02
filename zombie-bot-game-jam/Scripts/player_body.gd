@@ -1,6 +1,6 @@
 extends CharacterBody2D
 
-var health : float = 3
+var health : float = 3000000000
 const SPEED = 300.0
 var x_direction_input : String = ""
 var y_direction_input : String = ""
@@ -20,7 +20,7 @@ func _physics_process(delta: float) -> void:
 	if health <= 0:
 		queue_free()
 		return
-	print(health)
+	
 	if Input.is_action_pressed("right"):
 		velocity.x = SPEED
 		x_direction_input = "right"

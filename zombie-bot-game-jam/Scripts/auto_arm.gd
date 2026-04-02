@@ -1,6 +1,6 @@
 extends StaticBody2D
 
-var player : CharacterBody2D
+var player : Node2D
 var enemy : CharacterBody2D
 @onready var crane: StaticBody2D = $Crane
 

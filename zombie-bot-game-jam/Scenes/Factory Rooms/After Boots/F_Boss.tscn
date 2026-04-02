@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=4 uid="uid://yctp3li46n6e"]
+[gd_scene load_steps=22 format=4 uid="uid://yctp3li46n6e"]
 
 [ext_resource type="Script" uid="uid://duiblfs6iy3eq" path="res://Scripts/room.gd" id="1_70qjo"]
 [ext_resource type="Texture2D" uid="uid://bhr7eneqeuwd4" path="res://Art/Tilesets/Factory/floor.png" id="2_117nu"]
@@ -8,6 +8,7 @@
 [ext_resource type="AudioStream" uid="uid://bqygckabhwqwb" path="res://Sound/Music/Disassembly Line 16-Bit.wav" id="6_8lhr4"]
 [ext_resource type="Script" uid="uid://dfqub56g6o6ue" path="res://Scripts/moving_parts.gd" id="7_117nu"]
 [ext_resource type="Script" uid="uid://c4y65a7t7sb0x" path="res://Scripts/auto_arm.gd" id="8_70syg"]
+[ext_resource type="Script" uid="uid://cp550y2wf5ugd" path="res://Scripts/spawner.gd" id="8_ekahb"]
 [ext_resource type="PackedScene" uid="uid://c7ro7ltwn8e2c" path="res://Scenes/Dungeon Objects/drone.tscn" id="9_q7s03"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_qrxxx"]
@@ -222,6 +223,9 @@ size = Vector2(50, 289)
 size = Vector2(288.00003, 21.428604)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_70syg"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8lhr4"]
+size = Vector2(66, 2)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_q7s03"]
 radius = 223.14345
@@ -504,6 +508,170 @@ scale = Vector2(1, 4)
 shape = SubResource("RectangleShape2D_70syg")
 target_position = Vector2(-675, 0)
 collision_mask = 6
+
+[node name="ScrapSpawners" type="Node2D" parent="Conveyor"]
+
+[node name="Spawner2" type="Node2D" parent="Conveyor/ScrapSpawners"]
+position = Vector2(751, 545)
+script = ExtResource("8_ekahb")
+
+[node name="Stopper" type="Area2D" parent="Conveyor/ScrapSpawners/Spawner2"]
+collision_layer = 0
+collision_mask = 8
+metadata/_edit_lock_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Conveyor/ScrapSpawners/Spawner2/Stopper"]
+position = Vector2(-2, -495)
+shape = SubResource("RectangleShape2D_8lhr4")
+debug_color = Color(0.8229078, 0.3631912, 0.4533183, 0.41960785)
+
+[node name="Spawner3" type="Node2D" parent="Conveyor/ScrapSpawners"]
+position = Vector2(-670, 519)
+script = ExtResource("8_ekahb")
+
+[node name="Stopper" type="Area2D" parent="Conveyor/ScrapSpawners/Spawner3"]
+collision_layer = 0
+collision_mask = 8
+metadata/_edit_lock_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Conveyor/ScrapSpawners/Spawner3/Stopper"]
+position = Vector2(1405.4219, -9.201782)
+rotation = 1.5707964
+shape = SubResource("RectangleShape2D_8lhr4")
+debug_color = Color(0.8229078, 0.3631912, 0.4533183, 0.41960785)
+
+[node name="Spawner4" type="Node2D" parent="Conveyor/ScrapSpawners"]
+position = Vector2(-2397, 335)
+script = ExtResource("8_ekahb")
+
+[node name="Stopper" type="Area2D" parent="Conveyor/ScrapSpawners/Spawner4"]
+collision_layer = 0
+collision_mask = 8
+metadata/_edit_lock_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Conveyor/ScrapSpawners/Spawner4/Stopper"]
+position = Vector2(2543.4219, -3.2017822)
+rotation = 1.5707964
+shape = SubResource("RectangleShape2D_8lhr4")
+debug_color = Color(0.8229078, 0.3631912, 0.4533183, 0.41960785)
+
+[node name="Spawner5" type="Node2D" parent="Conveyor/ScrapSpawners"]
+position = Vector2(184, 330)
+script = ExtResource("8_ekahb")
+
+[node name="Stopper" type="Area2D" parent="Conveyor/ScrapSpawners/Spawner5"]
+collision_layer = 0
+collision_mask = 8
+metadata/_edit_lock_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Conveyor/ScrapSpawners/Spawner5/Stopper"]
+position = Vector2(-2, -270)
+shape = SubResource("RectangleShape2D_8lhr4")
+debug_color = Color(0.8229078, 0.3631912, 0.4533183, 0.41960785)
+
+[node name="Spawner6" type="Node2D" parent="Conveyor/ScrapSpawners"]
+position = Vector2(-717, 106)
+script = ExtResource("8_ekahb")
+
+[node name="Stopper" type="Area2D" parent="Conveyor/ScrapSpawners/Spawner6"]
+collision_layer = 0
+collision_mask = 8
+metadata/_edit_lock_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Conveyor/ScrapSpawners/Spawner6/Stopper"]
+position = Vector2(4, -44)
+shape = SubResource("RectangleShape2D_8lhr4")
+debug_color = Color(0.8229078, 0.3631912, 0.4533183, 0.41960785)
+
+[node name="Spawner7" type="Node2D" parent="Conveyor/ScrapSpawners"]
+position = Vector2(-2394, 100)
+script = ExtResource("8_ekahb")
+
+[node name="Stopper" type="Area2D" parent="Conveyor/ScrapSpawners/Spawner7"]
+collision_layer = 0
+collision_mask = 8
+metadata/_edit_lock_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Conveyor/ScrapSpawners/Spawner7/Stopper"]
+position = Vector2(1646.422, 0.7982178)
+rotation = 1.5707964
+shape = SubResource("RectangleShape2D_8lhr4")
+debug_color = Color(0.8229078, 0.3631912, 0.4533183, 0.41960785)
+
+[node name="Spawner8" type="Node2D" parent="Conveyor/ScrapSpawners"]
+position = Vector2(-2083, 5)
+script = ExtResource("8_ekahb")
+
+[node name="Stopper" type="Area2D" parent="Conveyor/ScrapSpawners/Spawner8"]
+collision_layer = 0
+collision_mask = 8
+metadata/_edit_lock_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Conveyor/ScrapSpawners/Spawner8/Stopper"]
+position = Vector2(-639.5781, 0.7982178)
+rotation = 1.5707964
+shape = SubResource("RectangleShape2D_8lhr4")
+debug_color = Color(0.8229078, 0.3631912, 0.4533183, 0.41960785)
+
+[node name="Spawner9" type="Node2D" parent="Conveyor/ScrapSpawners"]
+position = Vector2(-2078, -167)
+script = ExtResource("8_ekahb")
+
+[node name="Stopper" type="Area2D" parent="Conveyor/ScrapSpawners/Spawner9"]
+collision_layer = 0
+collision_mask = 8
+metadata/_edit_lock_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Conveyor/ScrapSpawners/Spawner9/Stopper"]
+position = Vector2(-639.5781, 0.7982178)
+rotation = 1.5707964
+shape = SubResource("RectangleShape2D_8lhr4")
+debug_color = Color(0.8229078, 0.3631912, 0.4533183, 0.41960785)
+
+[node name="Spawner10" type="Node2D" parent="Conveyor/ScrapSpawners"]
+position = Vector2(-2087, -346)
+script = ExtResource("8_ekahb")
+
+[node name="Stopper" type="Area2D" parent="Conveyor/ScrapSpawners/Spawner10"]
+collision_layer = 0
+collision_mask = 8
+metadata/_edit_lock_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Conveyor/ScrapSpawners/Spawner10/Stopper"]
+position = Vector2(-639.5781, 0.7982178)
+rotation = 1.5707964
+shape = SubResource("RectangleShape2D_8lhr4")
+debug_color = Color(0.8229078, 0.3631912, 0.4533183, 0.41960785)
+
+[node name="Spawner11" type="Node2D" parent="Conveyor/ScrapSpawners"]
+position = Vector2(-2703, -255)
+script = ExtResource("8_ekahb")
+
+[node name="Stopper" type="Area2D" parent="Conveyor/ScrapSpawners/Spawner11"]
+collision_layer = 0
+collision_mask = 8
+metadata/_edit_lock_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Conveyor/ScrapSpawners/Spawner11/Stopper"]
+position = Vector2(635.4219, 1.7983398)
+rotation = 1.5707964
+shape = SubResource("RectangleShape2D_8lhr4")
+debug_color = Color(0.8229078, 0.3631912, 0.4533183, 0.41960785)
+
+[node name="Spawner12" type="Node2D" parent="Conveyor/ScrapSpawners"]
+position = Vector2(-2702, -81)
+script = ExtResource("8_ekahb")
+
+[node name="Stopper" type="Area2D" parent="Conveyor/ScrapSpawners/Spawner12"]
+collision_layer = 0
+collision_mask = 8
+metadata/_edit_lock_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Conveyor/ScrapSpawners/Spawner12/Stopper"]
+position = Vector2(635.4219, 1.7983398)
+rotation = 1.5707964
+shape = SubResource("RectangleShape2D_8lhr4")
+debug_color = Color(0.8229078, 0.3631912, 0.4533183, 0.41960785)
 
 [node name="AutoArms" type="Node2D" parent="."]
 scale = Vector2(0.9, 0.9)
@@ -1107,6 +1275,17 @@ position = Vector2(197, 129)
 [node name="Drone3" parent="Mobs" instance=ExtResource("9_q7s03")]
 position = Vector2(-283, 146)
 
+[connection signal="body_exited" from="Conveyor/ScrapSpawners/Spawner2/Stopper" to="Conveyor/ScrapSpawners/Spawner2" method="_on_stopper_body_exited"]
+[connection signal="body_exited" from="Conveyor/ScrapSpawners/Spawner3/Stopper" to="Conveyor/ScrapSpawners/Spawner3" method="_on_stopper_body_exited"]
+[connection signal="body_exited" from="Conveyor/ScrapSpawners/Spawner4/Stopper" to="Conveyor/ScrapSpawners/Spawner4" method="_on_stopper_body_exited"]
+[connection signal="body_exited" from="Conveyor/ScrapSpawners/Spawner5/Stopper" to="Conveyor/ScrapSpawners/Spawner5" method="_on_stopper_body_exited"]
+[connection signal="body_exited" from="Conveyor/ScrapSpawners/Spawner6/Stopper" to="Conveyor/ScrapSpawners/Spawner6" method="_on_stopper_body_exited"]
+[connection signal="body_exited" from="Conveyor/ScrapSpawners/Spawner7/Stopper" to="Conveyor/ScrapSpawners/Spawner7" method="_on_stopper_body_exited"]
+[connection signal="body_exited" from="Conveyor/ScrapSpawners/Spawner8/Stopper" to="Conveyor/ScrapSpawners/Spawner8" method="_on_stopper_body_exited"]
+[connection signal="body_exited" from="Conveyor/ScrapSpawners/Spawner9/Stopper" to="Conveyor/ScrapSpawners/Spawner9" method="_on_stopper_body_exited"]
+[connection signal="body_exited" from="Conveyor/ScrapSpawners/Spawner10/Stopper" to="Conveyor/ScrapSpawners/Spawner10" method="_on_stopper_body_exited"]
+[connection signal="body_exited" from="Conveyor/ScrapSpawners/Spawner11/Stopper" to="Conveyor/ScrapSpawners/Spawner11" method="_on_stopper_body_exited"]
+[connection signal="body_exited" from="Conveyor/ScrapSpawners/Spawner12/Stopper" to="Conveyor/ScrapSpawners/Spawner12" method="_on_stopper_body_exited"]
 [connection signal="body_entered" from="AutoArms/AutoArm/Range" to="AutoArms/AutoArm" method="_on_range_body_entered"]
 [connection signal="body_exited" from="AutoArms/AutoArm/Range" to="AutoArms/AutoArm" method="_on_range_body_exited"]
 [connection signal="body_entered" from="AutoArms/AutoArm/Crane/Grabber" to="AutoArms/AutoArm" method="_on_grabber_body_entered"]
