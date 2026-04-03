@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=4 uid="uid://yctp3li46n6e"]
+[gd_scene load_steps=25 format=4 uid="uid://yctp3li46n6e"]
 
 [ext_resource type="Script" uid="uid://duiblfs6iy3eq" path="res://Scripts/room.gd" id="1_70qjo"]
 [ext_resource type="Texture2D" uid="uid://bhr7eneqeuwd4" path="res://Art/Tilesets/Factory/floor.png" id="2_117nu"]
@@ -10,6 +10,9 @@
 [ext_resource type="Script" uid="uid://c4y65a7t7sb0x" path="res://Scripts/auto_arm.gd" id="8_70syg"]
 [ext_resource type="Script" uid="uid://cp550y2wf5ugd" path="res://Scripts/spawner.gd" id="8_ekahb"]
 [ext_resource type="PackedScene" uid="uid://c7ro7ltwn8e2c" path="res://Scenes/Dungeon Objects/drone.tscn" id="9_q7s03"]
+[ext_resource type="Script" uid="uid://c3wevevv64fnu" path="res://Scripts/factory_boss.gd" id="11_x4kpo"]
+[ext_resource type="Texture2D" uid="uid://dkeqnrarjdmm4" path="res://Art/Sprites/gBot_pieces.webp" id="12_qhito"]
+[ext_resource type="PackedScene" uid="uid://dgeww3sl4i0ab" path="res://Scenes/Dungeon Objects/bent_door.tscn" id="13_qhito"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_qrxxx"]
 texture = ExtResource("2_117nu")
@@ -1275,6 +1278,56 @@ position = Vector2(197, 129)
 [node name="Drone3" parent="Mobs" instance=ExtResource("9_q7s03")]
 position = Vector2(-283, 146)
 
+[node name="ReturnSpot" type="Node2D" parent="."]
+position = Vector2(-2112, -410)
+
+[node name="EnergyBoxes" type="Node2D" parent="ReturnSpot"]
+position = Vector2(0, 68)
+
+[node name="EnergyBox" parent="ReturnSpot/EnergyBoxes" instance=ExtResource("13_qhito")]
+position = Vector2(-5, -186)
+
+[node name="EnergyBox2" parent="ReturnSpot/EnergyBoxes" instance=ExtResource("13_qhito")]
+position = Vector2(327, -184)
+
+[node name="EnergyBox3" parent="ReturnSpot/EnergyBoxes" instance=ExtResource("13_qhito")]
+position = Vector2(-299, -184)
+
+[node name="FactoryBoss" type="CharacterBody2D" parent="ReturnSpot"]
+position = Vector2(0, 68)
+collision_layer = 0
+collision_mask = 0
+motion_mode = 1
+wall_min_slide_angle = 0.0
+script = ExtResource("11_x4kpo")
+
+[node name="StaticBody" type="CollisionPolygon2D" parent="ReturnSpot/FactoryBoss"]
+position = Vector2(2, -72)
+scale = Vector2(0.95, 0.95)
+polygon = PackedVector2Array(-161, 64, -166, 12, -156, -56, -141, -79, -101, -76, -82, -99, -89, -130, -28, -158, 4, -114, 13, -145, 81, -134, 100, -101, 135, -77, 128, -35, 133, 77, 69, 89, -5, 77, -22, 94, -101, 102, -110, 68)
+metadata/_edit_lock_ = true
+
+[node name="HeadShape" type="Polygon2D" parent="ReturnSpot/FactoryBoss"]
+position = Vector2(-2, -2)
+offset = Vector2(-658, -487)
+texture = ExtResource("12_qhito")
+polygon = PackedVector2Array(481.4435, 463.555, 474.764, 364.69894, 510.8331, 320.6145, 550.9099, 317.94272, 549.574, 251.14807, 657.7814, 243.13272, 760.645, 263.1711, 820.76025, 340.6529, 807.40125, 488.93692, 803.39355, 516.9907, 673.812, 523.67017, 636.4071, 542.3727, 538.88684, 530.3496, 526.8639, 500.96, 481.4435, 500.96)
+uv = PackedVector2Array(481.4435, 463.555, 474.764, 364.69894, 510.8331, 320.6145, 550.9099, 317.94272, 549.574, 251.14807, 657.7814, 243.13272, 760.645, 263.1711, 820.76025, 340.6529, 807.40125, 488.93692, 803.39355, 516.9907, 673.812, 523.67017, 636.4071, 542.3727, 538.88684, 530.3496, 526.8639, 500.96, 481.4435, 500.96)
+metadata/_edit_lock_ = true
+
+[node name="Area2D" type="Area2D" parent="ReturnSpot/FactoryBoss"]
+collision_layer = 0
+collision_mask = 2
+metadata/_edit_lock_ = true
+
+[node name="CollisionPolygon2D2" type="CollisionPolygon2D" parent="ReturnSpot/FactoryBoss/Area2D"]
+position = Vector2(2, -72)
+polygon = PackedVector2Array(-161, 64, -166, 12, -156, -56, -141, -79, -101, -76, -82, -99, -89, -130, -28, -158, 4, -114, 13, -145, 81, -134, 100, -101, 135, -77, 128, -35, 133, 77, 69, 89, -5, 77, -22, 94, -101, 102, -110, 68)
+metadata/_edit_lock_ = true
+
+[node name="Timer" type="Timer" parent="ReturnSpot/FactoryBoss"]
+wait_time = 5.0
+
 [connection signal="body_exited" from="Conveyor/ScrapSpawners/Spawner2/Stopper" to="Conveyor/ScrapSpawners/Spawner2" method="_on_stopper_body_exited"]
 [connection signal="body_exited" from="Conveyor/ScrapSpawners/Spawner3/Stopper" to="Conveyor/ScrapSpawners/Spawner3" method="_on_stopper_body_exited"]
 [connection signal="body_exited" from="Conveyor/ScrapSpawners/Spawner4/Stopper" to="Conveyor/ScrapSpawners/Spawner4" method="_on_stopper_body_exited"]
@@ -1328,3 +1381,5 @@ position = Vector2(-283, 146)
 [connection signal="body_entered" from="AutoArms/AutoArm14/Range" to="AutoArms/AutoArm14" method="_on_range_body_entered"]
 [connection signal="body_exited" from="AutoArms/AutoArm14/Range" to="AutoArms/AutoArm14" method="_on_range_body_exited"]
 [connection signal="body_entered" from="AutoArms/AutoArm14/Crane/Grabber" to="AutoArms/AutoArm14" method="_on_grabber_body_entered"]
+[connection signal="body_entered" from="ReturnSpot/FactoryBoss/Area2D" to="ReturnSpot/FactoryBoss" method="_on_area_2d_body_entered"]
+[connection signal="timeout" from="ReturnSpot/FactoryBoss/Timer" to="ReturnSpot/FactoryBoss" method="_on_timer_timeout"]

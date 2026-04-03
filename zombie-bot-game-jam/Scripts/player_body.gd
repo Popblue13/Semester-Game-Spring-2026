@@ -1,6 +1,6 @@
 extends CharacterBody2D
 
-var health : float = 3000000000
+var health : float = 30
 const SPEED = 300.0
 var x_direction_input : String = ""
 var y_direction_input : String = ""
@@ -78,6 +78,7 @@ func _physics_process(delta: float) -> void:
 		set_collision_mask_value(2,true)
 	sprite_2d.position = sprite_position
 	
+	"""
 	# self clamp because the normal clamp ain't working for me
 	if velocity.y > SPEED * 3:
 		velocity.y = SPEED * 3
@@ -88,6 +89,7 @@ func _physics_process(delta: float) -> void:
 		velocity.x = SPEED * 3
 	elif velocity.x < -SPEED * 3:
 		velocity.x = -SPEED * 3
+	"""
 	
 	move_and_slide()
 	
