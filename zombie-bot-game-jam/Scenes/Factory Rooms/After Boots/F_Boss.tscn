@@ -242,6 +242,7 @@ height = 60.0
 
 [node name="FactoryMain" type="Node2D"]
 script = ExtResource("1_70qjo")
+room_theme = "silo"
 metadata/_edit_lock_ = true
 
 [node name="Floor" type="TileMapLayer" parent="."]
@@ -254,7 +255,7 @@ tile_map_data = PackedByteArray("AAAAAAAAAAAEAAAAAAAAAAEAAAAEAAEAAAAAAAIAAAAEAAI
 tile_set = SubResource("TileSet_1ibio")
 metadata/_edit_lock_ = true
 
-[node name="toBigRoom" parent="." instance=ExtResource("4_q7s03")]
+[node name="toBigRoom" parent="." unique_id=1198022038 instance=ExtResource("4_q7s03")]
 position = Vector2(1050, 54)
 scale = Vector2(2.2, 1.7)
 collision_layer = 2
@@ -262,11 +263,11 @@ collision_mask = 2
 target_scene_path = "uid://c1jvpmrwbjdec"
 target_door_name = "toBoss"
 
-[node name="player" parent="." instance=ExtResource("5_ekahb")]
+[node name="player" parent="." unique_id=1813194884 instance=ExtResource("5_ekahb")]
 position = Vector2(552, 280)
 metadata/_edit_lock_ = true
 
-[node name="Camera2D" type="Camera2D" parent="player"]
+[node name="Camera2D" type="Camera2D" parent="player" unique_id=950318493]
 limit_left = -2496
 limit_top = -611
 limit_right = 1136
@@ -277,103 +278,106 @@ editor_draw_limits = true
 editor_draw_drag_margin = true
 metadata/_edit_lock_ = true
 
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("6_8lhr4")
-autoplay = true
-
-[node name="Conveyor" type="Node2D" parent="."]
+[node name="Conveyor" type="Node2D" parent="." unique_id=1109440585]
 position = Vector2(298, 6)
 
-[node name="Jumpbable" type="StaticBody2D" parent="Conveyor"]
+[node name="Jumpbable" type="StaticBody2D" parent="Conveyor" unique_id=850079768]
 position = Vector2(753.00006, 509)
 scale = Vector2(1.4, 1.8)
 collision_layer = 14
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Conveyor/Jumpbable"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Conveyor/Jumpbable" unique_id=179365709]
 position = Vector2(0, -111.5)
 shape = SubResource("RectangleShape2D_70qjo")
 one_way_collision = true
 metadata/_edit_lock_ = true
 
-[node name="CollisionShape2D2" type="CollisionShape2D" parent="Conveyor/Jumpbable"]
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Conveyor/Jumpbable" unique_id=1336445766]
 position = Vector2(13.571533, -112)
 rotation = 1.5707964
 shape = SubResource("RectangleShape2D_117nu")
 one_way_collision = true
 metadata/_edit_lock_ = true
 
-[node name="CollisionShape2D3" type="CollisionShape2D" parent="Conveyor/Jumpbable"]
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="Conveyor/Jumpbable" unique_id=1174849877]
 position = Vector2(-13.571411, -139.57135)
 rotation = -1.5707964
 scale = Vector2(0.805, 1)
 shape = SubResource("RectangleShape2D_117nu")
 one_way_collision = true
 
-[node name="Jumpbable2" type="StaticBody2D" parent="Conveyor"]
+[node name="Jumpbable2" type="StaticBody2D" parent="Conveyor" unique_id=1868675900]
 position = Vector2(184, 341.99997)
 scale = Vector2(1.4, 1.15)
 collision_layer = 14
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Conveyor/Jumpbable2"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Conveyor/Jumpbable2" unique_id=78087793]
 position = Vector2(0, -111.5)
 rotation = 3.1415927
 shape = SubResource("RectangleShape2D_70qjo")
 one_way_collision = true
 metadata/_edit_lock_ = true
 
-[node name="CollisionShape2D2" type="CollisionShape2D" parent="Conveyor/Jumpbable2"]
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Conveyor/Jumpbable2" unique_id=920332047]
 position = Vector2(13.571533, -112)
 rotation = 1.5707964
 shape = SubResource("RectangleShape2D_117nu")
 one_way_collision = true
 metadata/_edit_lock_ = true
 
-[node name="CollisionShape2D3" type="CollisionShape2D" parent="Conveyor/Jumpbable2"]
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="Conveyor/Jumpbable2" unique_id=1812017145]
 position = Vector2(-15.000005, -146.2069)
 rotation = -1.5707964
 scale = Vector2(0.76, 1)
 shape = SubResource("RectangleShape2D_117nu")
 one_way_collision = true
 
-[node name="Jumpbable3" type="StaticBody2D" parent="Conveyor"]
-position = Vector2(-713, 58)
+[node name="Jumpbable3" type="StaticBody2D" parent="Conveyor" unique_id=60828362]
+position = Vector2(-716, 75)
 rotation = 3.1415927
 scale = Vector2(1.4, 0.35)
 collision_layer = 14
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Conveyor/Jumpbable3"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Conveyor/Jumpbable3" unique_id=1019493190]
 position = Vector2(0, -111.5)
 shape = SubResource("RectangleShape2D_70qjo")
 one_way_collision = true
 metadata/_edit_lock_ = true
 
-[node name="CollisionShape2D3" type="CollisionShape2D" parent="Conveyor/Jumpbable3"]
-position = Vector2(-13.571411, -111)
-rotation = -1.5707964
-shape = SubResource("RectangleShape2D_117nu")
-one_way_collision = true
-metadata/_edit_lock_ = true
-
-[node name="Jumpbable4" type="StaticBody2D" parent="Conveyor"]
-position = Vector2(552, 518)
-rotation = -1.5707964
-scale = Vector2(2, 5)
-collision_layer = 14
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Conveyor/Jumpbable4"]
-position = Vector2(0, -111.5)
-shape = SubResource("RectangleShape2D_70qjo")
-one_way_collision = true
-metadata/_edit_lock_ = true
-
-[node name="CollisionShape2D2" type="CollisionShape2D" parent="Conveyor/Jumpbable4"]
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Conveyor/Jumpbable3" unique_id=178462738]
 position = Vector2(13.571533, -112)
 rotation = 1.5707964
 shape = SubResource("RectangleShape2D_117nu")
 one_way_collision = true
 metadata/_edit_lock_ = true
 
-[node name="CollisionShape2D3" type="CollisionShape2D" parent="Conveyor/Jumpbable4"]
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="Conveyor/Jumpbable3" unique_id=2063411004]
+position = Vector2(-13.571411, -111)
+rotation = -1.5707964
+shape = SubResource("RectangleShape2D_117nu")
+one_way_collision = true
+metadata/_edit_lock_ = true
+
+[node name="Jumpbable4" type="StaticBody2D" parent="Conveyor" unique_id=1887422936]
+position = Vector2(552, 518)
+rotation = -1.5707964
+scale = Vector2(2, 5)
+collision_layer = 14
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Conveyor/Jumpbable4" unique_id=881653334]
+position = Vector2(0, -111.5)
+shape = SubResource("RectangleShape2D_70qjo")
+one_way_collision = true
+metadata/_edit_lock_ = true
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Conveyor/Jumpbable4" unique_id=37740367]
+position = Vector2(13.571533, -112)
+rotation = 1.5707964
+shape = SubResource("RectangleShape2D_117nu")
+one_way_collision = true
+metadata/_edit_lock_ = true
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="Conveyor/Jumpbable4" unique_id=570633069]
 position = Vector2(-13.571411, -111)
 rotation = -1.5707964
 shape = SubResource("RectangleShape2D_117nu")
@@ -386,20 +390,20 @@ rotation = -1.5707964
 scale = Vector2(2, 9.05)
 collision_layer = 14
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Conveyor/Jumpbable5"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Conveyor/Jumpbable5" unique_id=965218143]
 position = Vector2(0, -111.5)
 shape = SubResource("RectangleShape2D_70qjo")
 one_way_collision = true
 metadata/_edit_lock_ = true
 
-[node name="CollisionShape2D2" type="CollisionShape2D" parent="Conveyor/Jumpbable5"]
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Conveyor/Jumpbable5" unique_id=1640556426]
 position = Vector2(13.571533, -112)
 rotation = 1.5707964
 shape = SubResource("RectangleShape2D_117nu")
 one_way_collision = true
 metadata/_edit_lock_ = true
 
-[node name="CollisionShape2D3" type="CollisionShape2D" parent="Conveyor/Jumpbable5"]
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="Conveyor/Jumpbable5" unique_id=62734448]
 position = Vector2(-13.571411, -111)
 rotation = -1.5707964
 shape = SubResource("RectangleShape2D_117nu")
