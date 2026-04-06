@@ -1,6 +1,6 @@
 extends CharacterBody2D
 
-
+var health : float = 30
 const SPEED = 300.0
 var x_direction_input : String = ""
 var y_direction_input : String = ""
@@ -17,7 +17,8 @@ var laser_charge_level : float = 0
 var feature_enabled : Array = [true, true] # boots, cannon, big claws
 
 func _physics_process(delta: float) -> void:
-	if is_queued_for_deletion():
+	if health <= 0:
+		queue_free()
 		return
 	
 	if Input.is_action_pressed("right"):
@@ -77,6 +78,7 @@ func _physics_process(delta: float) -> void:
 		set_collision_mask_value(2,true)
 	sprite_2d.position = sprite_position
 	
+	"""
 	# self clamp because the normal clamp ain't working for me
 	if velocity.y > SPEED * 3:
 		velocity.y = SPEED * 3
@@ -87,6 +89,7 @@ func _physics_process(delta: float) -> void:
 		velocity.x = SPEED * 3
 	elif velocity.x < -SPEED * 3:
 		velocity.x = -SPEED * 3
+	"""
 	
 	move_and_slide()
 	
@@ -210,4 +213,8 @@ func _on_claws_area_entered(area: Area2D) -> void:
 
 func _on_claws_body_entered(body: Node2D) -> void:
 	if not body.get_collision_layer_value(4): #not an interactable
-		body.queue_free()
+		body.change_health(1)
+
+func change_health(health_taken:float) -> void:
+	health -= health_taken
+	

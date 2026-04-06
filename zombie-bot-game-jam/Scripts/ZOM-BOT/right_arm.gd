@@ -20,7 +20,7 @@ func _physics_process(delta: float) -> void:
 	if get_slide_collision_count() > 0:
 		var collision = get_last_slide_collision().get_collider_shape()
 		if collision is CollisionShape2D and collision.get_parent().get_collision_layer_value(2):
-			collision.get_parent().queue_free()
+			collision.get_parent().change_health(2.3*delta)
 
 func _on_left_area_body_entered(body: Node2D) -> void:
 	if body is not CharacterBody2D:

@@ -14,7 +14,7 @@ func _physics_process(_delta: float) -> void:
 				else:
 					if collider.get_collider_shape_index() == 0:
 						if not collider.get_collider_shape().get_parent().get_collision_layer_value(1):
-							collider.get_collider_shape().get_parent().queue_free()
+							collider.get_collider_shape().get_parent().change_health(1)
 			elif collider.get_collider_shape_index() == 0:
 				if not collider.get_collider_shape().get_parent().get_collision_layer_value(1):
 					collider.get_collider_shape().get_parent().queue_free()
