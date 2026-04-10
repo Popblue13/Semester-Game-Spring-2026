@@ -6,6 +6,7 @@ var enemy : CharacterBody2D # aka, second priority target
 var SPEED : float = 400.0
 const energy_projectile : PackedScene = preload("res://Scenes/Dungeon Objects/energy_projectile.tscn")
 var charge : float = 0.0
+@onready var animated_sprite_2d: AnimatedSprite2D = $AnimatedSprite2D
 
 func _physics_process(delta: float) -> void:
 	if health <= 0:
@@ -46,8 +47,11 @@ func charge_gun(delta: float) -> bool:
 	if charge > 2: # ~4 seconds to charge
 		charge = 0
 		return true # is charged
+	elif charge > 1.5:
+		animated_sprite_2d.play("Shoot")
 	else:
-		return false
+		animated_sprite_2d.play("Idle")
+	return false
 
 
 func _on_range_body_entered(body: Node2D) -> void:

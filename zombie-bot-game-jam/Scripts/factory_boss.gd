@@ -1,7 +1,7 @@
 extends CharacterBody2D
 
 const energy_projectile = preload("res://Scenes/Dungeon Objects/energy_projectile.tscn")
-const SPEED = 350.0
+const SPEED = 250.0
 var charge : float = 0
 @onready var timer: Timer = $Timer
 @onready var player : CharacterBody2D = $"../../player"
@@ -45,7 +45,7 @@ func _physics_process(delta: float) -> void:
 			direction = global_position.direction_to(player.global_position)
 			speed = SPEED
 			if global_position.distance_to(player.global_position) < 100:
-				speed += SPEED
+				speed -= SPEED
 			velocity = direction * speed
 		elif global_position.distance_to(return_spot.global_position) > 100 and go_back:
 			direction = global_position.direction_to(return_spot.global_position)
@@ -81,10 +81,11 @@ func charge_gun(delta: float) -> bool:
 func _on_area_2d_body_entered(body: Node2D) -> void:
 	if body is not CharacterBody2D:
 		return
-	body.change_health(2)
+	body.change_health(3) #don't let him touch you
 
 
 func _on_timer_timeout() -> void:
 	chasing = false #head back
 	go_back = true
+	get_parent().battery_explode = false
 	pass # Replace with function body.

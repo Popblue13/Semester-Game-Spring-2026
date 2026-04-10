@@ -1,24 +1,31 @@
 extends CharacterBody2D
 
-var health : float = 30
+var health : float = 5
 const SPEED = 300.0
 var x_direction_input : String = ""
 var y_direction_input : String = ""
 var override_direction_input : String = ""
 @onready var claws_hitbox: CollisionShape2D = $Claws/ClawsHitbox
-@onready var sprite_2d: Sprite2D = $Sprite2D
+@onready var sprite_2d: AnimatedSprite2D = $AnimatedSprite2D
 @onready var player_hurtbox: CollisionShape2D = $PlayerHurtbox
 @onready var sprite_position : Vector2 = Vector2(0,0)
 const energy_projectile : PackedScene = preload("res://Scenes/Dungeon Objects/energy_projectile.tscn")
 var last_direction : String = "right"
 var claw_cooldown : float = 0
 var laser_charge_level : float = 0
-
+var start_position : Vector2 
 var feature_enabled : Array = [true, true] # boots, cannon, big claws
 
 func _physics_process(delta: float) -> void:
+	if position != Vector2(379.0, 241.0) and position != Vector2(0.0, 0.0) and not start_position:
+		start_position = position
+		
+		
 	if health <= 0:
-		queue_free()
+		if position == start_position:
+			health = 5
+			return
+		position = start_position
 		return
 	
 	if Input.is_action_pressed("right"):
@@ -27,12 +34,14 @@ func _physics_process(delta: float) -> void:
 		if not y_direction_input:
 			override_direction_input = "right"
 		last_direction = "right"
+		sprite_2d.play("Right")
 	elif Input.is_action_pressed("left"):
 		velocity.x = -SPEED
 		x_direction_input = "left"
 		if not y_direction_input:
 			override_direction_input = "left"
 		last_direction = "left"
+		sprite_2d.play("Left")
 	else: # make go straight to zero if we want it to not slide afterwards
 		if x_direction_input == override_direction_input:
 			x_direction_input = ""
@@ -45,12 +54,14 @@ func _physics_process(delta: float) -> void:
 		if not x_direction_input:
 			override_direction_input = "up"
 		last_direction = "up"
+		sprite_2d.play("Back")
 	elif Input.is_action_pressed("down"):
 		velocity.y = SPEED
 		y_direction_input = "down"
 		if not x_direction_input:
 			override_direction_input = "down"
 		last_direction = "down"
+		sprite_2d.play("Front")
 	else:
 		if y_direction_input == override_direction_input:
 			y_direction_input = ""
@@ -118,10 +129,7 @@ func _physics_process(delta: float) -> void:
 		
 		
 		var direction_input : String
-		if override_direction_input:
-			direction_input = override_direction_input
-		else:
-			direction_input = last_direction
+		direction_input = last_direction
 		
 		if direction_input == "right":
 			instance.rotation = 0
@@ -141,14 +149,14 @@ func _physics_process(delta: float) -> void:
 
 func change_sprite_2d_position(delta : float) -> void:
 	if sprite_position.x == 0:
-		sprite_position.y -= 75 * delta
+		sprite_position.y -= 75 * delta # change how fast go up
 	else:
-		sprite_position.y += 10 * delta
+		sprite_position.y += 10 * delta # fall speed
 	
 	
 	if sprite_position.y > 0:
 		sprite_position.x = 0
-	elif sprite_position.y < -23:
+	elif sprite_position.y < -23: # make tinier to jump higher
 		sprite_position.x = 0.001
 	
 	if sprite_position.y < -11:
@@ -167,10 +175,7 @@ func _input(_event: InputEvent) -> void:
 	
 	if Input.is_action_pressed("left-click"):
 		var direction_input : String
-		if override_direction_input:
-			direction_input = override_direction_input
-		else:
-			direction_input = last_direction
+		direction_input = last_direction
 			
 		if not claws_hitbox.disabled:
 			if claw_cooldown > 2:

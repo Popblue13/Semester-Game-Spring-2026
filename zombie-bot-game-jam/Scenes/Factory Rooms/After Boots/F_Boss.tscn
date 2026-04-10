@@ -1,15 +1,15 @@
-[gd_scene load_steps=25 format=4 uid="uid://yctp3li46n6e"]
+[gd_scene load_steps=26 format=4 uid="uid://yctp3li46n6e"]
 
 [ext_resource type="Script" uid="uid://duiblfs6iy3eq" path="res://Scripts/room.gd" id="1_70qjo"]
 [ext_resource type="Texture2D" uid="uid://bhr7eneqeuwd4" path="res://Art/Tilesets/Factory/floor.png" id="2_117nu"]
 [ext_resource type="Texture2D" uid="uid://d330xn1e52jni" path="res://Art/Tilesets/Factory/IMG_0435 2.png" id="3_70syg"]
 [ext_resource type="PackedScene" uid="uid://c1mjli7ob3ifg" path="res://Scenes/Dungeon Objects/Doorway.tscn" id="4_q7s03"]
 [ext_resource type="PackedScene" uid="uid://vsy85ifrshdf" path="res://Scenes/Dungeon Objects/player.tscn" id="5_ekahb"]
-[ext_resource type="AudioStream" uid="uid://bqygckabhwqwb" path="res://Sound/Music/Disassembly Line 16-Bit.wav" id="6_8lhr4"]
 [ext_resource type="Script" uid="uid://dfqub56g6o6ue" path="res://Scripts/moving_parts.gd" id="7_117nu"]
 [ext_resource type="Script" uid="uid://c4y65a7t7sb0x" path="res://Scripts/auto_arm.gd" id="8_70syg"]
 [ext_resource type="Script" uid="uid://cp550y2wf5ugd" path="res://Scripts/spawner.gd" id="8_ekahb"]
 [ext_resource type="PackedScene" uid="uid://c7ro7ltwn8e2c" path="res://Scenes/Dungeon Objects/drone.tscn" id="9_q7s03"]
+[ext_resource type="Script" uid="uid://dc24kjihdfnvr" path="res://Scripts/return_spot.gd" id="10_qhito"]
 [ext_resource type="Script" uid="uid://c3wevevv64fnu" path="res://Scripts/factory_boss.gd" id="11_x4kpo"]
 [ext_resource type="Texture2D" uid="uid://dkeqnrarjdmm4" path="res://Art/Sprites/gBot_pieces.webp" id="12_qhito"]
 [ext_resource type="PackedScene" uid="uid://dgeww3sl4i0ab" path="res://Scenes/Dungeon Objects/bent_door.tscn" id="13_qhito"]
@@ -220,7 +220,7 @@ physics_layer_0/collision_layer = 1
 sources/0 = SubResource("TileSetAtlasSource_wobdf")
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_70qjo"]
-size = Vector2(50, 289)
+size = Vector2(43.000034, 289.30252)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_117nu"]
 size = Vector2(288.00003, 21.428604)
@@ -240,6 +240,9 @@ size = Vector2(112, 20)
 radius = 29.0
 height = 60.0
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wx7lv"]
+size = Vector2(176, 115)
+
 [node name="FactoryMain" type="Node2D"]
 script = ExtResource("1_70qjo")
 room_theme = "silo"
@@ -255,7 +258,7 @@ tile_map_data = PackedByteArray("AAAAAAAAAAAEAAAAAAAAAAEAAAAEAAEAAAAAAAIAAAAEAAI
 tile_set = SubResource("TileSet_1ibio")
 metadata/_edit_lock_ = true
 
-[node name="toBigRoom" parent="." unique_id=1198022038 instance=ExtResource("4_q7s03")]
+[node name="toBigRoom" parent="." instance=ExtResource("4_q7s03")]
 position = Vector2(1050, 54)
 scale = Vector2(2.2, 1.7)
 collision_layer = 2
@@ -263,11 +266,11 @@ collision_mask = 2
 target_scene_path = "uid://c1jvpmrwbjdec"
 target_door_name = "toBoss"
 
-[node name="player" parent="." unique_id=1813194884 instance=ExtResource("5_ekahb")]
+[node name="player" parent="." instance=ExtResource("5_ekahb")]
 position = Vector2(552, 280)
 metadata/_edit_lock_ = true
 
-[node name="Camera2D" type="Camera2D" parent="player" unique_id=950318493]
+[node name="Camera2D" type="Camera2D" parent="player"]
 limit_left = -2496
 limit_top = -611
 limit_right = 1136
@@ -278,106 +281,106 @@ editor_draw_limits = true
 editor_draw_drag_margin = true
 metadata/_edit_lock_ = true
 
-[node name="Conveyor" type="Node2D" parent="." unique_id=1109440585]
+[node name="Conveyor" type="Node2D" parent="."]
 position = Vector2(298, 6)
 
-[node name="Jumpbable" type="StaticBody2D" parent="Conveyor" unique_id=850079768]
+[node name="Jumpbable" type="StaticBody2D" parent="Conveyor"]
 position = Vector2(753.00006, 509)
 scale = Vector2(1.4, 1.8)
 collision_layer = 14
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Conveyor/Jumpbable" unique_id=179365709]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Conveyor/Jumpbable"]
 position = Vector2(0, -111.5)
 shape = SubResource("RectangleShape2D_70qjo")
 one_way_collision = true
 metadata/_edit_lock_ = true
 
-[node name="CollisionShape2D2" type="CollisionShape2D" parent="Conveyor/Jumpbable" unique_id=1336445766]
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Conveyor/Jumpbable"]
 position = Vector2(13.571533, -112)
 rotation = 1.5707964
 shape = SubResource("RectangleShape2D_117nu")
 one_way_collision = true
 metadata/_edit_lock_ = true
 
-[node name="CollisionShape2D3" type="CollisionShape2D" parent="Conveyor/Jumpbable" unique_id=1174849877]
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="Conveyor/Jumpbable"]
 position = Vector2(-13.571411, -139.57135)
 rotation = -1.5707964
 scale = Vector2(0.805, 1)
 shape = SubResource("RectangleShape2D_117nu")
 one_way_collision = true
 
-[node name="Jumpbable2" type="StaticBody2D" parent="Conveyor" unique_id=1868675900]
+[node name="Jumpbable2" type="StaticBody2D" parent="Conveyor"]
 position = Vector2(184, 341.99997)
 scale = Vector2(1.4, 1.15)
 collision_layer = 14
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Conveyor/Jumpbable2" unique_id=78087793]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Conveyor/Jumpbable2"]
 position = Vector2(0, -111.5)
 rotation = 3.1415927
 shape = SubResource("RectangleShape2D_70qjo")
 one_way_collision = true
 metadata/_edit_lock_ = true
 
-[node name="CollisionShape2D2" type="CollisionShape2D" parent="Conveyor/Jumpbable2" unique_id=920332047]
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Conveyor/Jumpbable2"]
 position = Vector2(13.571533, -112)
 rotation = 1.5707964
 shape = SubResource("RectangleShape2D_117nu")
 one_way_collision = true
 metadata/_edit_lock_ = true
 
-[node name="CollisionShape2D3" type="CollisionShape2D" parent="Conveyor/Jumpbable2" unique_id=1812017145]
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="Conveyor/Jumpbable2"]
 position = Vector2(-15.000005, -146.2069)
 rotation = -1.5707964
 scale = Vector2(0.76, 1)
 shape = SubResource("RectangleShape2D_117nu")
 one_way_collision = true
 
-[node name="Jumpbable3" type="StaticBody2D" parent="Conveyor" unique_id=60828362]
+[node name="Jumpbable3" type="StaticBody2D" parent="Conveyor"]
 position = Vector2(-716, 75)
 rotation = 3.1415927
 scale = Vector2(1.4, 0.35)
 collision_layer = 14
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Conveyor/Jumpbable3" unique_id=1019493190]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Conveyor/Jumpbable3"]
 position = Vector2(0, -111.5)
 shape = SubResource("RectangleShape2D_70qjo")
 one_way_collision = true
 metadata/_edit_lock_ = true
 
-[node name="CollisionShape2D2" type="CollisionShape2D" parent="Conveyor/Jumpbable3" unique_id=178462738]
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Conveyor/Jumpbable3"]
 position = Vector2(13.571533, -112)
 rotation = 1.5707964
 shape = SubResource("RectangleShape2D_117nu")
 one_way_collision = true
 metadata/_edit_lock_ = true
 
-[node name="CollisionShape2D3" type="CollisionShape2D" parent="Conveyor/Jumpbable3" unique_id=2063411004]
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="Conveyor/Jumpbable3"]
 position = Vector2(-13.571411, -111)
 rotation = -1.5707964
 shape = SubResource("RectangleShape2D_117nu")
 one_way_collision = true
 metadata/_edit_lock_ = true
 
-[node name="Jumpbable4" type="StaticBody2D" parent="Conveyor" unique_id=1887422936]
+[node name="Jumpbable4" type="StaticBody2D" parent="Conveyor"]
 position = Vector2(552, 518)
 rotation = -1.5707964
 scale = Vector2(2, 5)
 collision_layer = 14
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Conveyor/Jumpbable4" unique_id=881653334]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Conveyor/Jumpbable4"]
 position = Vector2(0, -111.5)
 shape = SubResource("RectangleShape2D_70qjo")
 one_way_collision = true
 metadata/_edit_lock_ = true
 
-[node name="CollisionShape2D2" type="CollisionShape2D" parent="Conveyor/Jumpbable4" unique_id=37740367]
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Conveyor/Jumpbable4"]
 position = Vector2(13.571533, -112)
 rotation = 1.5707964
 shape = SubResource("RectangleShape2D_117nu")
 one_way_collision = true
 metadata/_edit_lock_ = true
 
-[node name="CollisionShape2D3" type="CollisionShape2D" parent="Conveyor/Jumpbable4" unique_id=570633069]
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="Conveyor/Jumpbable4"]
 position = Vector2(-13.571411, -111)
 rotation = -1.5707964
 shape = SubResource("RectangleShape2D_117nu")
@@ -390,20 +393,20 @@ rotation = -1.5707964
 scale = Vector2(2, 9.05)
 collision_layer = 14
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Conveyor/Jumpbable5" unique_id=965218143]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Conveyor/Jumpbable5"]
 position = Vector2(0, -111.5)
 shape = SubResource("RectangleShape2D_70qjo")
 one_way_collision = true
 metadata/_edit_lock_ = true
 
-[node name="CollisionShape2D2" type="CollisionShape2D" parent="Conveyor/Jumpbable5" unique_id=1640556426]
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Conveyor/Jumpbable5"]
 position = Vector2(13.571533, -112)
 rotation = 1.5707964
 shape = SubResource("RectangleShape2D_117nu")
 one_way_collision = true
 metadata/_edit_lock_ = true
 
-[node name="CollisionShape2D3" type="CollisionShape2D" parent="Conveyor/Jumpbable5" unique_id=62734448]
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="Conveyor/Jumpbable5"]
 position = Vector2(-13.571411, -111)
 rotation = -1.5707964
 shape = SubResource("RectangleShape2D_117nu")
@@ -417,7 +420,7 @@ scale = Vector2(2, 5.95)
 collision_layer = 14
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Conveyor/Jumpbable6"]
-position = Vector2(0, -111.5)
+position = Vector2(-3.4999847, -111.651276)
 shape = SubResource("RectangleShape2D_70qjo")
 one_way_collision = true
 metadata/_edit_lock_ = true
@@ -1284,6 +1287,27 @@ position = Vector2(-283, 146)
 
 [node name="ReturnSpot" type="Node2D" parent="."]
 position = Vector2(-2112, -410)
+script = ExtResource("10_qhito")
+
+[node name="ElectricField" type="Area2D" parent="ReturnSpot"]
+position = Vector2(0, 68)
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ReturnSpot/ElectricField"]
+position = Vector2(-4, -149)
+shape = SubResource("RectangleShape2D_wx7lv")
+debug_color = Color(0.33928132, 0.5365767, 0.8370423, 0.41960785)
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="ReturnSpot/ElectricField"]
+position = Vector2(312, -171)
+shape = SubResource("RectangleShape2D_wx7lv")
+debug_color = Color(0.33928132, 0.5365767, 0.8370423, 0.41960785)
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="ReturnSpot/ElectricField"]
+position = Vector2(-289, -176)
+shape = SubResource("RectangleShape2D_wx7lv")
+debug_color = Color(0.33928132, 0.5365767, 0.8370423, 0.41960785)
 
 [node name="EnergyBoxes" type="Node2D" parent="ReturnSpot"]
 position = Vector2(0, 68)
@@ -1385,5 +1409,8 @@ wait_time = 5.0
 [connection signal="body_entered" from="AutoArms/AutoArm14/Range" to="AutoArms/AutoArm14" method="_on_range_body_entered"]
 [connection signal="body_exited" from="AutoArms/AutoArm14/Range" to="AutoArms/AutoArm14" method="_on_range_body_exited"]
 [connection signal="body_entered" from="AutoArms/AutoArm14/Crane/Grabber" to="AutoArms/AutoArm14" method="_on_grabber_body_entered"]
+[connection signal="body_entered" from="ReturnSpot/ElectricField" to="ReturnSpot" method="_on_electric_field_body_entered"]
+[connection signal="body_exited" from="ReturnSpot/ElectricField" to="ReturnSpot" method="_on_electric_field_body_exited"]
+[connection signal="child_exiting_tree" from="ReturnSpot/EnergyBoxes" to="ReturnSpot" method="_on_energy_boxes_child_exiting_tree"]
 [connection signal="body_entered" from="ReturnSpot/FactoryBoss/Area2D" to="ReturnSpot/FactoryBoss" method="_on_area_2d_body_entered"]
 [connection signal="timeout" from="ReturnSpot/FactoryBoss/Timer" to="ReturnSpot/FactoryBoss" method="_on_timer_timeout"]
