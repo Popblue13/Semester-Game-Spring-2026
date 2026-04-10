@@ -9,6 +9,7 @@ var override_direction_input : String = ""
 @onready var sprite_2d: AnimatedSprite2D = $AnimatedSprite2D
 @onready var player_hurtbox: CollisionShape2D = $PlayerHurtbox
 @onready var sprite_position : Vector2 = Vector2(0,0)
+@onready var animated_sprite_2d_2: AnimatedSprite2D = $Claws/ClawsHitbox/AnimatedSprite2D2
 const energy_projectile : PackedScene = preload("res://Scenes/Dungeon Objects/energy_projectile.tscn")
 var last_direction : String = "right"
 var claw_cooldown : float = 0
@@ -109,9 +110,11 @@ func _physics_process(delta: float) -> void:
 		if trigger_claw_cooldown(delta): # false if threshold reached
 			claw_cooldown = 0
 		claws_hitbox.disabled = false
+		animated_sprite_2d_2.visible = true
 	else:
 		if trigger_claw_cooldown(delta*9):
 			claws_hitbox.disabled = true
+			animated_sprite_2d_2.visible = false
 		else:
 			claw_cooldown -= delta * 2
 			

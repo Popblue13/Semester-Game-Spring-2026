@@ -87,7 +87,7 @@ animations = [{
 }],
 "loop": true,
 "name": &"Claw",
-"speed": 5.0
+"speed": 10.0
 }]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_d7sou"]
@@ -165,6 +165,7 @@ shape = SubResource("CircleShape2D_iam2d")
 disabled = true
 
 [node name="AnimatedSprite2D2" type="AnimatedSprite2D" parent="Claws/ClawsHitbox"]
+visible = false
 position = Vector2(0.28092003, -0.23021412)
 rotation = 0.7853982
 scale = Vector2(1.5, 1.5)
