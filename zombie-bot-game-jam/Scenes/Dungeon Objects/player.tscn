@@ -1,8 +1,9 @@
-[gd_scene load_steps=11 format=3 uid="uid://vsy85ifrshdf"]
+[gd_scene load_steps=23 format=3 uid="uid://vsy85ifrshdf"]
 
 [ext_resource type="Texture2D" uid="uid://rnp51ohx37kk" path="res://Art/Sprites/icon.svg" id="1_v0iea"]
 [ext_resource type="Script" uid="uid://biijq8uecnvgb" path="res://Scripts/player_body.gd" id="2_cvnsp"]
 [ext_resource type="Texture2D" uid="uid://bgk4em2y06kny" path="res://Art/Sprites/I_Eat_Bran.png" id="2_iam2d"]
+[ext_resource type="Texture2D" uid="uid://il5jpsfwkwvr" path="res://Art/Sprites/Claw_Claw_MF.png" id="3_hocvi"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_6t5aa"]
 radius = 12.0
@@ -10,6 +11,84 @@ height = 32.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_iam2d"]
 radius = 36.0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_etawe"]
+atlas = ExtResource("3_hocvi")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ex42f"]
+atlas = ExtResource("3_hocvi")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jo0yp"]
+atlas = ExtResource("3_hocvi")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_idrh7"]
+atlas = ExtResource("3_hocvi")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bw6h6"]
+atlas = ExtResource("3_hocvi")
+region = Rect2(128, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yyg6e"]
+atlas = ExtResource("3_hocvi")
+region = Rect2(160, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_foqch"]
+atlas = ExtResource("3_hocvi")
+region = Rect2(192, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nvuih"]
+atlas = ExtResource("3_hocvi")
+region = Rect2(224, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_f4cbt"]
+atlas = ExtResource("3_hocvi")
+region = Rect2(256, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_snqr2"]
+atlas = ExtResource("3_hocvi")
+region = Rect2(288, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_g85ko"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_etawe")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ex42f")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jo0yp")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_idrh7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bw6h6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yyg6e")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_foqch")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nvuih")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_f4cbt")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_snqr2")
+}],
+"loop": true,
+"name": &"Claw",
+"speed": 5.0
+}]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_d7sou"]
 atlas = ExtResource("2_iam2d")
@@ -84,6 +163,16 @@ collision_mask = 12
 position = Vector2(24, 0)
 shape = SubResource("CircleShape2D_iam2d")
 disabled = true
+
+[node name="AnimatedSprite2D2" type="AnimatedSprite2D" parent="Claws/ClawsHitbox"]
+position = Vector2(0.28092003, -0.23021412)
+rotation = 0.7853982
+scale = Vector2(1.5, 1.5)
+sprite_frames = SubResource("SpriteFrames_g85ko")
+animation = &"Claw"
+autoplay = "Claw"
+speed_scale = 2.0
+offset = Vector2(3.8933334, -3.8187084)
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 scale = Vector2(1.5, 1.5)

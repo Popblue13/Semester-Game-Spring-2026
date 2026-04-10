@@ -189,10 +189,10 @@ func _input(_event: InputEvent) -> void:
 			claws_hitbox.rotation = 0
 			claws_hitbox.position = Vector2(24 *claws_hitbox.scale.x,0)
 		elif direction_input == "left":
-			claws_hitbox.rotation = 0
+			claws_hitbox.rotation = 0 + PI
 			claws_hitbox.position = Vector2(-24*claws_hitbox.scale.x,0)
 		elif direction_input == "up":
-			claws_hitbox.rotation = PI/2
+			claws_hitbox.rotation = PI/2 + PI
 			claws_hitbox.position = Vector2(0,-24*claws_hitbox.scale.y)
 		elif direction_input == "down":
 			claws_hitbox.rotation = PI/2
