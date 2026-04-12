@@ -17,6 +17,7 @@ var laser_charge_level : float = 0
 var start_position : Vector2 
 var feature_enabled : Array = [Global.player_abilities["boots"], 
 Global.player_abilities["cannon"]] # boots, cannon, big claws
+@onready var canvas_modulate: CanvasModulate = $CanvasModulate
 
 func _physics_process(delta: float) -> void:
 	if position != Vector2(379.0, 241.0) and position != Vector2(0.0, 0.0) and not start_position:
@@ -29,6 +30,9 @@ func _physics_process(delta: float) -> void:
 			return
 		position = start_position
 		return
+	elif health < 5:
+		canvas_modulate.visible = true
+		canvas_modulate.color = Color(1,0,1,health/5)
 	
 	if Input.is_action_pressed("right"):
 		velocity.x = SPEED
@@ -226,4 +230,3 @@ func _on_claws_body_entered(body: Node2D) -> void:
 
 func change_health(health_taken:float) -> void:
 	health -= health_taken
-	

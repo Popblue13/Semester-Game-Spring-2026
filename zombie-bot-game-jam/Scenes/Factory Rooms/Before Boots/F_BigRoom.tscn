@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=4 uid="uid://c1jvpmrwbjdec"]
+[gd_scene load_steps=30 format=4 uid="uid://c1jvpmrwbjdec"]
 
 [ext_resource type="Script" uid="uid://duiblfs6iy3eq" path="res://Scripts/room.gd" id="1_udbj3"]
 [ext_resource type="PackedScene" uid="uid://vsy85ifrshdf" path="res://Scenes/Dungeon Objects/player.tscn" id="2_udbj3"]
@@ -11,6 +11,8 @@
 [ext_resource type="Script" uid="uid://c4y65a7t7sb0x" path="res://Scripts/auto_arm.gd" id="8_chv3v"]
 [ext_resource type="PackedScene" uid="uid://c7ro7ltwn8e2c" path="res://Scenes/Dungeon Objects/drone.tscn" id="9_1ibio"]
 [ext_resource type="Texture2D" uid="uid://divfho0dj32my" path="res://Art/Sprites/Saw_Blasted.png" id="9_u1yvb"]
+[ext_resource type="PackedScene" uid="uid://cbr3kher7x1rp" path="res://Scenes/Dungeon Objects/zappable_panel.tscn" id="12_wqb2f"]
+[ext_resource type="PackedScene" uid="uid://t1h6hl6wkq3f" path="res://Scenes/Dungeon Objects/toggable_cover.tscn" id="13_opog2"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_qrxxx"]
 texture = ExtResource("3_wobdf")
@@ -1670,16 +1672,35 @@ region_rect = Rect2(7.259262, 0, 17.18518, 32.666668)
 position = Vector2(-77, 515)
 
 [node name="Drone2" parent="Mobs" instance=ExtResource("9_1ibio")]
-position = Vector2(-811, -71)
+position = Vector2(-619, -216)
 
 [node name="Drone3" parent="Mobs" instance=ExtResource("9_1ibio")]
-position = Vector2(-735, -190)
+position = Vector2(-593, -355)
 
 [node name="Drone4" parent="Mobs" instance=ExtResource("9_1ibio")]
-position = Vector2(-939, -123)
+position = Vector2(-719, -351)
 
 [node name="Drone5" parent="Mobs" instance=ExtResource("9_1ibio")]
 position = Vector2(-147, -364)
+
+[node name="Drone6" parent="Mobs" instance=ExtResource("9_1ibio")]
+position = Vector2(626, -513)
+
+[node name="Drone7" parent="Mobs" instance=ExtResource("9_1ibio")]
+position = Vector2(962, -115)
+
+[node name="Drone8" parent="Mobs" instance=ExtResource("9_1ibio")]
+position = Vector2(96, -516)
+
+[node name="Drone9" parent="Mobs" instance=ExtResource("9_1ibio")]
+position = Vector2(-1017, 154)
+
+[node name="ZappablePanel" parent="." instance=ExtResource("12_wqb2f")]
+position = Vector2(1085, 259)
+
+[node name="ToggableCover" parent="ZappablePanel" instance=ExtResource("13_opog2")]
+position = Vector2(24, 35)
+rotation = 3.1415927
 
 [connection signal="body_exited" from="Conveyors/ScrapSpawners/Spawner/Stopper" to="Conveyors/ScrapSpawners/Spawner" method="_on_stopper_body_exited"]
 [connection signal="body_exited" from="Conveyors/ScrapSpawners/Spawner2/Stopper" to="Conveyors/ScrapSpawners/Spawner2" method="_on_stopper_body_exited"]

@@ -182,5 +182,9 @@ animation = &"Right"
 autoplay = "Front"
 offset = Vector2(0, -5.3333335)
 
+[node name="CanvasModulate" type="CanvasModulate" parent="."]
+visible = false
+color = Color(1, 0.003921569, 0.96862745, 1)
+
 [connection signal="area_entered" from="Claws" to="." method="_on_claws_area_entered"]
 [connection signal="body_entered" from="Claws" to="." method="_on_claws_body_entered"]
