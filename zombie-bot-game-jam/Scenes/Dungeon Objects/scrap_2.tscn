@@ -1,4 +1,6 @@
-[gd_scene load_steps=2 format=3 uid="uid://ba06qweaxolhv"]
+[gd_scene load_steps=3 format=3 uid="uid://ba06qweaxolhv"]
+
+[ext_resource type="Texture2D" uid="uid://cr0ed54pdev4b" path="res://Art/Sprites/Props_to_U.png" id="1_ch2xj"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_2vjn8"]
 
@@ -10,3 +12,8 @@ gravity_scale = 0.0
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_2vjn8")
 debug_color = Color(0.1635313, 0.6379591, 0.2723538, 0.41960785)
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_ch2xj")
+region_enabled = true
+region_rect = Rect2(0, 32.5, 32, 31.5)
