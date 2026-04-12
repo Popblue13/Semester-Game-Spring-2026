@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=4 uid="uid://cg4b68os1o6qu"]
+[gd_scene load_steps=17 format=4 uid="uid://cg4b68os1o6qu"]
 
 [ext_resource type="Script" uid="uid://duiblfs6iy3eq" path="res://Scripts/room.gd" id="1_mxiks"]
 [ext_resource type="Texture2D" uid="uid://bhr7eneqeuwd4" path="res://Art/Tilesets/Factory/floor.png" id="2_sm0p3"]
@@ -8,6 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://vsy85ifrshdf" path="res://Scenes/Dungeon Objects/player.tscn" id="6_hyu0p"]
 [ext_resource type="Texture2D" uid="uid://cr0ed54pdev4b" path="res://Art/Sprites/Props_to_U.png" id="7_sm0p3"]
 [ext_resource type="Texture2D" uid="uid://me71mifikyqa" path="res://Art/Sprites/Table_ME.png" id="8_sivvi"]
+[ext_resource type="PackedScene" uid="uid://c2uujrdvpkwwy" path="res://Scenes/Dungeon Objects/prop_detection.tscn" id="9_8b6lx"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_dmucl"]
 texture = ExtResource("2_sm0p3")
@@ -214,13 +215,13 @@ texture = ExtResource("3_sivvi")
 physics_layer_0/collision_layer = 1
 sources/0 = SubResource("TileSetAtlasSource_o7rme")
 
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_sivvi"]
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_454af"]
 texture = ExtResource("7_sm0p3")
 texture_region_size = Vector2i(32, 32)
 1:0/0 = 0
 0:0/0 = 0
 
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_8b6lx"]
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_hyu0p"]
 texture = ExtResource("8_sivvi")
 texture_region_size = Vector2i(32, 32)
 0:0/0 = 0
@@ -237,8 +238,8 @@ texture_region_size = Vector2i(32, 32)
 [sub_resource type="TileSet" id="TileSet_8b6lx"]
 tile_size = Vector2i(32, 32)
 physics_layer_0/collision_layer = 1
-sources/0 = SubResource("TileSetAtlasSource_sivvi")
-sources/1 = SubResource("TileSetAtlasSource_8b6lx")
+sources/0 = SubResource("TileSetAtlasSource_454af")
+sources/1 = SubResource("TileSetAtlasSource_hyu0p")
 
 [node name="Entrance" type="Node2D"]
 script = ExtResource("1_mxiks")
@@ -269,6 +270,10 @@ position = Vector2(379, 241)
 tile_map_data = PackedByteArray("AAARAAIAAQABAAAAAAAQAAIAAQAAAAAAAAAQAAMAAQAAAAEAAAAQAAQAAQAAAAIAAAARAAMAAQABAAEAAAARAAQAAQABAAIAAAA=")
 tile_set = SubResource("TileSet_8b6lx")
 
-[node name="Props" type="TileMapLayer" parent="."]
+[node name="PropDetection" parent="." instance=ExtResource("9_8b6lx")]
+position = Vector2(519, 118)
+
+[node name="Props" type="TileMapLayer" parent="PropDetection"]
+position = Vector2(-519, -118)
 tile_map_data = PackedByteArray("AAAQAAMAAAAAAAAAAAARAAIAAAABAAAAAAA=")
 tile_set = SubResource("TileSet_8b6lx")

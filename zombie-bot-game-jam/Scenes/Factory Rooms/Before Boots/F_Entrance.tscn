@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=4 uid="uid://5eoer813qwnv"]
+[gd_scene load_steps=20 format=4 uid="uid://5eoer813qwnv"]
 
 [ext_resource type="Script" uid="uid://duiblfs6iy3eq" path="res://Scripts/room.gd" id="1_spglx"]
 [ext_resource type="Texture2D" uid="uid://bhr7eneqeuwd4" path="res://Art/Tilesets/Factory/floor.png" id="2_a1f8c"]
@@ -8,6 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://d4mo2ex51mpwv" path="res://Scenes/Dungeon Objects/zombie.tscn" id="4_d8rbv"]
 [ext_resource type="Texture2D" uid="uid://cr0ed54pdev4b" path="res://Art/Sprites/Props_to_U.png" id="7_7318l"]
 [ext_resource type="Texture2D" uid="uid://me71mifikyqa" path="res://Art/Sprites/Table_ME.png" id="8_o7rme"]
+[ext_resource type="PackedScene" uid="uid://c2uujrdvpkwwy" path="res://Scenes/Dungeon Objects/prop_detection.tscn" id="9_o7rme"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_dmucl"]
 texture = ExtResource("2_a1f8c")
@@ -314,3 +315,6 @@ tile_set = SubResource("TileSet_yspmt")
 [node name="Props" type="TileMapLayer" parent="."]
 tile_map_data = PackedByteArray("AAAQAAMAAAAAAAAAAAA=")
 tile_set = SubResource("TileSet_npa1y")
+
+[node name="PropDetection" parent="." instance=ExtResource("9_o7rme")]
+position = Vector2(524, 115)
