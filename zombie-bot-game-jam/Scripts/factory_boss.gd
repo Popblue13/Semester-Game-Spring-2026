@@ -21,6 +21,8 @@ func _physics_process(delta: float) -> void:
 		timer.start(14)
 		chasing = true
 	elif energy_boxes.get_child_count() == 0 and boss_health == 1:
+		Global.player_abilities["cannon"] = true
+		player.feature_enabled[1] = true
 		queue_free()
 		
 	if is_queued_for_deletion():

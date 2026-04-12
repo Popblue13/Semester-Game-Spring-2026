@@ -15,7 +15,8 @@ var last_direction : String = "right"
 var claw_cooldown : float = 0
 var laser_charge_level : float = 0
 var start_position : Vector2 
-var feature_enabled : Array = [true, true] # boots, cannon, big claws
+var feature_enabled : Array = [Global.player_abilities["boots"], 
+Global.player_abilities["cannon"]] # boots, cannon, big claws
 
 func _physics_process(delta: float) -> void:
 	if position != Vector2(379.0, 241.0) and position != Vector2(0.0, 0.0) and not start_position:
