@@ -73,7 +73,7 @@ func _physics_process(delta: float) -> void:
 func charge_gun(delta: float) -> bool:
 	charge += delta
 	if charge > 1.3: # 2.6 seconds
-		if charge > 2: # shoot for 1.4 seconds
+		if charge > 1.7: # shoot for .8 seconds
 			charge = 0
 		return true # is charged
 	else:

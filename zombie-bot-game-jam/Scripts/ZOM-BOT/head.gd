@@ -6,6 +6,7 @@ var charge : float = 0
 var target : CharacterBody2D
 var boss_health : int = 15
 @onready var timer: Timer = $Timer
+@onready var label: Label = $Label
 
 func _physics_process(delta: float) -> void:
 	if boss_health <= 0:
@@ -13,6 +14,8 @@ func _physics_process(delta: float) -> void:
 		return
 	elif boss_health == 10 and timer.is_stopped():
 		timer.start()
+		
+	label.text = str(boss_health)
 	
 	if target:
 		var direction : Vector2 = global_position.direction_to(target.global_position)

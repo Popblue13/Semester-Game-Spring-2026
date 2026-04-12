@@ -33,7 +33,10 @@ func _physics_process(delta: float) -> void:
 	elif health < 5:
 		canvas_modulate.visible = true
 		canvas_modulate.color = Color(1,0,1-2.5/health,health/5+0.1)
-	
+		health += delta/7.5
+	else:
+		canvas_modulate.visible = false
+		
 	if Input.is_action_pressed("right"):
 		velocity.x = SPEED
 		x_direction_input = "right"

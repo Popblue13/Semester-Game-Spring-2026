@@ -373,6 +373,13 @@ metadata/_edit_lock_ = true
 [node name="Timer" type="Timer" parent="ZOM-BOT/Head"]
 wait_time = 5.0
 
+[node name="Label" type="Label" parent="ZOM-BOT/Head"]
+offset_left = -8.0
+offset_top = -160.0
+offset_right = 256.0
+offset_bottom = -133.0
+theme_override_font_sizes/font_size = 32
+
 [node name="YapBox" type="Area2D" parent="ZOM-BOT"]
 position = Vector2(1126, 682)
 collision_layer = 0
