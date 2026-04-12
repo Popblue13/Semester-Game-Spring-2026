@@ -225,25 +225,25 @@ tile_map_data = PackedByteArray("AAAAAAAAAAAAAAAAAAAAAAEAAAAAAAEAAAAAAAIAAAAAAAI
 tile_set = SubResource("TileSet_ak415")
 
 [node name="Drone" parent="." instance=ExtResource("4_vboyn")]
-position = Vector2(336, 327)
+position = Vector2(279, 134)
 
 [node name="Drone2" parent="." instance=ExtResource("4_vboyn")]
-position = Vector2(488, 204)
+position = Vector2(469, 115)
 
 [node name="Drone3" parent="." instance=ExtResource("4_vboyn")]
-position = Vector2(568, 407)
+position = Vector2(483, 334)
 
 [node name="Drone4" parent="." instance=ExtResource("4_vboyn")]
-position = Vector2(390, 412)
+position = Vector2(303, 256)
 
 [node name="Drone5" parent="." instance=ExtResource("4_vboyn")]
-position = Vector2(672, 316)
+position = Vector2(553, 203)
 
 [node name="Drone6" parent="." instance=ExtResource("4_vboyn")]
-position = Vector2(893, 285)
+position = Vector2(700, 296)
 
 [node name="toBoots" parent="." instance=ExtResource("5_hex8b")]
-position = Vector2(64, 176)
+position = Vector2(64, 506)
 collision_layer = 2
 collision_mask = 2
 target_scene_path = "uid://cg4b68os1o6qu"
