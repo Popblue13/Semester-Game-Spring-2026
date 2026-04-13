@@ -4,6 +4,7 @@ var health : float = 1
 var player : CharacterBody2D # aka, first priority target
 var enemy : CharacterBody2D # aka, second priority target
 var SPEED : float = 400.0
+@onready var animated_sprite_2d: AnimatedSprite2D = $AnimatedSprite2D
 
 func _physics_process(delta: float) -> void:
 	if health <= 0:
@@ -23,6 +24,16 @@ func _physics_process(delta: float) -> void:
 		velocity = clamp(velocity.move_toward(Vector2(0,0),delta*10),
 							Vector2(-SPEED,-SPEED), Vector2(SPEED,SPEED))
 		move_and_slide()
+	
+	if velocity.normalized().x > .5:
+		animated_sprite_2d.play("Right")
+	elif velocity.normalized().x < -.5:
+		animated_sprite_2d.play("Left")
+	elif velocity.normalized().y > .5:
+		animated_sprite_2d.play("Front")
+	elif velocity.normalized().y < -.5:
+		animated_sprite_2d.play("Back")
+	
 
 
 func _on_range_body_entered(body: Node2D) -> void:

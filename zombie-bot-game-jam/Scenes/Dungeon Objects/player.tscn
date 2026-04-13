@@ -1,7 +1,9 @@
-[gd_scene load_steps=5 format=3 uid="uid://vsy85ifrshdf"]
+[gd_scene load_steps=23 format=3 uid="uid://vsy85ifrshdf"]
 
 [ext_resource type="Texture2D" uid="uid://rnp51ohx37kk" path="res://Art/Sprites/icon.svg" id="1_v0iea"]
 [ext_resource type="Script" uid="uid://biijq8uecnvgb" path="res://Scripts/player_body.gd" id="2_cvnsp"]
+[ext_resource type="Texture2D" uid="uid://bgk4em2y06kny" path="res://Art/Sprites/I_Eat_Bran.png" id="2_iam2d"]
+[ext_resource type="Texture2D" uid="uid://il5jpsfwkwvr" path="res://Art/Sprites/Claw_Claw_MF.png" id="3_hocvi"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_6t5aa"]
 radius = 12.0
@@ -10,6 +12,135 @@ height = 32.0
 [sub_resource type="CircleShape2D" id="CircleShape2D_iam2d"]
 radius = 36.0
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_etawe"]
+atlas = ExtResource("3_hocvi")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ex42f"]
+atlas = ExtResource("3_hocvi")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jo0yp"]
+atlas = ExtResource("3_hocvi")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_idrh7"]
+atlas = ExtResource("3_hocvi")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bw6h6"]
+atlas = ExtResource("3_hocvi")
+region = Rect2(128, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yyg6e"]
+atlas = ExtResource("3_hocvi")
+region = Rect2(160, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_foqch"]
+atlas = ExtResource("3_hocvi")
+region = Rect2(192, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nvuih"]
+atlas = ExtResource("3_hocvi")
+region = Rect2(224, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_f4cbt"]
+atlas = ExtResource("3_hocvi")
+region = Rect2(256, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_snqr2"]
+atlas = ExtResource("3_hocvi")
+region = Rect2(288, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_g85ko"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_etawe")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ex42f")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jo0yp")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_idrh7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bw6h6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yyg6e")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_foqch")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nvuih")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_f4cbt")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_snqr2")
+}],
+"loop": true,
+"name": &"Claw",
+"speed": 10.0
+}]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_d7sou"]
+atlas = ExtResource("2_iam2d")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hocvi"]
+atlas = ExtResource("2_iam2d")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_j4dg5"]
+atlas = ExtResource("2_iam2d")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xlhdk"]
+atlas = ExtResource("2_iam2d")
+region = Rect2(96, 0, 32, 33)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_etawe"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_d7sou")
+}],
+"loop": true,
+"name": &"Back",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hocvi")
+}],
+"loop": true,
+"name": &"Front",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_j4dg5")
+}],
+"loop": true,
+"name": &"Left",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xlhdk")
+}],
+"loop": true,
+"name": &"Right",
+"speed": 5.0
+}]
+
 [node name="Player" type="CharacterBody2D" groups=["player"]]
 collision_layer = 2
 collision_mask = 3
@@ -17,7 +148,8 @@ motion_mode = 1
 script = ExtResource("2_cvnsp")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-scale = Vector2(0.25, 0.25)
+position = Vector2(0, 14)
+scale = Vector2(0.25, 0.03125)
 texture = ExtResource("1_v0iea")
 
 [node name="PlayerHurtbox" type="CollisionShape2D" parent="." groups=["player"]]
@@ -31,6 +163,28 @@ collision_mask = 12
 position = Vector2(24, 0)
 shape = SubResource("CircleShape2D_iam2d")
 disabled = true
+
+[node name="AnimatedSprite2D2" type="AnimatedSprite2D" parent="Claws/ClawsHitbox"]
+visible = false
+position = Vector2(0.28092003, -0.23021412)
+rotation = 0.7853982
+scale = Vector2(1.5, 1.5)
+sprite_frames = SubResource("SpriteFrames_g85ko")
+animation = &"Claw"
+autoplay = "Claw"
+speed_scale = 2.0
+offset = Vector2(3.8933334, -3.8187084)
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+scale = Vector2(1.5, 1.5)
+sprite_frames = SubResource("SpriteFrames_etawe")
+animation = &"Right"
+autoplay = "Front"
+offset = Vector2(0, -5.3333335)
+
+[node name="CanvasModulate" type="CanvasModulate" parent="."]
+visible = false
+color = Color(1, 0.003921569, 0.96862745, 1)
 
 [connection signal="area_entered" from="Claws" to="." method="_on_claws_area_entered"]
 [connection signal="body_entered" from="Claws" to="." method="_on_claws_body_entered"]

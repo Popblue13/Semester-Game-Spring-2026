@@ -1,7 +1,7 @@
 extends CharacterBody2D
 
 const energy_projectile = preload("res://Scenes/Dungeon Objects/energy_projectile.tscn")
-const SPEED = 350.0
+const SPEED = 250.0
 var charge : float = 0
 @onready var timer: Timer = $Timer
 @onready var player : CharacterBody2D = $"../../player"
@@ -21,6 +21,8 @@ func _physics_process(delta: float) -> void:
 		timer.start(14)
 		chasing = true
 	elif energy_boxes.get_child_count() == 0 and boss_health == 1:
+		Global.player_abilities["cannon"] = true
+		player.feature_enabled[1] = true
 		queue_free()
 		
 	if is_queued_for_deletion():
@@ -45,7 +47,7 @@ func _physics_process(delta: float) -> void:
 			direction = global_position.direction_to(player.global_position)
 			speed = SPEED
 			if global_position.distance_to(player.global_position) < 100:
-				speed += SPEED
+				speed -= SPEED
 			velocity = direction * speed
 		elif global_position.distance_to(return_spot.global_position) > 100 and go_back:
 			direction = global_position.direction_to(return_spot.global_position)
@@ -71,7 +73,7 @@ func _physics_process(delta: float) -> void:
 func charge_gun(delta: float) -> bool:
 	charge += delta
 	if charge > 1.3: # 2.6 seconds
-		if charge > 2: # shoot for 1.4 seconds
+		if charge > 1.7: # shoot for .8 seconds
 			charge = 0
 		return true # is charged
 	else:
@@ -81,10 +83,11 @@ func charge_gun(delta: float) -> bool:
 func _on_area_2d_body_entered(body: Node2D) -> void:
 	if body is not CharacterBody2D:
 		return
-	body.change_health(2)
+	body.change_health(3) #don't let him touch you
 
 
 func _on_timer_timeout() -> void:
 	chasing = false #head back
 	go_back = true
+	get_parent().battery_explode = false
 	pass # Replace with function body.
