@@ -18,6 +18,7 @@ var start_position : Vector2
 var feature_enabled : Array = [Global.player_abilities["boots"], 
 Global.player_abilities["cannon"]] # boots, cannon, big claws
 @onready var canvas_modulate: CanvasModulate = $CanvasModulate
+@onready var color_rect: ColorRect = $ColorRect
 
 func _physics_process(delta: float) -> void:
 	if position != Vector2(379.0, 241.0) and position != Vector2(0.0, 0.0) and not start_position:
@@ -31,12 +32,13 @@ func _physics_process(delta: float) -> void:
 			return
 		position = start_position
 		return
-	elif health < 5:
+	elif health < 0.1:
 		canvas_modulate.visible = true
-		canvas_modulate.color = Color(1,0,1-2.5/health,health/5+0.1)
+		canvas_modulate.color = Color(1,0,1-2.5/health,health/5+0.5)
 		health += delta/7.5
 	else:
 		canvas_modulate.visible = false
+	color_rect.size.x = health * 8
 		
 	if Input.is_action_pressed("right"):
 		velocity.x = SPEED
