@@ -7,9 +7,11 @@ var target : CharacterBody2D
 var boss_health : int = 15
 @onready var timer: Timer = $Timer
 @onready var label: Label = $Label
+@onready var end_stuff: Label = $"../../EndStuff"
 
 func _physics_process(delta: float) -> void:
 	if boss_health <= 0:
+		end_stuff.text = "Time: " + str(Time.get_ticks_msec()) + " ms\nLives Lost: " + str(Global.deaths)
 		get_parent().queue_free()
 		return
 	elif boss_health == 10 and timer.is_stopped():

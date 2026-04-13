@@ -401,6 +401,10 @@ position = Vector2(1151, 70.5)
 shape = SubResource("RectangleShape2D_8ejws")
 debug_color = Color(0.5985883, 0.4641313, 0.75107855, 0.41960785)
 
+[node name="EndStuff" type="Label" parent="."]
+offset_right = 40.0
+offset_bottom = 23.0
+
 [connection signal="body_entered" from="ZOM-BOT/RightArm/RightArea" to="ZOM-BOT/RightArm" method="_on_right_area_body_entered"]
 [connection signal="body_entered" from="ZOM-BOT/LeftArm/LeftArea" to="ZOM-BOT/LeftArm" method="_on_left_area_body_entered"]
 [connection signal="body_entered" from="ZOM-BOT/Head/Jaw/Area2D" to="ZOM-BOT/Head/Jaw" method="_on_area_2d_body_entered"]

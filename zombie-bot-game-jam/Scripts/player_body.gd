@@ -25,6 +25,7 @@ func _physics_process(delta: float) -> void:
 		
 		
 	if health <= 0:
+		Global.deaths += 1
 		if position == start_position:
 			health = 5
 			return
