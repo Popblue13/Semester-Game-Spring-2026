@@ -1,41 +1,77 @@
-[gd_scene format=3 uid="uid://c7ro7ltwn8e2c"]
+[gd_scene load_steps=10 format=3 uid="uid://c7ro7ltwn8e2c"]
 
 [ext_resource type="Script" uid="uid://cjvtkdetl4v70" path="res://Scripts/drone.gd" id="1_jd5kt"]
-[ext_resource type="Texture2D" uid="uid://rnp51ohx37kk" path="res://Art/Sprites/icon.svg" id="2_m83ns"]
+[ext_resource type="Texture2D" uid="uid://hraqeg86whpu" path="res://Art/Sprites/DRONE_STRIKE.png" id="2_jd5kt"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_lt4d5"]
 radius = 9.0
 height = 28.0
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_m83ns"]
+atlas = ExtResource("2_jd5kt")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lt4d5"]
+atlas = ExtResource("2_jd5kt")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jd5kt"]
+atlas = ExtResource("2_jd5kt")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ampdf"]
+atlas = ExtResource("2_jd5kt")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ampdf"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_m83ns")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lt4d5")
+}],
+"loop": true,
+"name": &"Idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jd5kt")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ampdf")
+}],
+"loop": true,
+"name": &"Shoot",
+"speed": 5.0
+}]
+
 [sub_resource type="CircleShape2D" id="CircleShape2D_ampdf"]
 radius = 402.0796
 
-[node name="Drone" type="CharacterBody2D" unique_id=85417022]
+[node name="Drone" type="CharacterBody2D"]
 collision_layer = 4
 collision_mask = 7
 motion_mode = 1
 script = ExtResource("1_jd5kt")
 
-[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1251780998]
-position = Vector2(4.7683716e-07, -0.4999988)
-scale = Vector2(0.15625, 0.21093749)
-texture = ExtResource("2_m83ns")
-
-[node name="Sprite2D2" type="Sprite2D" parent="." unique_id=1877807605]
-position = Vector2(0, -10)
-scale = Vector2(0.25, 0.15625)
-skew = -1.3439038
-texture = ExtResource("2_m83ns")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1166149039]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CapsuleShape2D_lt4d5")
 
-[node name="Range" type="Area2D" parent="." unique_id=1463043768]
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_ampdf")
+animation = &"Shoot"
+autoplay = "Idle"
+speed_scale = 2.5
+
+[node name="Range" type="Area2D" parent="."]
 visible = false
 collision_layer = 0
 collision_mask = 18
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Range" unique_id=999434599]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Range"]
 shape = SubResource("CircleShape2D_ampdf")
 debug_color = Color(0.9571249, 0.0283828, 0.52176684, 0.41960785)
 

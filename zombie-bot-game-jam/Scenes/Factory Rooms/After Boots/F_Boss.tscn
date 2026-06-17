@@ -1,15 +1,17 @@
-[gd_scene load_steps=25 format=4 uid="uid://yctp3li46n6e"]
+[gd_scene load_steps=33 format=4 uid="uid://yctp3li46n6e"]
 
 [ext_resource type="Script" uid="uid://duiblfs6iy3eq" path="res://Scripts/room.gd" id="1_70qjo"]
 [ext_resource type="Texture2D" uid="uid://bhr7eneqeuwd4" path="res://Art/Tilesets/Factory/floor.png" id="2_117nu"]
 [ext_resource type="Texture2D" uid="uid://d330xn1e52jni" path="res://Art/Tilesets/Factory/IMG_0435 2.png" id="3_70syg"]
+[ext_resource type="Texture2D" uid="uid://bh77on34ooy5i" path="res://Art/Tilesets/Factory/Belt_Huh_Tracks.png" id="4_oidkd"]
 [ext_resource type="PackedScene" uid="uid://c1mjli7ob3ifg" path="res://Scenes/Dungeon Objects/Doorway.tscn" id="4_q7s03"]
 [ext_resource type="PackedScene" uid="uid://vsy85ifrshdf" path="res://Scenes/Dungeon Objects/player.tscn" id="5_ekahb"]
-[ext_resource type="AudioStream" uid="uid://bqygckabhwqwb" path="res://Sound/Music/Disassembly Line 16-Bit.wav" id="6_8lhr4"]
 [ext_resource type="Script" uid="uid://dfqub56g6o6ue" path="res://Scripts/moving_parts.gd" id="7_117nu"]
 [ext_resource type="Script" uid="uid://c4y65a7t7sb0x" path="res://Scripts/auto_arm.gd" id="8_70syg"]
 [ext_resource type="Script" uid="uid://cp550y2wf5ugd" path="res://Scripts/spawner.gd" id="8_ekahb"]
 [ext_resource type="PackedScene" uid="uid://c7ro7ltwn8e2c" path="res://Scenes/Dungeon Objects/drone.tscn" id="9_q7s03"]
+[ext_resource type="Texture2D" uid="uid://divfho0dj32my" path="res://Art/Sprites/Saw_Blasted.png" id="9_wx7lv"]
+[ext_resource type="Script" uid="uid://dc24kjihdfnvr" path="res://Scripts/return_spot.gd" id="10_qhito"]
 [ext_resource type="Script" uid="uid://c3wevevv64fnu" path="res://Scripts/factory_boss.gd" id="11_x4kpo"]
 [ext_resource type="Texture2D" uid="uid://dkeqnrarjdmm4" path="res://Art/Sprites/gBot_pieces.webp" id="12_qhito"]
 [ext_resource type="PackedScene" uid="uid://dgeww3sl4i0ab" path="res://Scenes/Dungeon Objects/bent_door.tscn" id="13_qhito"]
@@ -219,8 +221,31 @@ texture = ExtResource("3_70syg")
 physics_layer_0/collision_layer = 1
 sources/0 = SubResource("TileSetAtlasSource_wobdf")
 
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_7ogym"]
+texture = ExtResource("4_oidkd")
+texture_region_size = Vector2i(32, 32)
+0:0/animation_columns = 2
+0:0/animation_frame_0/duration = 0.2
+0:0/animation_frame_1/duration = 0.2
+0:0/0 = 0
+0:1/animation_columns = 2
+0:1/animation_frame_0/duration = 0.2
+0:1/animation_frame_1/duration = 0.2
+0:1/0 = 0
+0:2/animation_columns = 2
+0:2/animation_frame_0/duration = 0.2
+0:2/animation_frame_1/duration = 0.2
+0:2/0 = 0
+0:3/animation_frame_0/duration = 0.2
+0:3/animation_frame_1/duration = 0.2
+0:3/0 = 0
+
+[sub_resource type="TileSet" id="TileSet_jgp8p"]
+tile_size = Vector2i(32, 32)
+sources/0 = SubResource("TileSetAtlasSource_7ogym")
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_70qjo"]
-size = Vector2(50, 289)
+size = Vector2(43.000034, 289.30252)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_117nu"]
 size = Vector2(288.00003, 21.428604)
@@ -240,6 +265,31 @@ size = Vector2(112, 20)
 radius = 29.0
 height = 60.0
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_wx7lv"]
+atlas = ExtResource("9_wx7lv")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_oidkd"]
+atlas = ExtResource("9_wx7lv")
+region = Rect2(32, 32, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_7ogym"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wx7lv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_oidkd")
+}],
+"loop": true,
+"name": &"Saw",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wx7lv"]
+size = Vector2(176, 115)
+
 [node name="FactoryMain" type="Node2D"]
 script = ExtResource("1_70qjo")
 room_theme = "silo"
@@ -255,7 +305,12 @@ tile_map_data = PackedByteArray("AAAAAAAAAAAEAAAAAAAAAAEAAAAEAAEAAAAAAAIAAAAEAAI
 tile_set = SubResource("TileSet_1ibio")
 metadata/_edit_lock_ = true
 
-[node name="toBigRoom" parent="." unique_id=1198022038 instance=ExtResource("4_q7s03")]
+[node name="BeltLayer" type="TileMapLayer" parent="."]
+tile_map_data = PackedByteArray("AAAgAAIAAAAAAAAAAAAgAAMAAAAAAAAAAAAgAAQAAAAAAAAAAAAgAAUAAAAAAAAAAAAgAAYAAAAAAAAAAAAgAAcAAAAAAAAAAAAgAAgAAAAAAAAAAAAgAAkAAAAAAAAAAAAgAAoAAAAAAAAAAAAgAAsAAAAAAAAAAAAgAAwAAAAAAAAAAAAgAA0AAAAAAAAAAAAgAA4AAAAAAAAAAAAgAA8AAAAAAAAAAAAgABAAAAAAAAAAAAAgABEAAAAAAAAAAAAhAAIAAAAAAAAAAAAhAAMAAAAAAAAAAAAhAAQAAAAAAAAAAAAhAAUAAAAAAAAAAAAhAAYAAAAAAAAAAAAhAAcAAAAAAAAAAAAhAAgAAAAAAAAAAAAhAAkAAAAAAAAAAAAhAAoAAAAAAAAAAAAhAAsAAAAAAAAAAAAhAAwAAAAAAAAAAAAhAA0AAAAAAAAAAAAhAA4AAAAAAAAAAAAhAA8AAAAAAAAAAAAhABAAAAAAAAAAAAAhABEAAAAAAAAAAAAOAAIAAAAAAAAAAAAOAAMAAAAAAAAAAAAOAAQAAAAAAAAAAAAOAAUAAAAAAAAAAAAOAAYAAAAAAAAAAAAOAAcAAAAAAAAAAAAOAAgAAAAAAAAAAAAOAAkAAAAAAAAAAAAOAAoAAAAAAAAAAAAOAAsAAAAAAAAAAAAPAAIAAAAAAAAAAAAPAAMAAAAAAAAAAAAPAAQAAAAAAAAAAAAPAAUAAAAAAAAAAAAPAAYAAAAAAAAAAAAPAAcAAAAAAAAAAAAPAAgAAAAAAAAAAAAPAAkAAAAAAAAAAAAPAAoAAAAAAAAAAAAPAAsAAAAAAAAAAADy/wIAAAAAAAAAAADy/wMAAAAAAAAAAADy/wQAAAAAAAAAAADz/wIAAAAAAAAAAADz/wMAAAAAAAAAAADz/wQAAAAAAAAAAADz/w8AAAAAAAIAAADz/xAAAAAAAAIAAADz/xEAAAAAAAIAAAD0/w8AAAAAAAIAAAD0/xAAAAAAAAIAAAD0/xEAAAAAAAIAAAD1/w8AAAAAAAIAAAD1/xAAAAAAAAIAAAD1/xEAAAAAAAIAAAD2/w8AAAAAAAIAAAD2/xAAAAAAAAIAAAD2/xEAAAAAAAIAAAD3/w8AAAAAAAIAAAD3/xAAAAAAAAIAAAD3/xEAAAAAAAIAAAD4/w8AAAAAAAIAAAD4/xAAAAAAAAIAAAD4/xEAAAAAAAIAAAD5/w8AAAAAAAIAAAD5/xAAAAAAAAIAAAD5/xEAAAAAAAIAAAD6/w8AAAAAAAIAAAD6/xAAAAAAAAIAAAD6/xEAAAAAAAIAAAD7/w8AAAAAAAIAAAD7/xAAAAAAAAIAAAD7/xEAAAAAAAIAAAD8/w8AAAAAAAIAAAD8/xAAAAAAAAIAAAD8/xEAAAAAAAIAAAD9/w8AAAAAAAIAAAD9/xAAAAAAAAIAAAD9/xEAAAAAAAIAAAD+/w8AAAAAAAIAAAD+/xAAAAAAAAIAAAD+/xEAAAAAAAIAAAD//w8AAAAAAAIAAAD//xAAAAAAAAIAAAD//xEAAAAAAAIAAAAAAA8AAAAAAAIAAAAAABAAAAAAAAIAAAAAABEAAAAAAAIAAAABAA8AAAAAAAIAAAABABAAAAAAAAIAAAABABEAAAAAAAIAAAACAA8AAAAAAAIAAAACABAAAAAAAAIAAAACABEAAAAAAAIAAAADAA8AAAAAAAIAAAADABAAAAAAAAIAAAADABEAAAAAAAIAAAAEAA8AAAAAAAIAAAAEABAAAAAAAAIAAAAEABEAAAAAAAIAAAAFAA8AAAAAAAIAAAAFABAAAAAAAAIAAAAFABEAAAAAAAIAAAAGAA8AAAAAAAIAAAAGABAAAAAAAAIAAAAGABEAAAAAAAIAAAAHAA8AAAAAAAIAAAAHABAAAAAAAAIAAAAHABEAAAAAAAIAAAAIAA8AAAAAAAIAAAAIABAAAAAAAAIAAAAIABEAAAAAAAIAAAAJAA8AAAAAAAIAAAAJABAAAAAAAAIAAAAJABEAAAAAAAIAAAAKAA8AAAAAAAIAAAAKABAAAAAAAAIAAAAKABEAAAAAAAIAAAALAA8AAAAAAAIAAAALABAAAAAAAAIAAAALABEAAAAAAAIAAAAMAA8AAAAAAAIAAAAMABAAAAAAAAIAAAAMABEAAAAAAAIAAAANAA8AAAAAAAIAAAANABAAAAAAAAIAAAANABEAAAAAAAIAAAAOAA8AAAAAAAIAAAAOABAAAAAAAAIAAAAOABEAAAAAAAIAAAAPAA8AAAAAAAIAAAAPABAAAAAAAAIAAAAPABEAAAAAAAIAAAAQAA8AAAAAAAIAAAAQABAAAAAAAAIAAAAQABEAAAAAAAIAAAARAA8AAAAAAAIAAAARABAAAAAAAAIAAAARABEAAAAAAAIAAAASAA8AAAAAAAIAAAASABAAAAAAAAIAAAASABEAAAAAAAIAAAATAA8AAAAAAAIAAAATABAAAAAAAAIAAAATABEAAAAAAAIAAAAUAA8AAAAAAAIAAAAUABAAAAAAAAIAAAAUABEAAAAAAAIAAAAVAA8AAAAAAAIAAAAVABAAAAAAAAIAAAAVABEAAAAAAAIAAAAWAA8AAAAAAAIAAAAWABAAAAAAAAIAAAAWABEAAAAAAAIAAAAXAA8AAAAAAAIAAAAXABAAAAAAAAIAAAAXABEAAAAAAAIAAAAYAA8AAAAAAAIAAAAYABAAAAAAAAIAAAAYABEAAAAAAAIAAAAZAA8AAAAAAAIAAAAZABAAAAAAAAIAAAAZABEAAAAAAAIAAAAaAA8AAAAAAAIAAAAaABAAAAAAAAIAAAAaABEAAAAAAAIAAAAbAA8AAAAAAAIAAAAbABAAAAAAAAIAAAAbABEAAAAAAAIAAAAcAA8AAAAAAAIAAAAcABAAAAAAAAIAAAAcABEAAAAAAAIAAAAdAA8AAAAAAAIAAAAdABAAAAAAAAIAAAAdABEAAAAAAAIAAAAeAA8AAAAAAAIAAAAeABAAAAAAAAIAAAAeABEAAAAAAAIAAAAfAA8AAAAAAAIAAAAfABAAAAAAAAIAAAAfABEAAAAAAAIAAAC8/wkAAAAAAAIAAAC8/woAAAAAAAIAAAC8/wsAAAAAAAIAAAC9/wkAAAAAAAIAAAC9/woAAAAAAAIAAAC9/wsAAAAAAAIAAAC+/wkAAAAAAAIAAAC+/woAAAAAAAIAAAC+/wsAAAAAAAIAAAC//wkAAAAAAAIAAAC//woAAAAAAAIAAAC//wsAAAAAAAIAAADA/wkAAAAAAAIAAADA/woAAAAAAAIAAADA/wsAAAAAAAIAAADB/wkAAAAAAAIAAADB/woAAAAAAAIAAADB/wsAAAAAAAIAAADC/wkAAAAAAAIAAADC/woAAAAAAAIAAADC/wsAAAAAAAIAAADD/wkAAAAAAAIAAADD/woAAAAAAAIAAADD/wsAAAAAAAIAAADE/wkAAAAAAAIAAADE/woAAAAAAAIAAADE/wsAAAAAAAIAAADF/wkAAAAAAAIAAADF/woAAAAAAAIAAADF/wsAAAAAAAIAAADG/wkAAAAAAAIAAADG/woAAAAAAAIAAADG/wsAAAAAAAIAAADH/wkAAAAAAAIAAADH/woAAAAAAAIAAADH/wsAAAAAAAIAAADI/wkAAAAAAAIAAADI/woAAAAAAAIAAADI/wsAAAAAAAIAAADJ/wkAAAAAAAIAAADJ/woAAAAAAAIAAADJ/wsAAAAAAAIAAADK/wkAAAAAAAIAAADK/woAAAAAAAIAAADK/wsAAAAAAAIAAADL/wkAAAAAAAIAAADL/woAAAAAAAIAAADL/wsAAAAAAAIAAADM/wkAAAAAAAIAAADM/woAAAAAAAIAAADM/wsAAAAAAAIAAADN/wkAAAAAAAIAAADN/woAAAAAAAIAAADN/wsAAAAAAAIAAADO/wkAAAAAAAIAAADO/woAAAAAAAIAAADO/wsAAAAAAAIAAADP/wkAAAAAAAIAAADP/woAAAAAAAIAAADP/wsAAAAAAAIAAADQ/wkAAAAAAAIAAADQ/woAAAAAAAIAAADQ/wsAAAAAAAIAAADR/wkAAAAAAAIAAADR/woAAAAAAAIAAADR/wsAAAAAAAIAAADS/wkAAAAAAAIAAADS/woAAAAAAAIAAADS/wsAAAAAAAIAAADT/wkAAAAAAAIAAADT/woAAAAAAAIAAADT/wsAAAAAAAIAAADU/wkAAAAAAAIAAADU/woAAAAAAAIAAADU/wsAAAAAAAIAAADV/wkAAAAAAAIAAADV/woAAAAAAAIAAADV/wsAAAAAAAIAAADW/wkAAAAAAAIAAADW/woAAAAAAAIAAADW/wsAAAAAAAIAAADX/wkAAAAAAAIAAADX/woAAAAAAAIAAADX/wsAAAAAAAIAAADY/wkAAAAAAAIAAADY/woAAAAAAAIAAADY/wsAAAAAAAIAAADZ/wkAAAAAAAIAAADZ/woAAAAAAAIAAADZ/wsAAAAAAAIAAADa/wkAAAAAAAIAAADa/woAAAAAAAIAAADa/wsAAAAAAAIAAADb/wkAAAAAAAIAAADb/woAAAAAAAIAAADb/wsAAAAAAAIAAADc/wkAAAAAAAIAAADc/woAAAAAAAIAAADc/wsAAAAAAAIAAADd/wkAAAAAAAIAAADd/woAAAAAAAIAAADd/wsAAAAAAAIAAADe/wkAAAAAAAIAAADe/woAAAAAAAIAAADe/wsAAAAAAAIAAADf/wkAAAAAAAIAAADf/woAAAAAAAIAAADf/wsAAAAAAAIAAADg/wkAAAAAAAIAAADg/woAAAAAAAIAAADg/wsAAAAAAAIAAADh/wkAAAAAAAIAAADh/woAAAAAAAIAAADh/wsAAAAAAAIAAADi/wkAAAAAAAIAAADi/woAAAAAAAIAAADi/wsAAAAAAAIAAADj/wkAAAAAAAIAAADj/woAAAAAAAIAAADj/wsAAAAAAAIAAADk/wkAAAAAAAIAAADk/woAAAAAAAIAAADk/wsAAAAAAAIAAADl/wkAAAAAAAIAAADl/woAAAAAAAIAAADl/wsAAAAAAAIAAADm/wkAAAAAAAIAAADm/woAAAAAAAIAAADm/wsAAAAAAAIAAADn/wkAAAAAAAIAAADn/woAAAAAAAIAAADn/wsAAAAAAAIAAADo/wkAAAAAAAIAAADo/woAAAAAAAIAAADo/wsAAAAAAAIAAADp/wkAAAAAAAIAAADp/woAAAAAAAIAAADp/wsAAAAAAAIAAADq/wkAAAAAAAIAAADq/woAAAAAAAIAAADq/wsAAAAAAAIAAADr/wkAAAAAAAIAAADr/woAAAAAAAIAAADr/wsAAAAAAAIAAADs/wkAAAAAAAIAAADs/woAAAAAAAIAAADs/wsAAAAAAAIAAADt/wkAAAAAAAIAAADt/woAAAAAAAIAAADt/wsAAAAAAAIAAADu/wkAAAAAAAIAAADu/woAAAAAAAIAAADu/wsAAAAAAAIAAADv/wkAAAAAAAIAAADv/woAAAAAAAIAAADv/wsAAAAAAAIAAADw/wkAAAAAAAIAAADw/woAAAAAAAIAAADw/wsAAAAAAAIAAADx/wkAAAAAAAIAAADx/woAAAAAAAIAAADx/wsAAAAAAAIAAADy/wkAAAAAAAIAAADy/woAAAAAAAIAAADy/wsAAAAAAAIAAADz/wkAAAAAAAIAAADz/woAAAAAAAIAAADz/wsAAAAAAAIAAAD0/wkAAAAAAAIAAAD0/woAAAAAAAIAAAD0/wsAAAAAAAIAAAD1/wkAAAAAAAIAAAD1/woAAAAAAAIAAAD1/wsAAAAAAAIAAAD2/wkAAAAAAAIAAAD2/woAAAAAAAIAAAD2/wsAAAAAAAIAAAD3/wkAAAAAAAIAAAD3/woAAAAAAAIAAAD3/wsAAAAAAAIAAAD4/wkAAAAAAAIAAAD4/woAAAAAAAIAAAD4/wsAAAAAAAIAAAD5/wkAAAAAAAIAAAD5/woAAAAAAAIAAAD5/wsAAAAAAAIAAAD6/wkAAAAAAAIAAAD6/woAAAAAAAIAAAD6/wsAAAAAAAIAAAD7/wkAAAAAAAIAAAD7/woAAAAAAAIAAAD7/wsAAAAAAAIAAAD8/wkAAAAAAAIAAAD8/woAAAAAAAIAAAD8/wsAAAAAAAIAAAD9/wkAAAAAAAIAAAD9/woAAAAAAAIAAAD9/wsAAAAAAAIAAAD+/wkAAAAAAAIAAAD+/woAAAAAAAIAAAD+/wsAAAAAAAIAAAD//wkAAAAAAAIAAAD//woAAAAAAAIAAAD//wsAAAAAAAIAAAAAAAkAAAAAAAIAAAAAAAoAAAAAAAIAAAAAAAsAAAAAAAIAAAABAAkAAAAAAAIAAAABAAoAAAAAAAIAAAABAAsAAAAAAAIAAAACAAkAAAAAAAIAAAACAAoAAAAAAAIAAAACAAsAAAAAAAIAAAADAAkAAAAAAAIAAAADAAoAAAAAAAIAAAADAAsAAAAAAAIAAAAEAAkAAAAAAAIAAAAEAAoAAAAAAAIAAAAEAAsAAAAAAAIAAAAFAAkAAAAAAAIAAAAFAAoAAAAAAAIAAAAFAAsAAAAAAAIAAAAGAAkAAAAAAAIAAAAGAAoAAAAAAAIAAAAGAAsAAAAAAAIAAAAHAAkAAAAAAAIAAAAHAAoAAAAAAAIAAAAHAAsAAAAAAAIAAAAIAAkAAAAAAAIAAAAIAAoAAAAAAAIAAAAIAAsAAAAAAAIAAAAJAAkAAAAAAAIAAAAJAAoAAAAAAAIAAAAJAAsAAAAAAAIAAAAKAAkAAAAAAAIAAAAKAAoAAAAAAAIAAAAKAAsAAAAAAAIAAAALAAkAAAAAAAIAAAALAAoAAAAAAAIAAAALAAsAAAAAAAIAAAAMAAkAAAAAAAIAAAAMAAoAAAAAAAIAAAAMAAsAAAAAAAIAAAANAAkAAAAAAAIAAAANAAoAAAAAAAIAAAANAAsAAAAAAAIAAAC8/wIAAAAAAAIAAAC8/wMAAAAAAAIAAAC8/wQAAAAAAAIAAAC9/wIAAAAAAAIAAAC9/wMAAAAAAAIAAAC9/wQAAAAAAAIAAAC+/wIAAAAAAAIAAAC+/wMAAAAAAAIAAAC+/wQAAAAAAAIAAAC//wIAAAAAAAIAAAC//wMAAAAAAAIAAAC//wQAAAAAAAIAAADA/wIAAAAAAAIAAADA/wMAAAAAAAIAAADA/wQAAAAAAAIAAADB/wIAAAAAAAIAAADB/wMAAAAAAAIAAADB/wQAAAAAAAIAAADC/wIAAAAAAAIAAADC/wMAAAAAAAIAAADC/wQAAAAAAAIAAADD/wIAAAAAAAIAAADD/wMAAAAAAAIAAADD/wQAAAAAAAIAAADE/wIAAAAAAAIAAADE/wMAAAAAAAIAAADE/wQAAAAAAAIAAADF/wIAAAAAAAIAAADF/wMAAAAAAAIAAADF/wQAAAAAAAIAAADG/wIAAAAAAAIAAADG/wMAAAAAAAIAAADG/wQAAAAAAAIAAADH/wIAAAAAAAIAAADH/wMAAAAAAAIAAADH/wQAAAAAAAIAAADI/wIAAAAAAAIAAADI/wMAAAAAAAIAAADI/wQAAAAAAAIAAADJ/wIAAAAAAAIAAADJ/wMAAAAAAAIAAADJ/wQAAAAAAAIAAADK/wIAAAAAAAIAAADK/wMAAAAAAAIAAADK/wQAAAAAAAIAAADL/wIAAAAAAAIAAADL/wMAAAAAAAIAAADL/wQAAAAAAAIAAADM/wIAAAAAAAIAAADM/wMAAAAAAAIAAADM/wQAAAAAAAIAAADN/wIAAAAAAAIAAADN/wMAAAAAAAIAAADN/wQAAAAAAAIAAADO/wIAAAAAAAIAAADO/wMAAAAAAAIAAADO/wQAAAAAAAIAAADP/wIAAAAAAAIAAADP/wMAAAAAAAIAAADP/wQAAAAAAAIAAADQ/wIAAAAAAAIAAADQ/wMAAAAAAAIAAADQ/wQAAAAAAAIAAADR/wIAAAAAAAIAAADR/wMAAAAAAAIAAADR/wQAAAAAAAIAAADS/wIAAAAAAAIAAADS/wMAAAAAAAIAAADS/wQAAAAAAAIAAADT/wIAAAAAAAIAAADT/wMAAAAAAAIAAADT/wQAAAAAAAIAAADU/wIAAAAAAAIAAADU/wMAAAAAAAIAAADU/wQAAAAAAAIAAADV/wIAAAAAAAIAAADV/wMAAAAAAAIAAADV/wQAAAAAAAIAAADW/wIAAAAAAAIAAADW/wMAAAAAAAIAAADW/wQAAAAAAAIAAADX/wIAAAAAAAIAAADX/wMAAAAAAAIAAADX/wQAAAAAAAIAAADY/wIAAAAAAAIAAADY/wMAAAAAAAIAAADY/wQAAAAAAAIAAADZ/wIAAAAAAAIAAADZ/wMAAAAAAAIAAADZ/wQAAAAAAAIAAADa/wIAAAAAAAIAAADa/wMAAAAAAAIAAADa/wQAAAAAAAIAAADb/wIAAAAAAAIAAADb/wMAAAAAAAIAAADb/wQAAAAAAAIAAADc/wIAAAAAAAIAAADc/wMAAAAAAAIAAADc/wQAAAAAAAIAAADd/wIAAAAAAAIAAADd/wMAAAAAAAIAAADd/wQAAAAAAAIAAADe/wIAAAAAAAIAAADe/wMAAAAAAAIAAADe/wQAAAAAAAIAAADf/wIAAAAAAAIAAADf/wMAAAAAAAIAAADf/wQAAAAAAAIAAADg/wIAAAAAAAIAAADg/wMAAAAAAAIAAADg/wQAAAAAAAIAAADh/wIAAAAAAAIAAADh/wMAAAAAAAIAAADh/wQAAAAAAAIAAADi/wIAAAAAAAIAAADi/wMAAAAAAAIAAADi/wQAAAAAAAIAAADj/wIAAAAAAAIAAADj/wMAAAAAAAIAAADj/wQAAAAAAAIAAADk/wIAAAAAAAIAAADk/wMAAAAAAAIAAADk/wQAAAAAAAIAAADl/wIAAAAAAAIAAADl/wMAAAAAAAIAAADl/wQAAAAAAAIAAADm/wIAAAAAAAIAAADm/wMAAAAAAAIAAADm/wQAAAAAAAIAAADn/wIAAAAAAAIAAADn/wMAAAAAAAIAAADn/wQAAAAAAAIAAADo/wIAAAAAAAIAAADo/wMAAAAAAAIAAADo/wQAAAAAAAIAAADp/wIAAAAAAAIAAADp/wMAAAAAAAIAAADp/wQAAAAAAAIAAADq/wIAAAAAAAIAAADq/wMAAAAAAAIAAADq/wQAAAAAAAIAAADr/wIAAAAAAAIAAADr/wMAAAAAAAIAAADr/wQAAAAAAAIAAADs/wIAAAAAAAIAAADs/wMAAAAAAAIAAADs/wQAAAAAAAIAAADt/wIAAAAAAAIAAADt/wMAAAAAAAIAAADt/wQAAAAAAAIAAADu/wIAAAAAAAIAAADu/wMAAAAAAAIAAADu/wQAAAAAAAIAAADv/wIAAAAAAAIAAADv/wMAAAAAAAIAAADv/wQAAAAAAAIAAADw/wIAAAAAAAIAAADw/wMAAAAAAAIAAADw/wQAAAAAAAIAAADx/wIAAAAAAAIAAADx/wMAAAAAAAIAAADx/wQAAAAAAAIAAAC0//z/AAAAAAIAAAC0//3/AAAAAAIAAAC0//7/AAAAAAIAAAC1//z/AAAAAAIAAAC1//3/AAAAAAIAAAC1//7/AAAAAAIAAAC2//z/AAAAAAIAAAC2//3/AAAAAAIAAAC2//7/AAAAAAIAAAC3//z/AAAAAAIAAAC3//3/AAAAAAIAAAC3//7/AAAAAAIAAAC4//z/AAAAAAIAAAC4//3/AAAAAAIAAAC4//7/AAAAAAIAAAC5//z/AAAAAAIAAAC5//3/AAAAAAIAAAC5//7/AAAAAAIAAAC6//z/AAAAAAIAAAC6//3/AAAAAAIAAAC6//7/AAAAAAIAAAC7//z/AAAAAAIAAAC7//3/AAAAAAIAAAC7//7/AAAAAAIAAAC8//z/AAAAAAIAAAC8//3/AAAAAAIAAAC8//7/AAAAAAIAAAC9//z/AAAAAAIAAAC9//3/AAAAAAIAAAC9//7/AAAAAAIAAAC+//z/AAAAAAIAAAC+//3/AAAAAAIAAAC+//7/AAAAAAIAAAC///z/AAAAAAIAAAC///3/AAAAAAIAAAC///7/AAAAAAIAAADA//z/AAAAAAIAAADA//3/AAAAAAIAAADA//7/AAAAAAIAAADB//z/AAAAAAIAAADB//3/AAAAAAIAAADB//7/AAAAAAIAAADC//z/AAAAAAIAAADC//3/AAAAAAIAAADC//7/AAAAAAIAAADD//z/AAAAAAIAAADD//3/AAAAAAIAAADD//7/AAAAAAIAAADE//z/AAAAAAIAAADE//3/AAAAAAIAAADE//7/AAAAAAIAAADF//z/AAAAAAIAAADF//3/AAAAAAIAAADF//7/AAAAAAIAAADG//z/AAAAAAIAAADG//3/AAAAAAIAAADG//7/AAAAAAIAAADH//z/AAAAAAIAAADH//3/AAAAAAIAAADH//7/AAAAAAIAAADI//z/AAAAAAIAAADI//3/AAAAAAIAAADI//7/AAAAAAIAAAC0////AAAAAAMAAAC0/wAAAAAAAAMAAAC0/wEAAAAAAAMAAAC1////AAAAAAMAAAC1/wAAAAAAAAMAAAC1/wEAAAAAAAMAAAC2////AAAAAAMAAAC2/wAAAAAAAAMAAAC2/wEAAAAAAAMAAAC3////AAAAAAMAAAC3/wAAAAAAAAMAAAC3/wEAAAAAAAMAAAC4////AAAAAAMAAAC4/wAAAAAAAAMAAAC4/wEAAAAAAAMAAAC5////AAAAAAMAAAC5/wAAAAAAAAMAAAC5/wEAAAAAAAMAAAC6////AAAAAAMAAAC6/wAAAAAAAAMAAAC6/wEAAAAAAAMAAAC7////AAAAAAMAAAC7/wAAAAAAAAMAAAC7/wEAAAAAAAMAAAC8////AAAAAAMAAAC8/wAAAAAAAAMAAAC8/wEAAAAAAAMAAAC9////AAAAAAMAAAC9/wAAAAAAAAMAAAC9/wEAAAAAAAMAAAC+////AAAAAAMAAAC+/wAAAAAAAAMAAAC+/wEAAAAAAAMAAAC/////AAAAAAMAAAC//wAAAAAAAAMAAAC//wEAAAAAAAMAAADA////AAAAAAMAAADA/wAAAAAAAAMAAADA/wEAAAAAAAMAAADB////AAAAAAMAAADB/wAAAAAAAAMAAADB/wEAAAAAAAMAAADC////AAAAAAMAAADC/wAAAAAAAAMAAADC/wEAAAAAAAMAAADD////AAAAAAMAAADD/wAAAAAAAAMAAADD/wEAAAAAAAMAAADE////AAAAAAMAAADE/wAAAAAAAAMAAADE/wEAAAAAAAMAAADF////AAAAAAMAAADF/wAAAAAAAAMAAADF/wEAAAAAAAMAAADG////AAAAAAMAAADG/wAAAAAAAAMAAADG/wEAAAAAAAMAAADH////AAAAAAMAAADH/wAAAAAAAAMAAADH/wEAAAAAAAMAAADI////AAAAAAMAAADI/wAAAAAAAAMAAADI/wEAAAAAAAMAAAC0//r/AAAAAAMAAAC0//v/AAAAAAMAAAC1//r/AAAAAAMAAAC1//v/AAAAAAMAAAC2//r/AAAAAAMAAAC2//v/AAAAAAMAAAC3//r/AAAAAAMAAAC3//v/AAAAAAMAAAC4//r/AAAAAAMAAAC4//v/AAAAAAMAAAC5//r/AAAAAAMAAAC5//v/AAAAAAMAAAC6//r/AAAAAAMAAAC6//v/AAAAAAMAAAC7//r/AAAAAAMAAAC7//v/AAAAAAMAAAC8//r/AAAAAAMAAAC8//v/AAAAAAMAAAC9//r/AAAAAAMAAAC9//v/AAAAAAMAAAC+//r/AAAAAAMAAAC+//v/AAAAAAMAAAC///r/AAAAAAMAAAC///v/AAAAAAMAAADA//r/AAAAAAMAAADA//v/AAAAAAMAAADB//r/AAAAAAMAAADB//v/AAAAAAMAAADC//r/AAAAAAMAAADC//v/AAAAAAMAAADD//r/AAAAAAMAAADD//v/AAAAAAMAAADE//r/AAAAAAMAAADE//v/AAAAAAMAAADF//r/AAAAAAMAAADF//v/AAAAAAMAAADG//r/AAAAAAMAAADG//v/AAAAAAMAAADH//r/AAAAAAMAAADH//v/AAAAAAMAAADI//r/AAAAAAMAAADI//v/AAAAAAMAAAC0//f/AAAAAAIAAAC0//j/AAAAAAIAAAC0//n/AAAAAAIAAAC1//f/AAAAAAIAAAC1//j/AAAAAAIAAAC1//n/AAAAAAIAAAC2//f/AAAAAAIAAAC2//j/AAAAAAIAAAC2//n/AAAAAAIAAAC3//f/AAAAAAIAAAC3//j/AAAAAAIAAAC3//n/AAAAAAIAAAC4//f/AAAAAAIAAAC4//j/AAAAAAIAAAC4//n/AAAAAAIAAAC5//f/AAAAAAIAAAC5//j/AAAAAAIAAAC5//n/AAAAAAIAAAC6//f/AAAAAAIAAAC6//j/AAAAAAIAAAC6//n/AAAAAAIAAAC7//f/AAAAAAIAAAC7//j/AAAAAAIAAAC7//n/AAAAAAIAAAC8//f/AAAAAAIAAAC8//j/AAAAAAIAAAC8//n/AAAAAAIAAAC9//f/AAAAAAIAAAC9//j/AAAAAAIAAAC9//n/AAAAAAIAAAC+//f/AAAAAAIAAAC+//j/AAAAAAIAAAC+//n/AAAAAAIAAAC///f/AAAAAAIAAAC///j/AAAAAAIAAAC///n/AAAAAAIAAADA//f/AAAAAAIAAADA//j/AAAAAAIAAADA//n/AAAAAAIAAADB//f/AAAAAAIAAADB//j/AAAAAAIAAADB//n/AAAAAAIAAADC//f/AAAAAAIAAADC//j/AAAAAAIAAADC//n/AAAAAAIAAADD//f/AAAAAAIAAADD//j/AAAAAAIAAADD//n/AAAAAAIAAADE//f/AAAAAAIAAADE//j/AAAAAAIAAADE//n/AAAAAAIAAADF//f/AAAAAAIAAADF//j/AAAAAAIAAADF//n/AAAAAAIAAADG//f/AAAAAAIAAADG//j/AAAAAAIAAADG//n/AAAAAAIAAADH//f/AAAAAAIAAADH//j/AAAAAAIAAADH//n/AAAAAAIAAADI//f/AAAAAAIAAADI//j/AAAAAAIAAADI//n/AAAAAAIAAAC0//T/AAAAAAMAAAC0//X/AAAAAAMAAAC0//b/AAAAAAMAAAC1//T/AAAAAAMAAAC1//X/AAAAAAMAAAC1//b/AAAAAAMAAAC2//T/AAAAAAMAAAC2//X/AAAAAAMAAAC2//b/AAAAAAMAAAC3//T/AAAAAAMAAAC3//X/AAAAAAMAAAC3//b/AAAAAAMAAAC4//T/AAAAAAMAAAC4//X/AAAAAAMAAAC4//b/AAAAAAMAAAC5//T/AAAAAAMAAAC5//X/AAAAAAMAAAC5//b/AAAAAAMAAAC6//T/AAAAAAMAAAC6//X/AAAAAAMAAAC6//b/AAAAAAMAAAC7//T/AAAAAAMAAAC7//X/AAAAAAMAAAC7//b/AAAAAAMAAAC8//T/AAAAAAMAAAC8//X/AAAAAAMAAAC8//b/AAAAAAMAAAC9//T/AAAAAAMAAAC9//X/AAAAAAMAAAC9//b/AAAAAAMAAAC+//T/AAAAAAMAAAC+//X/AAAAAAMAAAC+//b/AAAAAAMAAAC///T/AAAAAAMAAAC///X/AAAAAAMAAAC///b/AAAAAAMAAADA//T/AAAAAAMAAADA//X/AAAAAAMAAADA//b/AAAAAAMAAADB//T/AAAAAAMAAADB//X/AAAAAAMAAADB//b/AAAAAAMAAADC//T/AAAAAAMAAADC//X/AAAAAAMAAADC//b/AAAAAAMAAADD//T/AAAAAAMAAADD//X/AAAAAAMAAADD//b/AAAAAAMAAADE//T/AAAAAAMAAADE//X/AAAAAAMAAADE//b/AAAAAAMAAADF//T/AAAAAAMAAADF//X/AAAAAAMAAADF//b/AAAAAAMAAADG//T/AAAAAAMAAADG//X/AAAAAAMAAADG//b/AAAAAAMAAADH//T/AAAAAAMAAADH//X/AAAAAAMAAADH//b/AAAAAAMAAADI//T/AAAAAAMAAADI//X/AAAAAAMAAADI//b/AAAAAAMAAAA=")
+tile_set = SubResource("TileSet_jgp8p")
+metadata/_edit_lock_ = true
+
+[node name="toBigRoom" parent="." instance=ExtResource("4_q7s03")]
 position = Vector2(1050, 54)
 scale = Vector2(2.2, 1.7)
 collision_layer = 2
@@ -263,11 +318,11 @@ collision_mask = 2
 target_scene_path = "uid://c1jvpmrwbjdec"
 target_door_name = "toBoss"
 
-[node name="player" parent="." unique_id=1813194884 instance=ExtResource("5_ekahb")]
+[node name="player" parent="." instance=ExtResource("5_ekahb")]
 position = Vector2(552, 280)
 metadata/_edit_lock_ = true
 
-[node name="Camera2D" type="Camera2D" parent="player" unique_id=950318493]
+[node name="Camera2D" type="Camera2D" parent="player"]
 limit_left = -2496
 limit_top = -611
 limit_right = 1136
@@ -278,106 +333,106 @@ editor_draw_limits = true
 editor_draw_drag_margin = true
 metadata/_edit_lock_ = true
 
-[node name="Conveyor" type="Node2D" parent="." unique_id=1109440585]
+[node name="Conveyor" type="Node2D" parent="."]
 position = Vector2(298, 6)
 
-[node name="Jumpbable" type="StaticBody2D" parent="Conveyor" unique_id=850079768]
+[node name="Jumpbable" type="StaticBody2D" parent="Conveyor"]
 position = Vector2(753.00006, 509)
 scale = Vector2(1.4, 1.8)
 collision_layer = 14
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Conveyor/Jumpbable" unique_id=179365709]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Conveyor/Jumpbable"]
 position = Vector2(0, -111.5)
 shape = SubResource("RectangleShape2D_70qjo")
 one_way_collision = true
 metadata/_edit_lock_ = true
 
-[node name="CollisionShape2D2" type="CollisionShape2D" parent="Conveyor/Jumpbable" unique_id=1336445766]
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Conveyor/Jumpbable"]
 position = Vector2(13.571533, -112)
 rotation = 1.5707964
 shape = SubResource("RectangleShape2D_117nu")
 one_way_collision = true
 metadata/_edit_lock_ = true
 
-[node name="CollisionShape2D3" type="CollisionShape2D" parent="Conveyor/Jumpbable" unique_id=1174849877]
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="Conveyor/Jumpbable"]
 position = Vector2(-13.571411, -139.57135)
 rotation = -1.5707964
 scale = Vector2(0.805, 1)
 shape = SubResource("RectangleShape2D_117nu")
 one_way_collision = true
 
-[node name="Jumpbable2" type="StaticBody2D" parent="Conveyor" unique_id=1868675900]
+[node name="Jumpbable2" type="StaticBody2D" parent="Conveyor"]
 position = Vector2(184, 341.99997)
 scale = Vector2(1.4, 1.15)
 collision_layer = 14
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Conveyor/Jumpbable2" unique_id=78087793]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Conveyor/Jumpbable2"]
 position = Vector2(0, -111.5)
 rotation = 3.1415927
 shape = SubResource("RectangleShape2D_70qjo")
 one_way_collision = true
 metadata/_edit_lock_ = true
 
-[node name="CollisionShape2D2" type="CollisionShape2D" parent="Conveyor/Jumpbable2" unique_id=920332047]
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Conveyor/Jumpbable2"]
 position = Vector2(13.571533, -112)
 rotation = 1.5707964
 shape = SubResource("RectangleShape2D_117nu")
 one_way_collision = true
 metadata/_edit_lock_ = true
 
-[node name="CollisionShape2D3" type="CollisionShape2D" parent="Conveyor/Jumpbable2" unique_id=1812017145]
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="Conveyor/Jumpbable2"]
 position = Vector2(-15.000005, -146.2069)
 rotation = -1.5707964
 scale = Vector2(0.76, 1)
 shape = SubResource("RectangleShape2D_117nu")
 one_way_collision = true
 
-[node name="Jumpbable3" type="StaticBody2D" parent="Conveyor" unique_id=60828362]
+[node name="Jumpbable3" type="StaticBody2D" parent="Conveyor"]
 position = Vector2(-716, 75)
 rotation = 3.1415927
 scale = Vector2(1.4, 0.35)
 collision_layer = 14
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Conveyor/Jumpbable3" unique_id=1019493190]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Conveyor/Jumpbable3"]
 position = Vector2(0, -111.5)
 shape = SubResource("RectangleShape2D_70qjo")
 one_way_collision = true
 metadata/_edit_lock_ = true
 
-[node name="CollisionShape2D2" type="CollisionShape2D" parent="Conveyor/Jumpbable3" unique_id=178462738]
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Conveyor/Jumpbable3"]
 position = Vector2(13.571533, -112)
 rotation = 1.5707964
 shape = SubResource("RectangleShape2D_117nu")
 one_way_collision = true
 metadata/_edit_lock_ = true
 
-[node name="CollisionShape2D3" type="CollisionShape2D" parent="Conveyor/Jumpbable3" unique_id=2063411004]
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="Conveyor/Jumpbable3"]
 position = Vector2(-13.571411, -111)
 rotation = -1.5707964
 shape = SubResource("RectangleShape2D_117nu")
 one_way_collision = true
 metadata/_edit_lock_ = true
 
-[node name="Jumpbable4" type="StaticBody2D" parent="Conveyor" unique_id=1887422936]
+[node name="Jumpbable4" type="StaticBody2D" parent="Conveyor"]
 position = Vector2(552, 518)
 rotation = -1.5707964
 scale = Vector2(2, 5)
 collision_layer = 14
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Conveyor/Jumpbable4" unique_id=881653334]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Conveyor/Jumpbable4"]
 position = Vector2(0, -111.5)
 shape = SubResource("RectangleShape2D_70qjo")
 one_way_collision = true
 metadata/_edit_lock_ = true
 
-[node name="CollisionShape2D2" type="CollisionShape2D" parent="Conveyor/Jumpbable4" unique_id=37740367]
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Conveyor/Jumpbable4"]
 position = Vector2(13.571533, -112)
 rotation = 1.5707964
 shape = SubResource("RectangleShape2D_117nu")
 one_way_collision = true
 metadata/_edit_lock_ = true
 
-[node name="CollisionShape2D3" type="CollisionShape2D" parent="Conveyor/Jumpbable4" unique_id=570633069]
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="Conveyor/Jumpbable4"]
 position = Vector2(-13.571411, -111)
 rotation = -1.5707964
 shape = SubResource("RectangleShape2D_117nu")
@@ -390,20 +445,20 @@ rotation = -1.5707964
 scale = Vector2(2, 9.05)
 collision_layer = 14
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Conveyor/Jumpbable5" unique_id=965218143]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Conveyor/Jumpbable5"]
 position = Vector2(0, -111.5)
 shape = SubResource("RectangleShape2D_70qjo")
 one_way_collision = true
 metadata/_edit_lock_ = true
 
-[node name="CollisionShape2D2" type="CollisionShape2D" parent="Conveyor/Jumpbable5" unique_id=1640556426]
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Conveyor/Jumpbable5"]
 position = Vector2(13.571533, -112)
 rotation = 1.5707964
 shape = SubResource("RectangleShape2D_117nu")
 one_way_collision = true
 metadata/_edit_lock_ = true
 
-[node name="CollisionShape2D3" type="CollisionShape2D" parent="Conveyor/Jumpbable5" unique_id=62734448]
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="Conveyor/Jumpbable5"]
 position = Vector2(-13.571411, -111)
 rotation = -1.5707964
 shape = SubResource("RectangleShape2D_117nu")
@@ -417,15 +472,8 @@ scale = Vector2(2, 5.95)
 collision_layer = 14
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Conveyor/Jumpbable6"]
-position = Vector2(0, -111.5)
+position = Vector2(-3.4999847, -111.651276)
 shape = SubResource("RectangleShape2D_70qjo")
-one_way_collision = true
-metadata/_edit_lock_ = true
-
-[node name="CollisionShape2D2" type="CollisionShape2D" parent="Conveyor/Jumpbable6"]
-position = Vector2(13.571533, -112)
-rotation = 1.5707964
-shape = SubResource("RectangleShape2D_117nu")
 one_way_collision = true
 metadata/_edit_lock_ = true
 
@@ -710,6 +758,15 @@ collision_mask = 3
 position = Vector2(46, 0)
 shape = SubResource("RectangleShape2D_ekahb")
 
+[node name="Sprite2D" type="Sprite2D" parent="AutoArms/AutoArm/Crane/CollisionShape2D"]
+position = Vector2(-47.222195, -3.5895304e-05)
+rotation = 1.5707964
+scale = Vector2(1.2843161, 3.3819442)
+texture = ExtResource("9_wx7lv")
+offset = Vector2(0, -13.798771)
+region_enabled = true
+region_rect = Rect2(7.259262, 0, 17.18518, 32.666668)
+
 [node name="Grabber" type="Area2D" parent="AutoArms/AutoArm/Crane"]
 position = Vector2(85, -1)
 collision_layer = 0
@@ -720,10 +777,28 @@ position = Vector2(10, 0)
 scale = Vector2(0.5, 1)
 shape = SubResource("CapsuleShape2D_8lhr4")
 
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="AutoArms/AutoArm/Crane/Grabber/CollisionShape2D"]
+position = Vector2(-23.773926, 1.353801)
+rotation = 1.5865043
+scale = Vector2(2.5652397, 2.1146193)
+sprite_frames = SubResource("SpriteFrames_7ogym")
+animation = &"Saw"
+autoplay = "Saw"
+offset = Vector2(-0.3867798, -10.2091675)
+
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AutoArms/AutoArm"]
 position = Vector2(46, 0)
 shape = SubResource("RectangleShape2D_ekahb")
 metadata/_edit_lock_ = true
+
+[node name="Sprite2D" type="Sprite2D" parent="AutoArms/AutoArm/CollisionShape2D"]
+position = Vector2(-48.92578, 1.111023)
+rotation = 1.5707964
+scale = Vector2(1.2843161, 3.3819442)
+texture = ExtResource("9_wx7lv")
+offset = Vector2(-1.0164795, -13.240242)
+region_enabled = true
+region_rect = Rect2(7.259262, 0, 17.18518, 32.666668)
 
 [node name="AutoArm2" type="StaticBody2D" parent="AutoArms"]
 position = Vector2(705.5556, 168.88889)
@@ -752,6 +827,15 @@ collision_mask = 3
 position = Vector2(46, 0)
 shape = SubResource("RectangleShape2D_ekahb")
 
+[node name="Sprite2D" type="Sprite2D" parent="AutoArms/AutoArm2/Crane/CollisionShape2D"]
+position = Vector2(-47.222195, -3.5895304e-05)
+rotation = 1.5707964
+scale = Vector2(1.2843161, 3.3819442)
+texture = ExtResource("9_wx7lv")
+offset = Vector2(0, -13.798771)
+region_enabled = true
+region_rect = Rect2(7.259262, 0, 17.18518, 32.666668)
+
 [node name="Grabber" type="Area2D" parent="AutoArms/AutoArm2/Crane"]
 position = Vector2(85, -1)
 collision_layer = 0
@@ -762,10 +846,28 @@ position = Vector2(10, 0)
 scale = Vector2(0.5, 1)
 shape = SubResource("CapsuleShape2D_8lhr4")
 
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="AutoArms/AutoArm2/Crane/Grabber/CollisionShape2D"]
+position = Vector2(-23.773926, 1.353801)
+rotation = 1.5865043
+scale = Vector2(2.5652397, 2.1146193)
+sprite_frames = SubResource("SpriteFrames_7ogym")
+animation = &"Saw"
+autoplay = "Saw"
+offset = Vector2(-0.3867798, -10.2091675)
+
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AutoArms/AutoArm2"]
 position = Vector2(46, 0)
 shape = SubResource("RectangleShape2D_ekahb")
 metadata/_edit_lock_ = true
+
+[node name="Sprite2D" type="Sprite2D" parent="AutoArms/AutoArm2/CollisionShape2D"]
+position = Vector2(-47.222195, -3.5895304e-05)
+rotation = 1.5707964
+scale = Vector2(1.2843161, 3.3819442)
+texture = ExtResource("9_wx7lv")
+offset = Vector2(0, -13.798771)
+region_enabled = true
+region_rect = Rect2(7.259262, 0, 17.18518, 32.666668)
 
 [node name="AutoArm3" type="StaticBody2D" parent="AutoArms"]
 position = Vector2(788.8889, 484.4445)
@@ -794,6 +896,15 @@ collision_mask = 3
 position = Vector2(46, 0)
 shape = SubResource("RectangleShape2D_ekahb")
 
+[node name="Sprite2D" type="Sprite2D" parent="AutoArms/AutoArm3/Crane/CollisionShape2D"]
+position = Vector2(-47.222195, -3.5895304e-05)
+rotation = 1.5707964
+scale = Vector2(1.2843161, 3.3819442)
+texture = ExtResource("9_wx7lv")
+offset = Vector2(0, -13.798771)
+region_enabled = true
+region_rect = Rect2(7.259262, 0, 17.18518, 32.666668)
+
 [node name="Grabber" type="Area2D" parent="AutoArms/AutoArm3/Crane"]
 position = Vector2(85, -1)
 collision_layer = 0
@@ -804,10 +915,28 @@ position = Vector2(10, 0)
 scale = Vector2(0.5, 1)
 shape = SubResource("CapsuleShape2D_8lhr4")
 
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="AutoArms/AutoArm3/Crane/Grabber/CollisionShape2D"]
+position = Vector2(-23.773926, 1.353801)
+rotation = 1.5865043
+scale = Vector2(2.5652397, 2.1146193)
+sprite_frames = SubResource("SpriteFrames_7ogym")
+animation = &"Saw"
+autoplay = "Saw"
+offset = Vector2(-0.3867798, -10.2091675)
+
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AutoArms/AutoArm3"]
 position = Vector2(46, 0)
 shape = SubResource("RectangleShape2D_ekahb")
 metadata/_edit_lock_ = true
+
+[node name="Sprite2D" type="Sprite2D" parent="AutoArms/AutoArm3/CollisionShape2D"]
+position = Vector2(-47.222195, -3.5895304e-05)
+rotation = 1.5707964
+scale = Vector2(1.2843161, 3.3819442)
+texture = ExtResource("9_wx7lv")
+offset = Vector2(0, -13.798771)
+region_enabled = true
+region_rect = Rect2(7.259262, 0, 17.18518, 32.666668)
 
 [node name="AutoArm4" type="StaticBody2D" parent="AutoArms"]
 position = Vector2(375.55557, 486.66672)
@@ -836,6 +965,15 @@ collision_mask = 3
 position = Vector2(46, 0)
 shape = SubResource("RectangleShape2D_ekahb")
 
+[node name="Sprite2D" type="Sprite2D" parent="AutoArms/AutoArm4/Crane/CollisionShape2D"]
+position = Vector2(-47.222195, -3.5895304e-05)
+rotation = 1.5707964
+scale = Vector2(1.2843161, 3.3819442)
+texture = ExtResource("9_wx7lv")
+offset = Vector2(0, -13.798771)
+region_enabled = true
+region_rect = Rect2(7.259262, 0, 17.18518, 32.666668)
+
 [node name="Grabber" type="Area2D" parent="AutoArms/AutoArm4/Crane"]
 position = Vector2(85, -1)
 collision_layer = 0
@@ -846,10 +984,28 @@ position = Vector2(10, 0)
 scale = Vector2(0.5, 1)
 shape = SubResource("CapsuleShape2D_8lhr4")
 
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="AutoArms/AutoArm4/Crane/Grabber/CollisionShape2D"]
+position = Vector2(-23.773926, 1.353801)
+rotation = 1.5865043
+scale = Vector2(2.5652397, 2.1146193)
+sprite_frames = SubResource("SpriteFrames_7ogym")
+animation = &"Saw"
+autoplay = "Saw"
+offset = Vector2(-0.3867798, -10.2091675)
+
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AutoArms/AutoArm4"]
 position = Vector2(46, 0)
 shape = SubResource("RectangleShape2D_ekahb")
 metadata/_edit_lock_ = true
+
+[node name="Sprite2D" type="Sprite2D" parent="AutoArms/AutoArm4/CollisionShape2D"]
+position = Vector2(-47.222195, -3.5895304e-05)
+rotation = 1.5707964
+scale = Vector2(1.2843161, 3.3819442)
+texture = ExtResource("9_wx7lv")
+offset = Vector2(0, -13.798771)
+region_enabled = true
+region_rect = Rect2(7.259262, 0, 17.18518, 32.666668)
 
 [node name="AutoArm5" type="StaticBody2D" parent="AutoArms"]
 position = Vector2(-18.888876, 488.88892)
@@ -878,6 +1034,15 @@ collision_mask = 3
 position = Vector2(46, 0)
 shape = SubResource("RectangleShape2D_ekahb")
 
+[node name="Sprite2D" type="Sprite2D" parent="AutoArms/AutoArm5/Crane/CollisionShape2D"]
+position = Vector2(-47.222195, -3.5895304e-05)
+rotation = 1.5707964
+scale = Vector2(1.2843161, 3.3819442)
+texture = ExtResource("9_wx7lv")
+offset = Vector2(0, -13.798771)
+region_enabled = true
+region_rect = Rect2(7.259262, 0, 17.18518, 32.666668)
+
 [node name="Grabber" type="Area2D" parent="AutoArms/AutoArm5/Crane"]
 position = Vector2(85, -1)
 collision_layer = 0
@@ -888,10 +1053,28 @@ position = Vector2(10, 0)
 scale = Vector2(0.5, 1)
 shape = SubResource("CapsuleShape2D_8lhr4")
 
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="AutoArms/AutoArm5/Crane/Grabber/CollisionShape2D"]
+position = Vector2(-23.773926, 1.353801)
+rotation = 1.5865043
+scale = Vector2(2.5652397, 2.1146193)
+sprite_frames = SubResource("SpriteFrames_7ogym")
+animation = &"Saw"
+autoplay = "Saw"
+offset = Vector2(-0.3867798, -10.2091675)
+
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AutoArms/AutoArm5"]
 position = Vector2(46, 0)
 shape = SubResource("RectangleShape2D_ekahb")
 metadata/_edit_lock_ = true
+
+[node name="Sprite2D" type="Sprite2D" parent="AutoArms/AutoArm5/CollisionShape2D"]
+position = Vector2(-47.222195, -3.5895304e-05)
+rotation = 1.5707964
+scale = Vector2(1.2843161, 3.3819442)
+texture = ExtResource("9_wx7lv")
+offset = Vector2(0, -13.798771)
+region_enabled = true
+region_rect = Rect2(7.259262, 0, 17.18518, 32.666668)
 
 [node name="AutoArm6" type="StaticBody2D" parent="AutoArms"]
 position = Vector2(-346.66666, 482.2222)
@@ -920,6 +1103,15 @@ collision_mask = 3
 position = Vector2(46, 0)
 shape = SubResource("RectangleShape2D_ekahb")
 
+[node name="Sprite2D" type="Sprite2D" parent="AutoArms/AutoArm6/Crane/CollisionShape2D"]
+position = Vector2(-47.222195, -3.5895304e-05)
+rotation = 1.5707964
+scale = Vector2(1.2843161, 3.3819442)
+texture = ExtResource("9_wx7lv")
+offset = Vector2(0, -13.798771)
+region_enabled = true
+region_rect = Rect2(7.259262, 0, 17.18518, 32.666668)
+
 [node name="Grabber" type="Area2D" parent="AutoArms/AutoArm6/Crane"]
 position = Vector2(85, -1)
 collision_layer = 0
@@ -930,13 +1122,31 @@ position = Vector2(10, 0)
 scale = Vector2(0.5, 1)
 shape = SubResource("CapsuleShape2D_8lhr4")
 
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="AutoArms/AutoArm6/Crane/Grabber/CollisionShape2D"]
+position = Vector2(-23.773926, 1.353801)
+rotation = 1.5865043
+scale = Vector2(2.5652397, 2.1146193)
+sprite_frames = SubResource("SpriteFrames_7ogym")
+animation = &"Saw"
+autoplay = "Saw"
+offset = Vector2(-0.3867798, -10.2091675)
+
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AutoArms/AutoArm6"]
 position = Vector2(46, 0)
 shape = SubResource("RectangleShape2D_ekahb")
 metadata/_edit_lock_ = true
 
+[node name="Sprite2D" type="Sprite2D" parent="AutoArms/AutoArm6/CollisionShape2D"]
+position = Vector2(-47.222195, -3.5895304e-05)
+rotation = 1.5707964
+scale = Vector2(1.2843161, 3.3819442)
+texture = ExtResource("9_wx7lv")
+offset = Vector2(0, -13.798771)
+region_enabled = true
+region_rect = Rect2(7.259262, 0, 17.18518, 32.666668)
+
 [node name="AutoArm7" type="StaticBody2D" parent="AutoArms"]
-position = Vector2(180.00003, 251.11115)
+position = Vector2(295.2137, 223.42134)
 rotation = 2.0943952
 collision_layer = 2
 collision_mask = 3
@@ -962,6 +1172,15 @@ collision_mask = 3
 position = Vector2(46, 0)
 shape = SubResource("RectangleShape2D_ekahb")
 
+[node name="Sprite2D" type="Sprite2D" parent="AutoArms/AutoArm7/Crane/CollisionShape2D"]
+position = Vector2(-47.222195, -3.5895304e-05)
+rotation = 1.5707964
+scale = Vector2(1.2843161, 3.3819442)
+texture = ExtResource("9_wx7lv")
+offset = Vector2(0, -13.798771)
+region_enabled = true
+region_rect = Rect2(7.259262, 0, 17.18518, 32.666668)
+
 [node name="Grabber" type="Area2D" parent="AutoArms/AutoArm7/Crane"]
 position = Vector2(85, -1)
 collision_layer = 0
@@ -972,13 +1191,31 @@ position = Vector2(10, 0)
 scale = Vector2(0.5, 1)
 shape = SubResource("CapsuleShape2D_8lhr4")
 
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="AutoArms/AutoArm7/Crane/Grabber/CollisionShape2D"]
+position = Vector2(-23.773926, 1.353801)
+rotation = 1.5865043
+scale = Vector2(2.5652397, 2.1146193)
+sprite_frames = SubResource("SpriteFrames_7ogym")
+animation = &"Saw"
+autoplay = "Saw"
+offset = Vector2(-0.3867798, -10.2091675)
+
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AutoArms/AutoArm7"]
 position = Vector2(46, 0)
 shape = SubResource("RectangleShape2D_ekahb")
 metadata/_edit_lock_ = true
 
+[node name="Sprite2D" type="Sprite2D" parent="AutoArms/AutoArm7/CollisionShape2D"]
+position = Vector2(-47.222195, -3.5895304e-05)
+rotation = 1.5707964
+scale = Vector2(1.2843161, 3.3819442)
+texture = ExtResource("9_wx7lv")
+offset = Vector2(0, -13.798771)
+region_enabled = true
+region_rect = Rect2(7.259262, 0, 17.18518, 32.666668)
+
 [node name="AutoArm8" type="StaticBody2D" parent="AutoArms"]
-position = Vector2(-204.44444, 240)
+position = Vector2(-70.45432, 254.49147)
 rotation = 1.3962634
 collision_layer = 2
 collision_mask = 3
@@ -1004,6 +1241,15 @@ collision_mask = 3
 position = Vector2(46, 0)
 shape = SubResource("RectangleShape2D_ekahb")
 
+[node name="Sprite2D" type="Sprite2D" parent="AutoArms/AutoArm8/Crane/CollisionShape2D"]
+position = Vector2(-47.222195, -3.5895304e-05)
+rotation = 1.5707964
+scale = Vector2(1.2843161, 3.3819442)
+texture = ExtResource("9_wx7lv")
+offset = Vector2(0, -13.798771)
+region_enabled = true
+region_rect = Rect2(7.259262, 0, 17.18518, 32.666668)
+
 [node name="Grabber" type="Area2D" parent="AutoArms/AutoArm8/Crane"]
 position = Vector2(85, -1)
 collision_layer = 0
@@ -1014,13 +1260,31 @@ position = Vector2(10, 0)
 scale = Vector2(0.5, 1)
 shape = SubResource("CapsuleShape2D_8lhr4")
 
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="AutoArms/AutoArm8/Crane/Grabber/CollisionShape2D"]
+position = Vector2(-23.773926, 1.353801)
+rotation = 1.5865043
+scale = Vector2(2.5652397, 2.1146193)
+sprite_frames = SubResource("SpriteFrames_7ogym")
+animation = &"Saw"
+autoplay = "Saw"
+offset = Vector2(-0.3867798, -10.2091675)
+
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AutoArms/AutoArm8"]
 position = Vector2(46, 0)
 shape = SubResource("RectangleShape2D_ekahb")
 metadata/_edit_lock_ = true
 
+[node name="Sprite2D" type="Sprite2D" parent="AutoArms/AutoArm8/CollisionShape2D"]
+position = Vector2(-47.222195, -3.5895304e-05)
+rotation = 1.5707964
+scale = Vector2(1.2843161, 3.3819442)
+texture = ExtResource("9_wx7lv")
+offset = Vector2(0, -13.798771)
+region_enabled = true
+region_rect = Rect2(7.259262, 0, 17.18518, 32.666668)
+
 [node name="AutoArm9" type="StaticBody2D" parent="AutoArms"]
-position = Vector2(-517, 215)
+position = Vector2(-427.602, 245.6701)
 rotation = 1.5707964
 collision_layer = 2
 collision_mask = 3
@@ -1046,6 +1310,15 @@ collision_mask = 3
 position = Vector2(46, 0)
 shape = SubResource("RectangleShape2D_ekahb")
 
+[node name="Sprite2D" type="Sprite2D" parent="AutoArms/AutoArm9/Crane/CollisionShape2D"]
+position = Vector2(-47.222195, -3.5895304e-05)
+rotation = 1.5707964
+scale = Vector2(1.2843161, 3.3819442)
+texture = ExtResource("9_wx7lv")
+offset = Vector2(0, -13.798771)
+region_enabled = true
+region_rect = Rect2(7.259262, 0, 17.18518, 32.666668)
+
 [node name="Grabber" type="Area2D" parent="AutoArms/AutoArm9/Crane"]
 position = Vector2(85, -1)
 collision_layer = 0
@@ -1056,13 +1329,31 @@ position = Vector2(10, 0)
 scale = Vector2(0.5, 1)
 shape = SubResource("CapsuleShape2D_8lhr4")
 
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="AutoArms/AutoArm9/Crane/Grabber/CollisionShape2D"]
+position = Vector2(-23.773926, 1.353801)
+rotation = 1.5865043
+scale = Vector2(2.5652397, 2.1146193)
+sprite_frames = SubResource("SpriteFrames_7ogym")
+animation = &"Saw"
+autoplay = "Saw"
+offset = Vector2(-0.3867798, -10.2091675)
+
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AutoArms/AutoArm9"]
 position = Vector2(46, 0)
 shape = SubResource("RectangleShape2D_ekahb")
 metadata/_edit_lock_ = true
 
+[node name="Sprite2D" type="Sprite2D" parent="AutoArms/AutoArm9/CollisionShape2D"]
+position = Vector2(-47.222195, -3.5895304e-05)
+rotation = 1.5707964
+scale = Vector2(1.2843161, 3.3819442)
+texture = ExtResource("9_wx7lv")
+offset = Vector2(0, -13.798771)
+region_enabled = true
+region_rect = Rect2(7.259262, 0, 17.18518, 32.666668)
+
 [node name="AutoArm10" type="StaticBody2D" parent="AutoArms"]
-position = Vector2(-850.0001, 252.22223)
+position = Vector2(-770.1115, 266.62222)
 rotation = -0.7853982
 collision_layer = 2
 collision_mask = 3
@@ -1088,6 +1379,15 @@ collision_mask = 3
 position = Vector2(46, 0)
 shape = SubResource("RectangleShape2D_ekahb")
 
+[node name="Sprite2D" type="Sprite2D" parent="AutoArms/AutoArm10/Crane/CollisionShape2D"]
+position = Vector2(-47.222195, -3.5895304e-05)
+rotation = 1.5707964
+scale = Vector2(1.2843161, 3.3819442)
+texture = ExtResource("9_wx7lv")
+offset = Vector2(0, -13.798771)
+region_enabled = true
+region_rect = Rect2(7.259262, 0, 17.18518, 32.666668)
+
 [node name="Grabber" type="Area2D" parent="AutoArms/AutoArm10/Crane"]
 position = Vector2(85, -1)
 collision_layer = 0
@@ -1098,10 +1398,28 @@ position = Vector2(10, 0)
 scale = Vector2(0.5, 1)
 shape = SubResource("CapsuleShape2D_8lhr4")
 
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="AutoArms/AutoArm10/Crane/Grabber/CollisionShape2D"]
+position = Vector2(-23.773926, 1.353801)
+rotation = 1.5865043
+scale = Vector2(2.5652397, 2.1146193)
+sprite_frames = SubResource("SpriteFrames_7ogym")
+animation = &"Saw"
+autoplay = "Saw"
+offset = Vector2(-0.3867798, -10.2091675)
+
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AutoArms/AutoArm10"]
 position = Vector2(46, 0)
 shape = SubResource("RectangleShape2D_ekahb")
 metadata/_edit_lock_ = true
+
+[node name="Sprite2D" type="Sprite2D" parent="AutoArms/AutoArm10/CollisionShape2D"]
+position = Vector2(-47.222195, -3.5895304e-05)
+rotation = 1.5707964
+scale = Vector2(1.2843161, 3.3819442)
+texture = ExtResource("9_wx7lv")
+offset = Vector2(0, -13.798771)
+region_enabled = true
+region_rect = Rect2(7.259262, 0, 17.18518, 32.666668)
 
 [node name="AutoArm11" type="StaticBody2D" parent="AutoArms"]
 position = Vector2(-1148.8889, 247.77773)
@@ -1130,6 +1448,15 @@ collision_mask = 3
 position = Vector2(46, 0)
 shape = SubResource("RectangleShape2D_ekahb")
 
+[node name="Sprite2D" type="Sprite2D" parent="AutoArms/AutoArm11/Crane/CollisionShape2D"]
+position = Vector2(-47.222195, -3.5895304e-05)
+rotation = 1.5707964
+scale = Vector2(1.2843161, 3.3819442)
+texture = ExtResource("9_wx7lv")
+offset = Vector2(0, -13.798771)
+region_enabled = true
+region_rect = Rect2(7.259262, 0, 17.18518, 32.666668)
+
 [node name="Grabber" type="Area2D" parent="AutoArms/AutoArm11/Crane"]
 position = Vector2(85, -1)
 collision_layer = 0
@@ -1140,10 +1467,28 @@ position = Vector2(10, 0)
 scale = Vector2(0.5, 1)
 shape = SubResource("CapsuleShape2D_8lhr4")
 
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="AutoArms/AutoArm11/Crane/Grabber/CollisionShape2D"]
+position = Vector2(-23.773926, 1.353801)
+rotation = 1.5865043
+scale = Vector2(2.5652397, 2.1146193)
+sprite_frames = SubResource("SpriteFrames_7ogym")
+animation = &"Saw"
+autoplay = "Saw"
+offset = Vector2(-0.3867798, -10.2091675)
+
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AutoArms/AutoArm11"]
 position = Vector2(46, 0)
 shape = SubResource("RectangleShape2D_ekahb")
 metadata/_edit_lock_ = true
+
+[node name="Sprite2D" type="Sprite2D" parent="AutoArms/AutoArm11/CollisionShape2D"]
+position = Vector2(-47.222195, -3.5895304e-05)
+rotation = 1.5707964
+scale = Vector2(1.2843161, 3.3819442)
+texture = ExtResource("9_wx7lv")
+offset = Vector2(0, -13.798771)
+region_enabled = true
+region_rect = Rect2(7.259262, 0, 17.18518, 32.666668)
 
 [node name="AutoArm12" type="StaticBody2D" parent="AutoArms"]
 position = Vector2(-1501.1111, 240.00003)
@@ -1172,6 +1517,15 @@ collision_mask = 3
 position = Vector2(46, 0)
 shape = SubResource("RectangleShape2D_ekahb")
 
+[node name="Sprite2D" type="Sprite2D" parent="AutoArms/AutoArm12/Crane/CollisionShape2D"]
+position = Vector2(-47.222195, -3.5895304e-05)
+rotation = 1.5707964
+scale = Vector2(1.2843161, 3.3819442)
+texture = ExtResource("9_wx7lv")
+offset = Vector2(0, -13.798771)
+region_enabled = true
+region_rect = Rect2(7.259262, 0, 17.18518, 32.666668)
+
 [node name="Grabber" type="Area2D" parent="AutoArms/AutoArm12/Crane"]
 position = Vector2(85, -1)
 collision_layer = 0
@@ -1182,10 +1536,28 @@ position = Vector2(10, 0)
 scale = Vector2(0.5, 1)
 shape = SubResource("CapsuleShape2D_8lhr4")
 
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="AutoArms/AutoArm12/Crane/Grabber/CollisionShape2D"]
+position = Vector2(-23.773926, 1.353801)
+rotation = 1.5865043
+scale = Vector2(2.5652397, 2.1146193)
+sprite_frames = SubResource("SpriteFrames_7ogym")
+animation = &"Saw"
+autoplay = "Saw"
+offset = Vector2(-0.3867798, -10.2091675)
+
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AutoArms/AutoArm12"]
 position = Vector2(46, 0)
 shape = SubResource("RectangleShape2D_ekahb")
 metadata/_edit_lock_ = true
+
+[node name="Sprite2D" type="Sprite2D" parent="AutoArms/AutoArm12/CollisionShape2D"]
+position = Vector2(-47.222195, -3.5895304e-05)
+rotation = 1.5707964
+scale = Vector2(1.2843161, 3.3819442)
+texture = ExtResource("9_wx7lv")
+offset = Vector2(0, -13.798771)
+region_enabled = true
+region_rect = Rect2(7.259262, 0, 17.18518, 32.666668)
 
 [node name="AutoArm13" type="StaticBody2D" parent="AutoArms"]
 position = Vector2(-1840, 267.7778)
@@ -1214,6 +1586,15 @@ collision_mask = 3
 position = Vector2(46, 0)
 shape = SubResource("RectangleShape2D_ekahb")
 
+[node name="Sprite2D" type="Sprite2D" parent="AutoArms/AutoArm13/Crane/CollisionShape2D"]
+position = Vector2(-47.222195, -3.5895304e-05)
+rotation = 1.5707964
+scale = Vector2(1.2843161, 3.3819442)
+texture = ExtResource("9_wx7lv")
+offset = Vector2(0, -13.798771)
+region_enabled = true
+region_rect = Rect2(7.259262, 0, 17.18518, 32.666668)
+
 [node name="Grabber" type="Area2D" parent="AutoArms/AutoArm13/Crane"]
 position = Vector2(85, -1)
 collision_layer = 0
@@ -1224,10 +1605,28 @@ position = Vector2(10, 0)
 scale = Vector2(0.5, 1)
 shape = SubResource("CapsuleShape2D_8lhr4")
 
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="AutoArms/AutoArm13/Crane/Grabber/CollisionShape2D"]
+position = Vector2(-23.773926, 1.353801)
+rotation = 1.5865043
+scale = Vector2(2.5652397, 2.1146193)
+sprite_frames = SubResource("SpriteFrames_7ogym")
+animation = &"Saw"
+autoplay = "Saw"
+offset = Vector2(-0.3867798, -10.2091675)
+
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AutoArms/AutoArm13"]
 position = Vector2(46, 0)
 shape = SubResource("RectangleShape2D_ekahb")
 metadata/_edit_lock_ = true
+
+[node name="Sprite2D" type="Sprite2D" parent="AutoArms/AutoArm13/CollisionShape2D"]
+position = Vector2(-47.222195, -3.5895304e-05)
+rotation = 1.5707964
+scale = Vector2(1.2843161, 3.3819442)
+texture = ExtResource("9_wx7lv")
+offset = Vector2(0, -13.798771)
+region_enabled = true
+region_rect = Rect2(7.259262, 0, 17.18518, 32.666668)
 
 [node name="AutoArm14" type="StaticBody2D" parent="AutoArms"]
 position = Vector2(-2182.2222, 268.88895)
@@ -1256,6 +1655,15 @@ collision_mask = 3
 position = Vector2(46, 0)
 shape = SubResource("RectangleShape2D_ekahb")
 
+[node name="Sprite2D" type="Sprite2D" parent="AutoArms/AutoArm14/Crane/CollisionShape2D"]
+position = Vector2(-47.222195, -3.5895304e-05)
+rotation = 1.5707964
+scale = Vector2(1.2843161, 3.3819442)
+texture = ExtResource("9_wx7lv")
+offset = Vector2(0, -13.798771)
+region_enabled = true
+region_rect = Rect2(7.259262, 0, 17.18518, 32.666668)
+
 [node name="Grabber" type="Area2D" parent="AutoArms/AutoArm14/Crane"]
 position = Vector2(85, -1)
 collision_layer = 0
@@ -1266,10 +1674,28 @@ position = Vector2(10, 0)
 scale = Vector2(0.5, 1)
 shape = SubResource("CapsuleShape2D_8lhr4")
 
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="AutoArms/AutoArm14/Crane/Grabber/CollisionShape2D"]
+position = Vector2(-23.773926, 1.353801)
+rotation = 1.5865043
+scale = Vector2(2.5652397, 2.1146193)
+sprite_frames = SubResource("SpriteFrames_7ogym")
+animation = &"Saw"
+autoplay = "Saw"
+offset = Vector2(-0.3867798, -10.2091675)
+
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AutoArms/AutoArm14"]
 position = Vector2(46, 0)
 shape = SubResource("RectangleShape2D_ekahb")
 metadata/_edit_lock_ = true
+
+[node name="Sprite2D" type="Sprite2D" parent="AutoArms/AutoArm14/CollisionShape2D"]
+position = Vector2(-47.222195, -3.5895304e-05)
+rotation = 1.5707964
+scale = Vector2(1.2843161, 3.3819442)
+texture = ExtResource("9_wx7lv")
+offset = Vector2(0, -13.798771)
+region_enabled = true
+region_rect = Rect2(7.259262, 0, 17.18518, 32.666668)
 
 [node name="Mobs" type="Node2D" parent="."]
 
@@ -1284,6 +1710,7 @@ position = Vector2(-283, 146)
 
 [node name="ReturnSpot" type="Node2D" parent="."]
 position = Vector2(-2112, -410)
+script = ExtResource("10_qhito")
 
 [node name="EnergyBoxes" type="Node2D" parent="ReturnSpot"]
 position = Vector2(0, 68)
@@ -1291,11 +1718,41 @@ position = Vector2(0, 68)
 [node name="EnergyBox" parent="ReturnSpot/EnergyBoxes" instance=ExtResource("13_qhito")]
 position = Vector2(-5, -186)
 
+[node name="ElectricField" type="Area2D" parent="ReturnSpot/EnergyBoxes/EnergyBox"]
+position = Vector2(5, 186)
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ReturnSpot/EnergyBoxes/EnergyBox/ElectricField"]
+position = Vector2(-4, -149)
+shape = SubResource("RectangleShape2D_wx7lv")
+debug_color = Color(0.33928132, 0.5365767, 0.8370423, 0.41960785)
+
 [node name="EnergyBox2" parent="ReturnSpot/EnergyBoxes" instance=ExtResource("13_qhito")]
 position = Vector2(327, -184)
 
+[node name="ElectricField2" type="Area2D" parent="ReturnSpot/EnergyBoxes/EnergyBox2"]
+position = Vector2(-327, 184)
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="ReturnSpot/EnergyBoxes/EnergyBox2/ElectricField2"]
+position = Vector2(312, -171)
+shape = SubResource("RectangleShape2D_wx7lv")
+debug_color = Color(0.33928132, 0.5365767, 0.8370423, 0.41960785)
+
 [node name="EnergyBox3" parent="ReturnSpot/EnergyBoxes" instance=ExtResource("13_qhito")]
 position = Vector2(-299, -184)
+
+[node name="ElectricField3" type="Area2D" parent="ReturnSpot/EnergyBoxes/EnergyBox3"]
+position = Vector2(299, 184)
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="ReturnSpot/EnergyBoxes/EnergyBox3/ElectricField3"]
+position = Vector2(-289, -176)
+shape = SubResource("RectangleShape2D_wx7lv")
+debug_color = Color(0.33928132, 0.5365767, 0.8370423, 0.41960785)
 
 [node name="FactoryBoss" type="CharacterBody2D" parent="ReturnSpot"]
 position = Vector2(0, 68)
@@ -1385,5 +1842,12 @@ wait_time = 5.0
 [connection signal="body_entered" from="AutoArms/AutoArm14/Range" to="AutoArms/AutoArm14" method="_on_range_body_entered"]
 [connection signal="body_exited" from="AutoArms/AutoArm14/Range" to="AutoArms/AutoArm14" method="_on_range_body_exited"]
 [connection signal="body_entered" from="AutoArms/AutoArm14/Crane/Grabber" to="AutoArms/AutoArm14" method="_on_grabber_body_entered"]
+[connection signal="child_exiting_tree" from="ReturnSpot/EnergyBoxes" to="ReturnSpot" method="_on_energy_boxes_child_exiting_tree"]
+[connection signal="body_entered" from="ReturnSpot/EnergyBoxes/EnergyBox/ElectricField" to="ReturnSpot" method="_on_electric_field_body_entered"]
+[connection signal="body_exited" from="ReturnSpot/EnergyBoxes/EnergyBox/ElectricField" to="ReturnSpot" method="_on_electric_field_body_exited"]
+[connection signal="body_entered" from="ReturnSpot/EnergyBoxes/EnergyBox2/ElectricField2" to="ReturnSpot" method="_on_electric_field_body_entered"]
+[connection signal="body_exited" from="ReturnSpot/EnergyBoxes/EnergyBox2/ElectricField2" to="ReturnSpot" method="_on_electric_field_body_exited"]
+[connection signal="body_entered" from="ReturnSpot/EnergyBoxes/EnergyBox3/ElectricField3" to="ReturnSpot" method="_on_electric_field_body_entered"]
+[connection signal="body_exited" from="ReturnSpot/EnergyBoxes/EnergyBox3/ElectricField3" to="ReturnSpot" method="_on_electric_field_body_exited"]
 [connection signal="body_entered" from="ReturnSpot/FactoryBoss/Area2D" to="ReturnSpot/FactoryBoss" method="_on_area_2d_body_entered"]
 [connection signal="timeout" from="ReturnSpot/FactoryBoss/Timer" to="ReturnSpot/FactoryBoss" method="_on_timer_timeout"]

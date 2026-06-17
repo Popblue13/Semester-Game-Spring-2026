@@ -1,7 +1,7 @@
 extends Node2D
 
 
-const SCRAP : PackedScene = preload("res://Scenes/Dungeon Objects/scrap.tscn")
+const SCRAP : PackedScene = preload("res://Scenes/Dungeon Objects/scrap_2.tscn")
 var charge : float = 1
 var stopped_scrap : RigidBody2D
 

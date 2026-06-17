@@ -1,8 +1,31 @@
-[gd_scene load_steps=3 format=3 uid="uid://lufbtv73xm0e"]
+[gd_scene load_steps=7 format=3 uid="uid://lufbtv73xm0e"]
 
 [ext_resource type="Script" uid="uid://1wj606y5tiau" path="res://Scripts/energy_projectile.gd" id="1_qcrt5"]
+[ext_resource type="Texture2D" uid="uid://divfho0dj32my" path="res://Art/Sprites/Saw_Blasted.png" id="2_ry70o"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_j0pfi"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ry70o"]
+atlas = ExtResource("2_ry70o")
+region = Rect2(0, 33, 31, 31)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cxxkg"]
+atlas = ExtResource("2_ry70o")
+region = Rect2(0, 64, 31, 31)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_w7vom"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ry70o")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cxxkg")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
 
 [node name="EnergyProjectile" type="CharacterBody2D"]
 collision_layer = 8
@@ -13,3 +36,8 @@ script = ExtResource("1_qcrt5")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 scale = Vector2(1, 0.25)
 shape = SubResource("RectangleShape2D_j0pfi")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_w7vom")
+autoplay = "default"
+speed_scale = 2.5
